@@ -10,7 +10,6 @@ public class AimIndicatorMovement : MonoBehaviour
     public bool isShooter; // Set this in the inspector or dynamically
     private Quaternion initialRotation;
 
-    MultiplayerInputManager inputManager;
     private InputControls playerControls;
     private float keyboardAimInput;
     private Vector2 joystickAimInput;
@@ -20,9 +19,8 @@ public class AimIndicatorMovement : MonoBehaviour
     {
         // Store the initial rotation of the aim indicator
         initialRotation = transform.localRotation;
-        inputManager = MultiplayerInputManager.instance;
 
-        inputManager.onPlayerJoined += AssignInputs;
+        MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
     }
 
     private void OnDisable()
@@ -38,8 +36,8 @@ public class AimIndicatorMovement : MonoBehaviour
         if (playerID == ID)
         {
             //Debug.Log($"Player {ID} assigned inputs.");
-            inputManager.onPlayerJoined -= AssignInputs;
-            playerControls = inputManager.players[playerID].playerControls;
+            MultiplayerInputManager.instance.onPlayerJoined -= AssignInputs;
+            playerControls = MultiplayerInputManager.instance.players[playerID].playerControls;
 
             if (isShooter)
             {

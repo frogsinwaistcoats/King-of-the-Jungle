@@ -7,6 +7,7 @@ using UnityEngine.InputSystem.Users;
 [System.Serializable]
 public class IndividualPlayerControls
 {
+
     public int playerID;
     public InputDevice inputDevice;
     InputUser inputUser;
@@ -21,7 +22,6 @@ public class IndividualPlayerControls
         Playstation,
         Xbox,
         Switch,
-        //Wii
     }
 
     public void SetupPlayer(InputAction.CallbackContext obj, int ID)
@@ -37,15 +37,6 @@ public class IndividualPlayerControls
         playerControls.Enable();
         SetControllerType();
     }
-
-    /*
-    public void SetupPlayerWii(int ID)
-    {
-        playerID = ID;
-
-        SetControllerType();
-    }
-    */
 
     void SetControllerType()
     {
@@ -64,12 +55,6 @@ public class IndividualPlayerControls
         else if (inputDevice is UnityEngine.InputSystem.Keyboard)
         {
             controllerType = ControllerType.Keyboard;
-            //could assign mouse here too
-        }
-        
-        //else
-        {
-            //controllerType = ControllerType.Wii;
         }
     }
 
