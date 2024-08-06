@@ -862,6 +862,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fde7746-37af-449f-9504-c5ddaddc2596"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1007,6 +1016,28 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""AimKeyboardRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7b14462-db7e-40fa-a5b0-4f3c2907f229"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""421f472b-c4ed-40d2-9df8-3807b903bb64"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1039,6 +1070,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_Player_AimJoystick = m_Player.FindAction("AimJoystick", throwIfNotFound: true);
         m_Player_AimKeyboardLeft = m_Player.FindAction("AimKeyboardLeft", throwIfNotFound: true);
         m_Player_AimKeyboardRight = m_Player.FindAction("AimKeyboardRight", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1338,6 +1370,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AimJoystick;
     private readonly InputAction m_Player_AimKeyboardLeft;
     private readonly InputAction m_Player_AimKeyboardRight;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -1348,6 +1381,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @AimJoystick => m_Wrapper.m_Player_AimJoystick;
         public InputAction @AimKeyboardLeft => m_Wrapper.m_Player_AimKeyboardLeft;
         public InputAction @AimKeyboardRight => m_Wrapper.m_Player_AimKeyboardRight;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1375,6 +1409,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @AimKeyboardRight.started += instance.OnAimKeyboardRight;
             @AimKeyboardRight.performed += instance.OnAimKeyboardRight;
             @AimKeyboardRight.canceled += instance.OnAimKeyboardRight;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1397,6 +1434,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @AimKeyboardRight.started -= instance.OnAimKeyboardRight;
             @AimKeyboardRight.performed -= instance.OnAimKeyboardRight;
             @AimKeyboardRight.canceled -= instance.OnAimKeyboardRight;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1444,5 +1484,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnAimJoystick(InputAction.CallbackContext context);
         void OnAimKeyboardLeft(InputAction.CallbackContext context);
         void OnAimKeyboardRight(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
