@@ -48,10 +48,10 @@ public class MultiplayerInputManager : MonoBehaviour
             return;
         }
 
-        if (SceneManager.GetActiveScene().name != "CharacterSelection")
-        {
-            return;
-        }
+        //if (SceneManager.GetActiveScene().name != "CharacterSelection")
+        //{
+        //    return;
+        //}
 
         //check if device is already assigned to a player
         foreach (IndividualPlayerControls player in players)
