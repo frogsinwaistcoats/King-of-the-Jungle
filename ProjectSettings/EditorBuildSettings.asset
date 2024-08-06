@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0446413972878114d983ce3ec33711ae
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelection.unity
+    guid: 6c08def2af4311346945a6802e2d8464
+  - enabled: 1
+    path: Assets/Scenes/MazeMinigame.unity
+    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/RaceMinigame.unity
+    guid: 22ffa197d80ba5a44a999e52899df227
+  - enabled: 1
+    path: Assets/Scenes/DodgeballMinigame.unity
+    guid: d045f1448d5fdee439dbaa1f96b4762d
+  - enabled: 1
+    path: Assets/Scenes/BumperMinigame.unity
+    guid: eff462bfb421f4046aa367b64ce670a3
+  m_configObjects: {}
