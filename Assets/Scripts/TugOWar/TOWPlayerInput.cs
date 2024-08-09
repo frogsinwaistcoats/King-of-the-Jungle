@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class TOWPlayerInput : MonoBehaviour
 {
@@ -27,6 +26,8 @@ public class TOWPlayerInput : MonoBehaviour
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
+
+        gameObject.transform.SetParent(rope); //players move with rope
     }
 
     private void OnDisable()
@@ -90,11 +91,11 @@ public class TOWPlayerInput : MonoBehaviour
 
     private void CheckWinCondition()
     {
-        if (rope.position.x >= maxDistance)
+        if (rope.position.x <= maxDistance)
         {
             Debug.Log("Player 1 wins");
         }
-        else if (rope.position.x <= -maxDistance)
+        else if (rope.position.x >= -maxDistance)
         {
             Debug.Log("Player 2 wins");
         }

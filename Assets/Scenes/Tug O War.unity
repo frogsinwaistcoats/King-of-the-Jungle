@@ -279,7 +279,7 @@ MonoBehaviour:
   playerID: 1
   rope: {fileID: 1038616967}
   moveSpeed: 1
-  maxDistance: 10
+  maxDistance: 7
 --- !u!1 &206466265
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +878,7 @@ MonoBehaviour:
   playerID: 0
   rope: {fileID: 1038616967}
   moveSpeed: 1
-  maxDistance: 10
+  maxDistance: 7
 --- !u!136 &717025247
 CapsuleCollider:
   m_ObjectHideFlags: 0
