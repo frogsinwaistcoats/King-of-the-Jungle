@@ -89,6 +89,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pull"",
+                    ""type"": ""Button"",
+                    ""id"": ""d95d7e93-cd75-4dcd-99fe-927c2085d723"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -419,6 +428,28 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NextButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a9b9bcd-c5d5-4c53-8ff7-1c571ed1d8f9"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78bcede5-bb47-40e2-bf0e-ea7b44fa79a1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1123,6 +1154,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_MasterControls_Move = m_MasterControls.FindAction("Move", throwIfNotFound: true);
         m_MasterControls_Jump = m_MasterControls.FindAction("Jump", throwIfNotFound: true);
         m_MasterControls_NextButton = m_MasterControls.FindAction("NextButton", throwIfNotFound: true);
+        m_MasterControls_Pull = m_MasterControls.FindAction("Pull", throwIfNotFound: true);
         // SpinControl1
         m_SpinControl1 = asset.FindActionMap("SpinControl1", throwIfNotFound: true);
         m_SpinControl1_Movement = m_SpinControl1.FindAction("Movement", throwIfNotFound: true);
@@ -1213,6 +1245,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_MasterControls_Move;
     private readonly InputAction m_MasterControls_Jump;
     private readonly InputAction m_MasterControls_NextButton;
+    private readonly InputAction m_MasterControls_Pull;
     public struct MasterControlsActions
     {
         private @InputControls m_Wrapper;
@@ -1224,6 +1257,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_MasterControls_Move;
         public InputAction @Jump => m_Wrapper.m_MasterControls_Jump;
         public InputAction @NextButton => m_Wrapper.m_MasterControls_NextButton;
+        public InputAction @Pull => m_Wrapper.m_MasterControls_Pull;
         public InputActionMap Get() { return m_Wrapper.m_MasterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1254,6 +1288,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @NextButton.started += instance.OnNextButton;
             @NextButton.performed += instance.OnNextButton;
             @NextButton.canceled += instance.OnNextButton;
+            @Pull.started += instance.OnPull;
+            @Pull.performed += instance.OnPull;
+            @Pull.canceled += instance.OnPull;
         }
 
         private void UnregisterCallbacks(IMasterControlsActions instance)
@@ -1279,6 +1316,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @NextButton.started -= instance.OnNextButton;
             @NextButton.performed -= instance.OnNextButton;
             @NextButton.canceled -= instance.OnNextButton;
+            @Pull.started -= instance.OnPull;
+            @Pull.performed -= instance.OnPull;
+            @Pull.canceled -= instance.OnPull;
         }
 
         public void RemoveCallbacks(IMasterControlsActions instance)
@@ -1591,6 +1631,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnNextButton(InputAction.CallbackContext context);
+        void OnPull(InputAction.CallbackContext context);
     }
     public interface ISpinControl1Actions
     {
