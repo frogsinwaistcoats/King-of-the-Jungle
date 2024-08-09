@@ -6,7 +6,7 @@ public class TOWPlayerInput : MonoBehaviour
     public int playerID;
     public Transform rope;
     public float moveSpeed = 1f;
-    public float maxDistance = 5f;
+    public float maxDistance = 10f;
 
     private int player1Pulls = 0;
     private int player2Pulls = 0;
