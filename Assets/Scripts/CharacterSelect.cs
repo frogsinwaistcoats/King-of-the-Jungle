@@ -3,115 +3,96 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class CharacterSelect : MonoBehaviour
 {
     public TextMeshProUGUI[] playerPrompts;
+    public Image[] playerSprites;
+    public Sprite[] characterSprites;
+
     MultiplayerInputManager inputManager;
+    private List<InputControls> inputControls = new List<InputControls>();
+    private List<int> selectedSpriteIndex;
+    private int joinedPlayers;
 
     private void Start()
     {
         inputManager = MultiplayerInputManager.instance;
-        inputManager.onPlayerJoined += UpdatePrompts;
-        int joinedPlayers = inputManager.players.Count;
+        inputManager.onPlayerJoined += OnPlayerJoinedHandler;
+
+        joinedPlayers = inputManager.players.Count;
+        selectedSpriteIndex = new List<int>(new int [joinedPlayers]);
+        
         for (int i = 0; i < joinedPlayers; i++)
         {
-            UpdatePrompts(i);
+            OnPlayerJoinedHandler(i);
         }
     }
 
-    public void UpdatePrompts(int id)
+    private void OnPlayerJoinedHandler(int playerID)
     {
-        playerPrompts[id].text = "Choose Character";
-    }
+        Debug.Log("Player" + playerID + "Joined");
 
-    public void ContinueToGame()
-    {
-        SceneManager.LoadScene("MinigameMaze");
-    }
-
-    /*
-    public TextMeshProUGUI[] playerPrompts;
-    public Sprite[] characterSprites;
-    public Image[] playerCharacterImages;
-    private int[] selectedCharacterIndices;
-    MultiplayerInputManager inputManager;
-    public int playerID;
-
-    public InputControls inputControls;
-
-    private void Start()
-    {
-        GetComponent<IndividualPlayerControls>().playerID = playerID;
-
-        inputManager = MultiplayerInputManager.instance;
-        inputManager.onPlayerJoined += UpdatePrompts;
-        int joinedPlayers = inputManager.players.Count;
-        selectedCharacterIndices = new int[joinedPlayers];
-        for(int i = 0; i < joinedPlayers; i++)
+        if (playerID >= inputControls.Count)
         {
-            UpdatePrompts(i);
+            inputControls.Add(inputManager.players[playerID].playerControls);
+            selectedSpriteIndex.Add(0);
         }
 
-        inputControls = new InputControls();
-        inputControls.Enable();
+        UpdatePrompts(playerID);
+        AssignInputs(playerID);
+        
     }
 
-    //private void OnEnable()
-    //{
-    //    inputControls.CharacterSelection.Next.performed += Next_performed;
-    //    inputControls.CharacterSelection.Previous.performed += Previous_performed;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    inputControls.CharacterSelection.Next.performed -= Next_performed;
-    //    inputControls.CharacterSelection.Previous.performed -= Previous_performed;
-    //    inputControls.Disable();
-    //}
-
-    //private void Next_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    //{
-    //    CycleCharacter(playerID, 1);
-    //}
-
-    //private void Previous_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    //{
-    //    CycleCharacter(playerID, -1);
-    //}
-
-
-    //private void CycleCharacter(int playerID, int direction)
-    //{
-    //    selectedCharacterIndices[playerID] += direction;
-    //    if (selectedCharacterIndices[playerID] >= characterSprites.Length)
-    //    {
-    //        selectedCharacterIndices[playerID] = 0;
-    //    }
-    //    else if (selectedCharacterIndices[playerID] < 0)
-    //    {
-    //        selectedCharacterIndices[playerID] = characterSprites.Length - 1;
-    //    }
-    //    UpdateCharacterSprite(playerID);
-    //}
-
-    //private void UpdateCharacterSprite(int playerID)
-    //{
-    //    if (playerID < 0 || playerID >= playerCharacterImages.Length)
-    //        return;
-
-    //    playerCharacterImages[playerID].sprite = characterSprites[selectedCharacterIndices[playerID]];
-    //}
-
-    public void UpdatePrompts(int id)
+    private void AssignInputs(int playerID)
     {
-        playerPrompts[id].text = "Choose Character";
-        //UpdateCharacterSprite(id);
+        inputManager.onPlayerJoined += AssignInputs;
+        inputControls[playerID] = inputManager.players[playerID].playerControls;
+
+        inputControls[playerID].CharacterSelectControls.Next.performed += context => OnNext(playerID);
+        inputControls[playerID].CharacterSelectControls.Previous.performed += context => OnPrevious(playerID);
+
+    }
+
+    private void OnPrevious(int playerID)
+    {
+        Debug.Log("Previous for player " + playerID);
+        CycleSprites(playerID, true);
+    }
+
+    private void OnNext(int playerID)
+    {
+        Debug.Log("Next for player " + playerID);
+        CycleSprites(playerID, false);
+    }
+
+    public void UpdatePrompts(int playerID)
+    {
+        playerPrompts[playerID].text = "Choose Character";
+        playerSprites[playerID].sprite = characterSprites[0];
+        selectedSpriteIndex[playerID] = 0; 
+    }
+
+    public void CycleSprites(int playerID, bool next)
+    {
+        if(playerID < selectedSpriteIndex.Count)
+        {
+            if (next)
+            {
+                selectedSpriteIndex[playerID] = (selectedSpriteIndex[playerID] + 1) % characterSprites.Length;
+            }
+            else
+            {
+                selectedSpriteIndex[playerID] = (selectedSpriteIndex[playerID] - 1 + characterSprites.Length) % characterSprites.Length;
+            }
+
+            playerSprites[playerID].sprite = characterSprites[selectedSpriteIndex[playerID]];
+        }
     }
 
     public void ContinueToGame()
     {
         SceneManager.LoadScene("MinigameMaze");
-    }
-    */
+    } 
 }

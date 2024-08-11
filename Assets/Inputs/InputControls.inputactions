@@ -280,7 +280,18 @@
                 {
                     "name": "",
                     "id": "20e027b4-570e-42ab-aeae-20e1befea664",
-                    "path": "<Gamepad>/leftStick/left",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectionLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28870083-8fa7-4fb9-95fe-2980dbfa1705",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -291,7 +302,18 @@
                 {
                     "name": "",
                     "id": "96f00d42-91d0-4046-b05b-046ad65f08e1",
-                    "path": "<Gamepad>/leftStick/right",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectionRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f5ec6ceb-9241-42aa-9aec-08279c2533bc",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1051,7 +1073,7 @@
             ]
         },
         {
-            "name": "CharacterSelection",
+            "name": "CharacterSelectControls",
             "id": "79751c9b-2660-43ec-8546-26b0148086fa",
             "actions": [
                 {

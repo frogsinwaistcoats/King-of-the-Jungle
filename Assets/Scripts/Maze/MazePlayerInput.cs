@@ -59,7 +59,7 @@ public class MazePlayerInput : MonoBehaviour
     {
         if (playerID == ID)
         {
-            inputManager.onPlayerJoined -= AssignInputs;
+            inputManager.onPlayerJoined += AssignInputs;
             inputControls = inputManager.players[playerID].playerControls;
             inputControls.MasterControls.Movement.performed += OnMove;
             inputControls.MasterControls.Movement.canceled += OnMove;

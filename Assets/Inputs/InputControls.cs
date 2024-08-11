@@ -302,7 +302,18 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""20e027b4-570e-42ab-aeae-20e1befea664"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectionLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""28870083-8fa7-4fb9-95fe-2980dbfa1705"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -313,7 +324,18 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""96f00d42-91d0-4046-b05b-046ad65f08e1"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectionRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5ec6ceb-9241-42aa-9aec-08279c2533bc"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1073,7 +1095,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""CharacterSelection"",
+            ""name"": ""CharacterSelectControls"",
             ""id"": ""79751c9b-2660-43ec-8546-26b0148086fa"",
             ""actions"": [
                 {
@@ -1173,10 +1195,10 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_Player_AimKeyboardLeft = m_Player.FindAction("AimKeyboardLeft", throwIfNotFound: true);
         m_Player_AimKeyboardRight = m_Player.FindAction("AimKeyboardRight", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        // CharacterSelection
-        m_CharacterSelection = asset.FindActionMap("CharacterSelection", throwIfNotFound: true);
-        m_CharacterSelection_Next = m_CharacterSelection.FindAction("Next", throwIfNotFound: true);
-        m_CharacterSelection_Previous = m_CharacterSelection.FindAction("Previous", throwIfNotFound: true);
+        // CharacterSelectControls
+        m_CharacterSelectControls = asset.FindActionMap("CharacterSelectControls", throwIfNotFound: true);
+        m_CharacterSelectControls_Next = m_CharacterSelectControls.FindAction("Next", throwIfNotFound: true);
+        m_CharacterSelectControls_Previous = m_CharacterSelectControls.FindAction("Previous", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1569,26 +1591,26 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // CharacterSelection
-    private readonly InputActionMap m_CharacterSelection;
-    private List<ICharacterSelectionActions> m_CharacterSelectionActionsCallbackInterfaces = new List<ICharacterSelectionActions>();
-    private readonly InputAction m_CharacterSelection_Next;
-    private readonly InputAction m_CharacterSelection_Previous;
-    public struct CharacterSelectionActions
+    // CharacterSelectControls
+    private readonly InputActionMap m_CharacterSelectControls;
+    private List<ICharacterSelectControlsActions> m_CharacterSelectControlsActionsCallbackInterfaces = new List<ICharacterSelectControlsActions>();
+    private readonly InputAction m_CharacterSelectControls_Next;
+    private readonly InputAction m_CharacterSelectControls_Previous;
+    public struct CharacterSelectControlsActions
     {
         private @InputControls m_Wrapper;
-        public CharacterSelectionActions(@InputControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Next => m_Wrapper.m_CharacterSelection_Next;
-        public InputAction @Previous => m_Wrapper.m_CharacterSelection_Previous;
-        public InputActionMap Get() { return m_Wrapper.m_CharacterSelection; }
+        public CharacterSelectControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Next => m_Wrapper.m_CharacterSelectControls_Next;
+        public InputAction @Previous => m_Wrapper.m_CharacterSelectControls_Previous;
+        public InputActionMap Get() { return m_Wrapper.m_CharacterSelectControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterSelectionActions set) { return set.Get(); }
-        public void AddCallbacks(ICharacterSelectionActions instance)
+        public static implicit operator InputActionMap(CharacterSelectControlsActions set) { return set.Get(); }
+        public void AddCallbacks(ICharacterSelectControlsActions instance)
         {
-            if (instance == null || m_Wrapper.m_CharacterSelectionActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CharacterSelectionActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_CharacterSelectControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CharacterSelectControlsActionsCallbackInterfaces.Add(instance);
             @Next.started += instance.OnNext;
             @Next.performed += instance.OnNext;
             @Next.canceled += instance.OnNext;
@@ -1597,7 +1619,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Previous.canceled += instance.OnPrevious;
         }
 
-        private void UnregisterCallbacks(ICharacterSelectionActions instance)
+        private void UnregisterCallbacks(ICharacterSelectControlsActions instance)
         {
             @Next.started -= instance.OnNext;
             @Next.performed -= instance.OnNext;
@@ -1607,21 +1629,21 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Previous.canceled -= instance.OnPrevious;
         }
 
-        public void RemoveCallbacks(ICharacterSelectionActions instance)
+        public void RemoveCallbacks(ICharacterSelectControlsActions instance)
         {
-            if (m_Wrapper.m_CharacterSelectionActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_CharacterSelectControlsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ICharacterSelectionActions instance)
+        public void SetCallbacks(ICharacterSelectControlsActions instance)
         {
-            foreach (var item in m_Wrapper.m_CharacterSelectionActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_CharacterSelectControlsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CharacterSelectionActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_CharacterSelectControlsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public CharacterSelectionActions @CharacterSelection => new CharacterSelectionActions(this);
+    public CharacterSelectControlsActions @CharacterSelectControls => new CharacterSelectControlsActions(this);
     public interface IMasterControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -1655,7 +1677,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnAimKeyboardRight(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
     }
-    public interface ICharacterSelectionActions
+    public interface ICharacterSelectControlsActions
     {
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
