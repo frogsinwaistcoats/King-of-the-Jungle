@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashSpeed = 20f;
     public float dashDuration = 0.2f;
     private bool isDashing;
+    private bool canDash = true;
     private Vector2 movementInput;
 
     private InputControls playerControls;
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isDashing)
+        if (isTarget && !isDashing)
         {
             Vector3 movement = new Vector3(movementInput.x, 0, 0) * moveSpeed * Time.fixedDeltaTime; // Only allow movement along the x-axis
             rb.MovePosition(rb.position + movement);
@@ -55,16 +56,21 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        if (isDashing) yield break;
-        isDashing = true;
+        if (!isTarget || !canDash || isDashing) yield break;
 
-        Vector3 dashDirection = new Vector3(movementInput.x, 0, movementInput.y).normalized;
+        isDashing = true;
+        canDash = false;
+
+        Vector3 dashDirection = new Vector3(movementInput.x, 0, 0).normalized;
         rb.velocity = dashDirection * dashSpeed;
 
         yield return new WaitForSeconds(dashDuration);
 
         rb.velocity = Vector3.zero;
         isDashing = false;
+
+        yield return new WaitForSeconds(1f); // 1-second cooldown
+        canDash = true;
     }
 
     public void AddScore(float value)

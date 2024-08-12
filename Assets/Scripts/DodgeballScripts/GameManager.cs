@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
             }
 
             // Set the player position based on the number of players
-            players[i].transform.position = spawnPoints[Mathf.Min(players.Count - 1, spawnPoints.Count - 1)].position;
+            players[i].transform.position = spawnPoints[i].position;
         }
     }
 
