@@ -7,8 +7,8 @@ public class TOWPlayerInput : MonoBehaviour
     public float moveSpeed = 1f;
     public float maxDistance = 10f;
 
-    private int player1Pulls = 0;
-    private int player2Pulls = 0;
+    [SerializeField]private int player1Pulls = 0;
+    [SerializeField] private int player2Pulls = 0;
 
     MultiplayerInputManager inputManager; 
     InputControls inputControls;
