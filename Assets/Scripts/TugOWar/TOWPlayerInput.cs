@@ -13,9 +13,9 @@ public class TOWPlayerInput : MonoBehaviour
     MultiplayerInputManager inputManager; 
     InputControls inputControls;
 
-
     private void Start()
     {
+
         inputManager = MultiplayerInputManager.instance;
 
         if (inputManager.players.Count >= playerID + 1)
@@ -27,7 +27,7 @@ public class TOWPlayerInput : MonoBehaviour
             inputManager.onPlayerJoined += AssignInputs;
         }
 
-        gameObject.transform.SetParent(rope); //players move with rope
+        //gameObject.transform.SetParent(rope); //players move with rope
     }
 
     private void OnDisable()
