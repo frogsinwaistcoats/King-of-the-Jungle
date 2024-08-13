@@ -26,15 +26,25 @@ public class PlayerAiming : MonoBehaviour
     {
         MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
 
-        // Ensure aim indicator starts in the correct orientation
-        if (aimIndicator != null)
+        if (shootPoint != null)
         {
-            initialRotation = aimIndicator.transform.localRotation;
-            aimIndicator.transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
-            currentAngle = 0; // Ensure the current angle starts at 0
+            // Capture the initial rotation at start to maintain a baseline for adjustments
+            initialRotation = shootPoint.localRotation;
         }
+
+        ResetAimIndicator();
     }
 
+    private void ResetAimIndicator()
+    {
+        if (shootPoint != null)
+        {
+            // Reset rotation to initial state or another predefined state
+            shootPoint.localRotation = initialRotation;
+            if (visualIndicator != null)
+                visualIndicator.transform.localRotation = initialRotation; // Ensure visual indicator matches
+        }
+    }
     private void AssignInputs(int ID)
     {
         if (playerID == ID)
@@ -71,35 +81,30 @@ public class PlayerAiming : MonoBehaviour
         }
     }
 
+    public void SetupControls()
+    {
+        if (isShooter)
+        {
+            playerControls.Player.AimKeyboardLeft.Enable();
+            playerControls.Player.AimKeyboardRight.Enable();
+            playerControls.Player.AimJoystick.Enable();
+            playerControls.Player.Shoot.Enable();
+        }
+        else
+        {
+            playerControls.Player.AimKeyboardLeft.Disable();
+            playerControls.Player.AimKeyboardRight.Disable();
+            playerControls.Player.AimJoystick.Disable();
+            playerControls.Player.Shoot.Disable();
+        }
+    }
+
     private void Update()
     {
         if (isShooter && playerControls != null)
         {
             float inputDirection = DetermineInputDirection();
             RotateAimIndicator(inputDirection);
-
-            // Determine input direction
-            if (keyboardAimInput != 0)
-            {
-                inputDirection = keyboardAimInput;
-            }
-            else if (joystickAimInput.x != 0)
-            {
-                inputDirection = joystickAimInput.x;
-            }
-
-            // Calculate the new angle within the limits
-            currentAngle = Mathf.Clamp(currentAngle + inputDirection * aimSpeed * Time.deltaTime, -maxAngle, maxAngle);
-
-            // Apply the rotation to the aim indicators
-            if (aimIndicator != null)
-            {
-                aimIndicator.transform.localRotation = initialRotation * Quaternion.Euler(0, currentAngle, 0);
-            }
-            if (visualIndicator != null)
-            {
-                visualIndicator.transform.localRotation = initialRotation * Quaternion.Euler(0, currentAngle, 0);
-            }
         }
     }
 
@@ -107,19 +112,35 @@ public class PlayerAiming : MonoBehaviour
     {
         float inputDirection = 0;
         if (keyboardAimInput != 0)
+        {
             inputDirection = keyboardAimInput;
+        }
         else if (joystickAimInput.x != 0)
+        {
             inputDirection = joystickAimInput.x;
+        }
 
         return inputDirection;
     }
 
     void RotateAimIndicator(float inputDirection)
     {
+        // Update the angle based on input, clamping it within the maximum range allowed
         currentAngle = Mathf.Clamp(currentAngle + inputDirection * aimSpeed * Time.deltaTime, -maxAngle, maxAngle);
-        shootPoint.localRotation = Quaternion.Euler(0, currentAngle, 0); // Adjust rotation based on input
+
+        // Set the rotation of the visual indicator
+        Quaternion visualRotation = Quaternion.Euler(-currentAngle, 0, 0);
         if (visualIndicator != null)
-            visualIndicator.transform.localRotation = Quaternion.Euler(0, currentAngle, 0); // Visual only
+        {
+            visualIndicator.transform.localRotation = initialRotation * visualRotation;
+        }
+
+        // Set the rotation of the actual aim indicator with an additional -90 degrees offset on the x-axis
+        Quaternion aimRotation = Quaternion.Euler(-currentAngle +90, 0, 0);
+        if (aimIndicator != null)
+        {
+            aimIndicator.transform.localRotation = initialRotation * aimRotation;
+        }
     }
 
     private void ShootProjectile()

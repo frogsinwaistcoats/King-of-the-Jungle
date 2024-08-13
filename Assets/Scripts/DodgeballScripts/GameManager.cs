@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     private int roundsPlayed = 0;
 
     public List<Transform> spawnPoints;  // Reference the actual spawn points (children)
-    public GameObject[] playerPrefabs; // The player prefabs
     private bool[] playerActive; // Track active players
 
     private void Awake()
@@ -33,16 +32,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        players = new List<PlayerMovement>(FindObjectsOfType<PlayerMovement>());
-
         playerActive = new bool[spawnPoints.Count];
-
-        // Move all players out of the scene initially
-        foreach (GameObject player in playerPrefabs)
-        {
-            player.transform.position = new Vector3(1000, 1000, 1000); // Move players out of the scene
-        }
         StartRound();
+    }
+
+    private void InstantiatePlayers()
+    {
+        for (int i = 0; i < PlayerManager.Instance.selectedPrefabsIndex.Count; i++)
+        {
+            int prefabIndex = PlayerManager.Instance.selectedPrefabsIndex[i];
+            GameObject player = Instantiate(PlayerManager.Instance.playerPrefabs[prefabIndex], spawnPoints[i].position, Quaternion.identity);
+            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+            playerMovement.playerID = i;
+            players.Add(playerMovement);
+            playerActive[i] = true;
+        }
     }
 
     private void StartRound()
@@ -80,56 +84,29 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            RespawnPlayers();
             StartRound();
         }
     }
 
-    public void SetTargetPlayer(int index)
+    private void RespawnPlayers()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].transform.position = spawnPoints[i].position;
+            players[i].transform.rotation = spawnPoints[i].rotation;
+        }
+    }
+
+    private void SetTargetPlayer(int index)
     {
         for (int i = 0; i < players.Count; i++)
         {
             PlayerAiming playerAiming = players[i].GetComponent<PlayerAiming>();
-
-            if (i == index)
-            {
-                players[i].isTarget = true;
-                playerAiming.isShooter = false;
-            }
-            else
-            {
-                players[i].isTarget = false;
-                playerAiming.isShooter = true;
-            }
-
-            // Set the player position based on the number of players
-            players[i].transform.position = spawnPoints[i].position;
+            playerAiming.isShooter = (i != index);
+            players[i].isTarget = (i == index);
         }
     }
-
-    public void OnPlayerJoined(PlayerInput playerInput)
-    {
-        int playerIndex = playerInput.playerIndex;
-
-        if (playerIndex < spawnPoints.Count && !playerActive[playerIndex])
-        {
-            Debug.Log("Player " + playerIndex + " joining at spawn point: " + spawnPoints[playerIndex].position);
-
-            // Activate the player object
-            playerPrefabs[playerIndex].SetActive(true);
-
-            // Set the player to the correct spawn point
-            playerPrefabs[playerIndex].transform.position = spawnPoints[playerIndex].position;
-            playerPrefabs[playerIndex].transform.rotation = spawnPoints[playerIndex].rotation;
-
-            // Mark the player as active
-            playerActive[playerIndex] = true;
-        }
-        else
-        {
-            Debug.LogWarning("Player " + playerIndex + " could not join. Either out of spawn points or already active.");
-        }
-    }
-
 
     public void PlayerHitTarget(int shooterID)
     {
