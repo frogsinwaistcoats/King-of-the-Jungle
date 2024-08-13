@@ -45,6 +45,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void EnableMovementControls()
+    {
+        playerControls.Player.Move.Enable();
+        playerControls.Player.Dash.Enable();
+    }
+
+    public void DisableMovementControls()
+    {
+        playerControls.Player.Move.Disable();
+        playerControls.Player.Dash.Disable();
+    }
+
     private void FixedUpdate()
     {
         if (isTarget && !isDashing)
