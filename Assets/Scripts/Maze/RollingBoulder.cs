@@ -6,6 +6,7 @@ public class RollingBoulder : MonoBehaviour
 {
     public Transform[] pathPoints; //points to define boulders path
     public float speed = 3f;
+    public float rotateSpeed = 150f;
 
     private int currentPointIndex;
     private List<MazePlayerInput> players;
@@ -18,7 +19,9 @@ public class RollingBoulder : MonoBehaviour
 
     void Update()
     {
+        
         MoveAlongPath();
+        Rotate();
     }
 
     void MoveAlongPath()
@@ -33,6 +36,23 @@ public class RollingBoulder : MonoBehaviour
         {
             currentPointIndex = (currentPointIndex + 1) % pathPoints.Length;
         }
+    }
+
+    void Rotate()
+    {
+        Vector3 direction = pathPoints[currentPointIndex].position - transform.position;
+
+        //if moving to left
+        if (direction.x < 0)
+        {
+            transform.Rotate(0f, rotateSpeed * Time.deltaTime, 0f, Space.Self);
+        }
+        //if moving to right
+        else if (direction.x > 0)
+        {
+            transform.Rotate(0f, -rotateSpeed * Time.deltaTime, 0f, Space.Self);
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)

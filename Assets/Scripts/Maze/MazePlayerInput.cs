@@ -9,6 +9,8 @@ public class MazePlayerInput : MonoBehaviour
     public Vector2 moveInput;
     public float moveSpeed;
     private Rigidbody rb;
+
+    public int characterSpriteID;
     
     public Collider finishCollider;
     public InputControls inputControls;
@@ -34,12 +36,19 @@ public class MazePlayerInput : MonoBehaviour
         if (inputManager.players.Count >= playerID + 1)
         {
             AssignInputs(playerID);
+            AssignCharacterSprite(playerID);
         }
         else
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
         
+    }
+
+    public void AssignCharacterSprite(int playerID)
+    {
+        characterSpriteID = inputManager.players[playerID].characterID;
+        gameObject.GetComponent<SpriteRenderer>().sprite = inputManager.characterSprites[characterSpriteID];
     }
 
     public void OnDisable()
