@@ -5,15 +5,15 @@ using System.Collections;
 public class PlayerAiming : MonoBehaviour
 {
     public int playerID;
-    public GameObject aimIndicator; // The actual aiming indicator
-    public GameObject visualIndicator; // The visual indicator
+    public GameObject aimIndicator;
+    public GameObject visualIndicator;
     public bool isShooter;
-    public float aimSpeed = 100f; // Adjust aim speed as needed
-    public float maxAngle = 60f; // Max angle for the arc movement (60 degrees left/right)
+    public float aimSpeed = 100f;
+    public float maxAngle = 60f;
     public GameObject projectilePrefab;
-    public Transform shootPoint; // Point from which projectiles are instantiated
-    public float projectileSpeed = 10f; // Speed of the projectile
-    public float shootCooldown = 1f; // Cooldown time between shots
+    public Transform shootPoint;
+    public float projectileSpeed = 10f;
+    public float shootCooldown = 1f;
 
     private InputControls playerControls;
     private float keyboardAimInput;
@@ -26,32 +26,18 @@ public class PlayerAiming : MonoBehaviour
     {
         MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
 
-        if (shootPoint != null)
+        if (aimIndicator != null)
         {
-            // Capture the initial rotation at start to maintain a baseline for adjustments
-            initialRotation = shootPoint.localRotation;
-        }
-
-        ResetAimIndicator();
-    }
-
-    private void ResetAimIndicator()
-    {
-        if (shootPoint != null)
-        {
-            // Reset rotation to initial state or another predefined state
-            shootPoint.localRotation = initialRotation;
-            if (visualIndicator != null)
-                visualIndicator.transform.localRotation = initialRotation; // Ensure visual indicator matches
+            initialRotation = aimIndicator.transform.localRotation;
+            aimIndicator.transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
+            currentAngle = 0;
         }
     }
-    private void AssignInputs(int ID)
-    {
-        if (playerID == ID)
-        {
-            MultiplayerInputManager.instance.onPlayerJoined -= AssignInputs;
-            playerControls = MultiplayerInputManager.instance.players[playerID].playerControls;
 
+    public void SetupControls()
+    {
+        if (playerControls != null)
+        {
             if (isShooter)
             {
                 playerControls.Player.AimKeyboardLeft.performed += ctx => keyboardAimInput = -1f;
@@ -71,31 +57,35 @@ public class PlayerAiming : MonoBehaviour
                     }
                 };
 
-                // Ensure the aim indicator is properly oriented
-                if (aimIndicator != null)
-                {
-                    aimIndicator.transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
-                    currentAngle = 0; // Reset current angle
-                }
+                Debug.Log($"Player {playerID} set as shooter with controls assigned.");
             }
-        }
-    }
-
-    public void SetupControls()
-    {
-        if (isShooter)
-        {
-            playerControls.Player.AimKeyboardLeft.Enable();
-            playerControls.Player.AimKeyboardRight.Enable();
-            playerControls.Player.AimJoystick.Enable();
-            playerControls.Player.Shoot.Enable();
+            else
+            {
+                Debug.Log($"Player {playerID} is not a shooter.");
+            }
         }
         else
         {
-            playerControls.Player.AimKeyboardLeft.Disable();
-            playerControls.Player.AimKeyboardRight.Disable();
-            playerControls.Player.AimJoystick.Disable();
-            playerControls.Player.Shoot.Disable();
+            Debug.LogError("Cannot set up controls - playerControls is null!");
+        }
+    }
+
+    private void AssignInputs(int ID)
+    {
+        if (playerID == ID)
+        {
+            MultiplayerInputManager.instance.onPlayerJoined -= AssignInputs;
+            playerControls = MultiplayerInputManager.instance.players[playerID].playerControls;
+
+            if (playerControls != null)
+            {
+                SetupControls();
+                Debug.Log($"Player {playerID} controls assigned successfully.");
+            }
+            else
+            {
+                Debug.LogError($"Player {playerID} controls are not assigned properly!");
+            }
         }
     }
 
@@ -103,57 +93,44 @@ public class PlayerAiming : MonoBehaviour
     {
         if (isShooter && playerControls != null)
         {
-            float inputDirection = DetermineInputDirection();
-            RotateAimIndicator(inputDirection);
-        }
-    }
+            float inputDirection = 0;
 
-    float DetermineInputDirection()
-    {
-        float inputDirection = 0;
-        if (keyboardAimInput != 0)
-        {
-            inputDirection = keyboardAimInput;
-        }
-        else if (joystickAimInput.x != 0)
-        {
-            inputDirection = joystickAimInput.x;
-        }
+            if (keyboardAimInput != 0)
+            {
+                inputDirection = keyboardAimInput;
+            }
+            else if (joystickAimInput.x != 0)
+            {
+                inputDirection = joystickAimInput.x;
+            }
 
-        return inputDirection;
-    }
+            currentAngle = Mathf.Clamp(currentAngle + inputDirection * aimSpeed * Time.deltaTime, -maxAngle, maxAngle);
 
-    void RotateAimIndicator(float inputDirection)
-    {
-        // Update the angle based on input, clamping it within the maximum range allowed
-        currentAngle = Mathf.Clamp(currentAngle + inputDirection * aimSpeed * Time.deltaTime, -maxAngle, maxAngle);
+            if (aimIndicator != null)
+            {
+                aimIndicator.transform.localRotation = initialRotation * Quaternion.Euler(currentAngle, 0, 0);
+            }
 
-        // Set the rotation of the visual indicator
-        Quaternion visualRotation = Quaternion.Euler(-currentAngle, 0, 0);
-        if (visualIndicator != null)
-        {
-            visualIndicator.transform.localRotation = initialRotation * visualRotation;
-        }
-
-        // Set the rotation of the actual aim indicator with an additional -90 degrees offset on the x-axis
-        Quaternion aimRotation = Quaternion.Euler(-currentAngle +90, 0, 0);
-        if (aimIndicator != null)
-        {
-            aimIndicator.transform.localRotation = initialRotation * aimRotation;
+            if (visualIndicator != null)
+            {
+                visualIndicator.transform.localRotation = initialRotation * Quaternion.Euler(currentAngle, 0, 0);
+            }
         }
     }
 
     private void ShootProjectile()
     {
-        if (shootPoint != null && projectilePrefab != null && aimIndicator != null)
+        if (projectilePrefab != null && shootPoint != null)
         {
-            GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb != null)
+            GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+            Projectile projectileScript = projectile.GetComponent<Projectile>();
+            if (projectileScript != null)
             {
-                // Shoot the projectile in the direction the aim indicator is pointing
-                rb.velocity = aimIndicator.transform.forward * projectileSpeed;
+                projectileScript.shooterID = playerID;
             }
+
+            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+            projectileRb.velocity = shootPoint.forward * projectileSpeed;
         }
     }
 

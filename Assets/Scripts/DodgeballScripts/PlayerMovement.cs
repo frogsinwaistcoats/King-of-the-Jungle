@@ -15,46 +15,83 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
     private Vector2 movementInput;
 
-    private InputControls playerControls;
+    public InputControls playerControls;
     private float score;
 
     MultiplayerInputManager multiplayerInputManager;
 
     private void Start()
     {
+        MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
         multiplayerInputManager = MultiplayerInputManager.instance;
         rb = GetComponent<Rigidbody>();
-        MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<Vector2>();
     }
-    private void AssignInputs(int ID)
+
+    public void AssignInputs(int ID)
     {
         if (playerID == ID)
         {
             MultiplayerInputManager.instance.onPlayerJoined -= AssignInputs;
-            playerControls = MultiplayerInputManager.instance.players[playerID].playerControls;
 
-            playerControls.Player.Move.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
-            playerControls.Player.Move.canceled += ctx => movementInput = Vector2.zero;
+            // Check if ID is valid and within range
+            if (ID < MultiplayerInputManager.instance.players.Count)
+            {
+                playerControls = MultiplayerInputManager.instance.players[playerID].playerControls;
+            }
+            else
+            {
+                Debug.LogError($"Invalid Player ID: {ID}. Cannot assign inputs.");
+                return;
+            }
 
-            playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
+            if (playerControls != null)
+            {
+                playerControls.Player.Move.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
+                playerControls.Player.Move.canceled += ctx => movementInput = Vector2.zero;
+
+                playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
+            }
+            else
+            {
+                Debug.LogError($"Player {ID} controls not set up correctly.");
+            }
         }
+    }
+
+    public bool HasValidControls()
+    {
+        return playerControls != null;
     }
 
     public void EnableMovementControls()
     {
-        playerControls.Player.Move.Enable();
-        playerControls.Player.Dash.Enable();
+        if (playerControls != null)
+        {
+            playerControls.Player.Move.Enable();
+            playerControls.Player.Dash.Enable();
+        }
+        else
+        {
+            Debug.LogError("Cannot enable movement controls - playerControls is null!");
+        }
     }
 
     public void DisableMovementControls()
     {
-        playerControls.Player.Move.Disable();
-        playerControls.Player.Dash.Disable();
+        if (playerControls != null)
+        {
+            playerControls.Player.Move.Disable();
+            playerControls.Player.Dash.Disable();
+        }
+        else
+        {
+            Debug.LogError("Cannot disable movement controls - playerControls is null!");
+        }
     }
 
     private void FixedUpdate()

@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     private int roundsPlayed = 0;
 
     public List<Transform> spawnPoints;  // Reference the actual spawn points (children)
-    private bool[] playerActive; // Track active players
+
+    private bool allPlayersReady = false;
 
     private void Awake()
     {
@@ -32,21 +33,56 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        playerActive = new bool[spawnPoints.Count];
-        StartRound();
+        // Ensure that InstantiatePlayers is only called when players join
+        MultiplayerInputManager.instance.onPlayerJoined += InstantiatePlayers;
+
+        // Start a coroutine that checks every second if all players are ready
+        StartCoroutine(WaitForPlayersToBeReady());
     }
 
-    private void InstantiatePlayers()
+    private IEnumerator WaitForPlayersToBeReady()
     {
-        for (int i = 0; i < PlayerManager.Instance.selectedPrefabsIndex.Count; i++)
+        while (!allPlayersReady)
         {
-            int prefabIndex = PlayerManager.Instance.selectedPrefabsIndex[i];
-            GameObject player = Instantiate(PlayerManager.Instance.playerPrefabs[prefabIndex], spawnPoints[i].position, Quaternion.identity);
-            PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-            playerMovement.playerID = i;
-            players.Add(playerMovement);
-            playerActive[i] = true;
+            if (players.Count >= 2) // Minimum two players to start the game
+            {
+                allPlayersReady = true;
+                StartRound();
+            }
+            else
+            {
+                Debug.Log("Not enough players, waiting 5 more seconds...");
+                yield return new WaitForSeconds(5f);
+            }
         }
+    }
+
+    //public bool HasValidControls()
+    //{
+    //    return playerControls != null;
+    //}
+
+    void InstantiatePlayers(int playerID)
+    {
+        // Ensure playerID is within bounds
+        if (playerID >= PlayerManager.Instance.selectedPrefabsIndex.Count)
+        {
+            Debug.LogError("Player ID exceeds the number of selected prefabs.");
+            return;
+        }
+
+        // Create the player instance
+        int prefabIndex = PlayerManager.Instance.selectedPrefabsIndex[playerID];
+        GameObject player = Instantiate(PlayerManager.Instance.playerPrefabs[prefabIndex], spawnPoints[playerID].position, Quaternion.identity);
+
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement.playerID = playerID;
+
+        // Assign inputs
+        playerMovement.AssignInputs(playerID);
+
+        // Add to players list
+        players.Add(playerMovement);
     }
 
     private void StartRound()
@@ -56,6 +92,10 @@ public class GameManager : MonoBehaviour
             roundTimer = roundDuration;
             SetTargetPlayer(currentTargetIndex);
             StartCoroutine(RoundTimer());
+        }
+        else
+        {
+            Debug.LogError("No players are present to start the round");
         }
     }
 
@@ -70,11 +110,66 @@ public class GameManager : MonoBehaviour
         EndRound();
     }
 
+    private void SetTargetPlayer(int index)
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            PlayerAiming playerAiming = players[i].GetComponent<PlayerAiming>();
+            PlayerMovement playerMovement = players[i].GetComponent<PlayerMovement>();
+
+            if (playerMovement.playerControls == null)
+            {
+                Debug.LogError($"playerControls is null for player {i} (ID: {players[i].playerID}).");
+            }
+
+            if (i == index)
+            {
+                players[i].isTarget = true;
+                playerAiming.isShooter = false;
+                playerMovement.EnableMovementControls(); // Make sure the target can move
+            }
+            else
+            {
+                players[i].isTarget = false;
+                playerAiming.isShooter = true;
+                playerMovement.DisableMovementControls(); // Make sure shooters cannot move but can aim
+            }
+
+            // Set the player position based on the spawn points
+            players[i].transform.position = spawnPoints[i].position;
+            players[i].transform.rotation = spawnPoints[i].rotation;
+        }
+    }
+
+    public void PlayerHitTarget(int shooterID)
+    {
+        // Check if the shooterID is valid
+        if (shooterID >= 0 && shooterID < players.Count)
+        {
+            // Calculate score
+            float scoreToAdd = 5; // 5 base points 
+            players[shooterID].AddScore(scoreToAdd);
+            Debug.Log($"Shooter {shooterID} hit the target and earned {scoreToAdd} points!");
+
+            // End the round and possibly reset positions
+            EndRound();
+        }
+        else
+        {
+            Debug.LogError("Invalid shooter ID, cannot assign score.");
+        }
+    }
+
     private void EndRound()
     {
+        // Score and debug
         players[currentTargetIndex].AddScore(roundDuration - roundTimer);
         DebugScores();
 
+        // Rotate the spawn points for new positions
+        RotateSpawnPoints();
+
+        // Calculate new target index and continue the game or end it
         currentTargetIndex = (currentTargetIndex + 1) % players.Count;
         roundsPlayed++;
 
@@ -89,8 +184,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void RespawnPlayers()
+    private void RotateSpawnPoints()
     {
+        Transform firstSpawn = spawnPoints[0];
+        spawnPoints.RemoveAt(0);
+        spawnPoints.Add(firstSpawn);  // Move the first to the last
+
+        // Reassign player positions based on new order
         for (int i = 0; i < players.Count; i++)
         {
             players[i].transform.position = spawnPoints[i].position;
@@ -98,30 +198,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SetTargetPlayer(int index)
+    private void RespawnPlayers()
     {
         for (int i = 0; i < players.Count; i++)
         {
+            players[i].transform.position = spawnPoints[i].position;
+            players[i].transform.rotation = spawnPoints[i].rotation;
+
             PlayerAiming playerAiming = players[i].GetComponent<PlayerAiming>();
-            playerAiming.isShooter = (i != index);
-            players[i].isTarget = (i == index);
-        }
-    }
+            PlayerMovement playerMovement = players[i].GetComponent<PlayerMovement>();
 
-    public void PlayerHitTarget(int shooterID)
-    {
-        players[shooterID].AddScore(5f);
-        EndRound();
-    }
+            if (i == currentTargetIndex)
+            {
+                players[i].isTarget = true;
+                playerAiming.isShooter = false;
+                playerMovement.EnableMovementControls();  // Ensure this method exists and correctly sets up movement controls
+            }
+            else
+            {
+                players[i].isTarget = false;
+                playerAiming.isShooter = true;
+                playerMovement.DisableMovementControls();  // Ensure this method exists and disables movement controls, enabling aiming
+            }
 
-    public void EndGame()
-    {
-        Debug.Log("Game Over!");
-        foreach (PlayerMovement player in players)
-        {
-            Debug.Log($"Player {player.playerID} score: {player.GetScore()}");
+            playerAiming.SetupControls();  // Setup controls based on new role
         }
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void DebugScores()
@@ -130,5 +231,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log($"Player {player.playerID} score: {player.GetScore()}");
         }
+    }
+
+    public void EndGame()
+    {
+        Debug.Log("Game Over!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -333,7 +333,8 @@ MonoBehaviour:
   isShooter: 0
   aimSpeed: 100
   maxAngle: 60
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 8878274156411191360, guid: ec7ed35b1a9d2634da5f8f325bed440a,
+    type: 3}
   shootPoint: {fileID: 7369236437395396714}
   projectileSpeed: 10
   shootCooldown: 1

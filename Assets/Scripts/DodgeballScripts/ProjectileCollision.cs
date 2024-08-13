@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class ProjectileCollision : MonoBehaviour
 {
-    public GameManager gameManager;
-
-    private void Start()
-    {
-        // Find the GameManager in the scene
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
 
         if (player != null && player.isTarget)
         {
-            GameManager.instance.PlayerHitTarget(GetComponent<Projectile>().shooterID);
+            Projectile projectile = GetComponent<Projectile>();
+            if (projectile != null && GameManager.instance != null)
+            {
+                GameManager.instance.PlayerHitTarget(projectile.shooterID);
+            }
+            else
+            {
+                Debug.LogError("Projectile or GameManager instance not found.");
+            }
             Destroy(gameObject); // Destroy the projectile
         }
     }
