@@ -612,6 +612,59 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: a26c8f63bd7829b408e1e044f4b71e7d,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: af3b7e5aa3a906a45aaa4d3a3942865a,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7c53e2cd0a55e694e89718dcf462fa5a,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: 72335a3967e78db4e8298c6c55fecc19,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: f7f726f55f40a0a4b9e7d1fff7a7221e,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: e7c64fd6cd798f045ba3ad27bd24d005,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 3aea60e7ddab9a44b94630fdead525ef,
+        type: 3}
+    - target: {fileID: 1492496943386828547, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: characterSprites.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e2d623ea6ffa1e479c181f8ccc11640,
+        type: 3}
     - target: {fileID: 4385142079295470146, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,6 +9,8 @@ public class IndividualPlayerControls
 {
 
     public int playerID;
+    public int characterID;
+    public Sprite[] characterSprites;
     public InputDevice inputDevice;
     InputUser inputUser;
 
