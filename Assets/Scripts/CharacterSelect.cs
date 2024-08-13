@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEditor.UI;
+using Unity.VisualScripting;
 
 public class CharacterSelect : MonoBehaviour
 {
@@ -28,6 +29,19 @@ public class CharacterSelect : MonoBehaviour
         for (int i = 0; i < joinedPlayers; i++)
         {
             OnPlayerJoinedHandler(i);
+        }
+    }
+
+    private void Disable(int playerID)
+    {
+        if (inputControls != null)
+        {
+            inputControls[playerID].CharacterSelectControls.Next.performed -= context => OnNext(playerID);
+            inputControls[playerID].CharacterSelectControls.Previous.performed -= context => OnPrevious(playerID);
+        }
+        else
+        {
+            inputManager.onPlayerJoined -= AssignInputs;
         }
     }
 
@@ -94,8 +108,10 @@ public class CharacterSelect : MonoBehaviour
         }
     }
 
-    public void ContinueToGame()
+    public void ContinueToGame(int playerID)
     {
+        Disable(playerID);
         SceneManager.LoadScene("MinigameMaze");
+        
     } 
 }
