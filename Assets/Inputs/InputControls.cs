@@ -46,24 +46,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SelectionLeft"",
-                    ""type"": ""Button"",
-                    ""id"": ""a21d77ba-222d-4ad8-8123-9148292f94d0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SelectionRight"",
-                    ""type"": ""Button"",
-                    ""id"": ""046b02cd-4a88-4334-b5b7-29655c0e15e8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""aae95e98-03a4-4dcc-a717-453d83ae88a0"",
@@ -296,50 +278,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""JoinButton"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""20e027b4-570e-42ab-aeae-20e1befea664"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectionLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""28870083-8fa7-4fb9-95fe-2980dbfa1705"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectionLeft"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""96f00d42-91d0-4046-b05b-046ad65f08e1"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectionRight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f5ec6ceb-9241-42aa-9aec-08279c2533bc"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SelectionRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1121,7 +1059,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1bde442a-cec2-4480-b41d-a9bc735197eb"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1132,7 +1070,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8e07c817-e1c4-43ef-bb1c-53b8480ba823"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1143,7 +1081,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5e30173a-5a0f-46ed-bab1-57654704bb24"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1154,7 +1092,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5a4f4367-d406-4aef-b886-dd7bab8b1d12"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1171,8 +1109,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_MasterControls = asset.FindActionMap("MasterControls", throwIfNotFound: true);
         m_MasterControls_Movement = m_MasterControls.FindAction("Movement", throwIfNotFound: true);
         m_MasterControls_JoinButton = m_MasterControls.FindAction("JoinButton", throwIfNotFound: true);
-        m_MasterControls_SelectionLeft = m_MasterControls.FindAction("SelectionLeft", throwIfNotFound: true);
-        m_MasterControls_SelectionRight = m_MasterControls.FindAction("SelectionRight", throwIfNotFound: true);
         m_MasterControls_Move = m_MasterControls.FindAction("Move", throwIfNotFound: true);
         m_MasterControls_Jump = m_MasterControls.FindAction("Jump", throwIfNotFound: true);
         m_MasterControls_NextButton = m_MasterControls.FindAction("NextButton", throwIfNotFound: true);
@@ -1262,8 +1198,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private List<IMasterControlsActions> m_MasterControlsActionsCallbackInterfaces = new List<IMasterControlsActions>();
     private readonly InputAction m_MasterControls_Movement;
     private readonly InputAction m_MasterControls_JoinButton;
-    private readonly InputAction m_MasterControls_SelectionLeft;
-    private readonly InputAction m_MasterControls_SelectionRight;
     private readonly InputAction m_MasterControls_Move;
     private readonly InputAction m_MasterControls_Jump;
     private readonly InputAction m_MasterControls_NextButton;
@@ -1274,8 +1208,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public MasterControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_MasterControls_Movement;
         public InputAction @JoinButton => m_Wrapper.m_MasterControls_JoinButton;
-        public InputAction @SelectionLeft => m_Wrapper.m_MasterControls_SelectionLeft;
-        public InputAction @SelectionRight => m_Wrapper.m_MasterControls_SelectionRight;
         public InputAction @Move => m_Wrapper.m_MasterControls_Move;
         public InputAction @Jump => m_Wrapper.m_MasterControls_Jump;
         public InputAction @NextButton => m_Wrapper.m_MasterControls_NextButton;
@@ -1295,12 +1227,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @JoinButton.started += instance.OnJoinButton;
             @JoinButton.performed += instance.OnJoinButton;
             @JoinButton.canceled += instance.OnJoinButton;
-            @SelectionLeft.started += instance.OnSelectionLeft;
-            @SelectionLeft.performed += instance.OnSelectionLeft;
-            @SelectionLeft.canceled += instance.OnSelectionLeft;
-            @SelectionRight.started += instance.OnSelectionRight;
-            @SelectionRight.performed += instance.OnSelectionRight;
-            @SelectionRight.canceled += instance.OnSelectionRight;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -1323,12 +1249,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @JoinButton.started -= instance.OnJoinButton;
             @JoinButton.performed -= instance.OnJoinButton;
             @JoinButton.canceled -= instance.OnJoinButton;
-            @SelectionLeft.started -= instance.OnSelectionLeft;
-            @SelectionLeft.performed -= instance.OnSelectionLeft;
-            @SelectionLeft.canceled -= instance.OnSelectionLeft;
-            @SelectionRight.started -= instance.OnSelectionRight;
-            @SelectionRight.performed -= instance.OnSelectionRight;
-            @SelectionRight.canceled -= instance.OnSelectionRight;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
@@ -1648,8 +1568,6 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJoinButton(InputAction.CallbackContext context);
-        void OnSelectionLeft(InputAction.CallbackContext context);
-        void OnSelectionRight(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnNextButton(InputAction.CallbackContext context);
