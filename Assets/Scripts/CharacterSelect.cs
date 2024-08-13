@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEditor.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
-    public TextMeshProUGUI[] playerPrompts;
+    //public TextMeshProUGUI[] playerPrompts;
     public Image[] playerSprites;
     public Sprite[] characterSprites;
 
@@ -69,7 +70,8 @@ public class CharacterSelect : MonoBehaviour
 
     public void UpdatePrompts(int playerID)
     {
-        playerPrompts[playerID].text = "Choose Character";
+        //playerPrompts[playerID].text = "Choose Character";
+        playerSprites[playerID].enabled = true;
         playerSprites[playerID].sprite = characterSprites[0];
         selectedSpriteIndex[playerID] = 0; 
     }
@@ -86,7 +88,8 @@ public class CharacterSelect : MonoBehaviour
             {
                 selectedSpriteIndex[playerID] = (selectedSpriteIndex[playerID] - 1 + characterSprites.Length) % characterSprites.Length;
             }
-
+            
+            inputManager.players[playerID].characterID = selectedSpriteIndex[playerID];
             playerSprites[playerID].sprite = characterSprites[selectedSpriteIndex[playerID]];
         }
     }
