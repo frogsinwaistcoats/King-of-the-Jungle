@@ -22,7 +22,7 @@ public class FinishRace : MonoBehaviour
     IEnumerator nextScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("DodgeballMinigame");
+        SceneManager.LoadScene("Scores");
     }
 
 }

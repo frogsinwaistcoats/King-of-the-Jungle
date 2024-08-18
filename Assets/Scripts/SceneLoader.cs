@@ -27,35 +27,70 @@ public class SceneLoader : MonoBehaviour
         inputManager.inputControls.MasterControls.NextButton.performed += NextButton_performed;
     }
 
-    public void PlayGame()
+    public void LoadCharacterSelection()
     {
         SceneManager.LoadScene("CharacterSelection");
     }
 
-    public void ContinueGame()
+    public void LoadMinigameSelection()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("MinigameSelection");
     }
 
     private void NextButton_performed(InputAction.CallbackContext obj)
     {
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            PlayGame();
+            LoadCharacterSelection();
         }
 
         if (SceneManager.GetActiveScene().name == "CharacterSelection")
         {
             if (inputManager.players.Count >= 2) 
             {
-                ContinueGame();
+                LoadMinigameSelection();
             }
             else
             {
                 Debug.Log("Not enough Players");
             }
-            
         }
+    }
 
+    public void PlayMazeMinigame()
+    {
+        SceneManager.LoadScene("MazeMinigame");
+    }
+
+    public void PlayRaceMinigame()
+    {
+        SceneManager.LoadScene("RaceMinigame");
+    }
+
+    public void PlayDodgeballMinigame()
+    {
+        SceneManager.LoadScene("DodgeballMinigame");
+    }
+
+    public void PlayBumperMinigame()
+    {
+        SceneManager.LoadScene("BumperMinigame");
+    }
+
+    public void PlayTugOWarMinigame()
+    {
+        SceneManager.LoadScene("TugOWarMinigame");
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadPreviousScene()
+    {
+        int currentScene;
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene - 1);
     }
 }

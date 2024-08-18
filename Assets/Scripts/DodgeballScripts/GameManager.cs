@@ -236,6 +236,6 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("Game Over!");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("Scores");
     }
 }

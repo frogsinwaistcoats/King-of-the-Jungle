@@ -29,6 +29,7 @@ public class Finish : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         finishedPlayers++;
+        Debug.Log("Finished players: " + finishedPlayers);
         playerFinishText.enabled = true;
         //if ()
         //{
@@ -44,19 +45,19 @@ public class Finish : MonoBehaviour
         //}
 
 
-        if (finishedPlayers == totalPlayers - 1)
+        if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
             gameFinishText.enabled = true;
-            StartCoroutine(nextScene());
+            StartCoroutine(NextScene());
             Debug.Log("Next scene");
         }
         
     }
 
-    IEnumerator nextScene()
+    IEnumerator NextScene()
     {
         yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("RaceMinigame");
+        SceneManager.LoadScene("Scores");
     }
 
 }

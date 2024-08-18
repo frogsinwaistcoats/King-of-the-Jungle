@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TOWPlayerInput : MonoBehaviour
 {
@@ -94,10 +95,12 @@ public class TOWPlayerInput : MonoBehaviour
         if (rope.position.x <= maxDistance)
         {
             Debug.Log("Player 1 wins");
+            SceneManager.LoadScene("Scores");
         }
         else if (rope.position.x >= -maxDistance)
         {
             Debug.Log("Player 2 wins");
+            SceneManager.LoadScene("Scores");
         }
     }
 }

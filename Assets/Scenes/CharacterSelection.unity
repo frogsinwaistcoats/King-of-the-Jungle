@@ -1058,11 +1058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb04b7e2b179574688c7f698e306191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrompts:
-  - {fileID: 913225022}
-  - {fileID: 440703704}
-  - {fileID: 370432461}
-  - {fileID: 440026872}
   playerSprites:
   - {fileID: 1655623066}
   - {fileID: 2065292021}
@@ -2688,11 +2683,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
-          type: 3}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: ContinueGame
-        m_Mode: 1
+      - m_Target: {fileID: 430039931}
+        m_TargetAssemblyTypeName: CharacterSelect, Assembly-CSharp
+        m_MethodName: ContinueToGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2859,6 +2853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  characterSprites: []
 --- !u!1 &1758303800
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManagerBumper : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class GameManagerBumper : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Player").Length <= 1)
         {
             gameStatusText.text = "Game Over";
+            SceneManager.LoadScene("Scores");
         }
     }
 }

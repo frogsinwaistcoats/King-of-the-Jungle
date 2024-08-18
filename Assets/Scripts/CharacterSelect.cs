@@ -111,7 +111,7 @@ public class CharacterSelect : MonoBehaviour
     public void ContinueToGame(int playerID)
     {
         Disable(playerID);
-        SceneManager.LoadScene("MinigameMaze");
+        SceneManager.LoadScene("MinigameSelection");
         
     } 
 }
