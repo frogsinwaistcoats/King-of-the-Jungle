@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spin Trigger
   - Ground
+  - Obstacle
   layers:
   - Default
   - TransparentFX

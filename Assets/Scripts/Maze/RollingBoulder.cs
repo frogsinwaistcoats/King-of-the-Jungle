@@ -19,7 +19,6 @@ public class RollingBoulder : MonoBehaviour
 
     void Update()
     {
-        
         MoveAlongPath();
         Rotate();
     }
@@ -55,15 +54,15 @@ public class RollingBoulder : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            MazePlayerInput playerInput = collision.gameObject.GetComponent<MazePlayerInput>();
-            if (playerInput != null)
-            {
-                playerInput.ReturnToStart();
-            }
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        MazePlayerInput playerInput = collision.gameObject.GetComponent<MazePlayerInput>();
+    //        if (playerInput != null)
+    //        {
+    //            playerInput.ReturnToStart();
+    //        }
+    //    }
+    //}
 }

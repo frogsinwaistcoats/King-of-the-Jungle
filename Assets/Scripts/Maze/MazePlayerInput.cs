@@ -110,6 +110,14 @@ public class MazePlayerInput : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            ReturnToStart();
+        }
+    }
+
     public void ReturnToStart()
     {
         gameObject.transform.position = startPosition;
