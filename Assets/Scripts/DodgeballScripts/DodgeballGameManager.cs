@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class DodgeballGameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static DodgeballGameManager instance;
 
     public List<PlayerMovement> players = new List<PlayerMovement>();
     public float roundDuration = 30f;
