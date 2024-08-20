@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerData : MonoBehaviour
+[System.Serializable]
+public class PlayerData
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public string playerName; //store players name
+    public int characterIndex; //store players character choice
+
+    //sets players name
+    public void SetPlayerName(string n) 
+    { 
+        playerName = n; 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    //sets players character choice
+    public void SetCharacter(int index) 
+    { 
+        characterIndex = index; 
     }
 }

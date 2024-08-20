@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class PlayerSelect : MonoBehaviour
 {
+    public int playerID;
+
+    [SerializeField] GameManager gameManager;
     [SerializeField] CharacterSelect characterSelect;
     [SerializeField] string playerName;
 
@@ -50,5 +53,6 @@ public class PlayerSelect : MonoBehaviour
     public void Confirm()
     {
         playerName = playerInputField.text;
+        gameManager.SetPlayer(playerID, currentCharacter, playerName);
     }
 }
