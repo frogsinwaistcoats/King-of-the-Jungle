@@ -9,7 +9,12 @@ using Unity.VisualScripting;
 
 public class CharacterSelect : MonoBehaviour
 {
-    //public TextMeshProUGUI[] playerPrompts;
+    public List<Character> characters = new List<Character>();
+
+    //public List<Sprite> characterSprites = new List<Sprite>();
+    //public List<string> characterNames = new List<string>();
+
+    /*
     public Image[] playerSprites;
     public Sprite[] characterSprites;
 
@@ -114,4 +119,5 @@ public class CharacterSelect : MonoBehaviour
         SceneManager.LoadScene("MinigameSelection");
         
     } 
+    */
 }

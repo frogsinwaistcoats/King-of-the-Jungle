@@ -9,9 +9,9 @@ public class ProjectileCollision : MonoBehaviour
         if (player != null && player.isTarget)
         {
             Projectile projectile = GetComponent<Projectile>();
-            if (projectile != null && GameManager.instance != null)
+            if (projectile != null && DodgeballGameManager.instance != null)
             {
-                GameManager.instance.PlayerHitTarget(projectile.shooterID);
+                DodgeballGameManager.instance.PlayerHitTarget(projectile.shooterID);
             }
             else
             {
