@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class Finish : MonoBehaviour
+public class MazeFinishManager : MonoBehaviour
 {
     public TextMeshPro playerFinishText;
     public TextMeshPro gameFinishText;
