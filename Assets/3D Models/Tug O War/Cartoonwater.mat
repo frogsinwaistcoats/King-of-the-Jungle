@@ -57,6 +57,7 @@ Material:
     - _Basw_color: {r: 0.06274507, g: 0.71530443, b: 0.77254903, a: 0}
     - _ripple_color: {r: 0.7064792, g: 1.849057, b: 1.334872, a: 0}
     - _ripple_density: {r: 4, g: 0, b: 0, a: 0}
-    - _ripple_slimness: {r: 0, g: 5, b: 0, a: 0}
-    - _ripple_speed: {r: 3, g: 1, b: 0, a: 0}
+    - _ripple_slimness: {r: 0, g: 3, b: 0, a: 0}
+    - _ripple_speed: {r: 2, g: 1, b: 0, a: 0}
+    - _wave_speed: {r: 0.1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
