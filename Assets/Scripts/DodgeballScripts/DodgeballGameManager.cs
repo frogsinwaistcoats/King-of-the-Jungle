@@ -78,8 +78,10 @@ public class DodgeballGameManager : MonoBehaviour
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         playerMovement.playerID = playerID;
 
-        // Assign inputs
+        // Assign inputs (for movement and aiming)
         playerMovement.AssignInputs(playerID);
+        PlayerAiming playerAiming = player.GetComponent<PlayerAiming>();
+        playerAiming.AssignInputs(playerID);
 
         // Add to players list
         players.Add(playerMovement);
@@ -133,6 +135,7 @@ public class DodgeballGameManager : MonoBehaviour
                 players[i].isTarget = false;
                 playerAiming.isShooter = true;
                 playerMovement.DisableMovementControls(); // Make sure shooters cannot move but can aim
+                playerAiming.SetupControls();  // Ensure the shooter controls are correctly set
             }
 
             // Set the player position based on the spawn points

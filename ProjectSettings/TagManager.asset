@@ -7,6 +7,9 @@ TagManager:
   - Spin Trigger
   - Ground
   - Obstacle
+  - Floor
+  - TargetPlayer
+  - Arrow
   layers:
   - Default
   - TransparentFX

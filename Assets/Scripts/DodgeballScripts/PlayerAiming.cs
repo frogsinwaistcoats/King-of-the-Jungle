@@ -6,7 +6,6 @@ public class PlayerAiming : MonoBehaviour
 {
     public int playerID;
     public GameObject aimIndicator;
-    public GameObject visualIndicator;
     public bool isShooter;
     public float aimSpeed = 100f;
     public float maxAngle = 60f;
@@ -22,6 +21,9 @@ public class PlayerAiming : MonoBehaviour
     private Quaternion initialRotation;
     private bool canShoot = true;
 
+    public LineRenderer lineRenderer;
+    public float lineLength = 5f; // Adjust to match Debug.DrawRay's length
+
     private void Start()
     {
         MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
@@ -31,6 +33,20 @@ public class PlayerAiming : MonoBehaviour
             initialRotation = aimIndicator.transform.localRotation;
             aimIndicator.transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
             currentAngle = 0;
+        }
+
+        if (lineRenderer == null)
+        {
+            Debug.LogError("LineRenderer is not assigned!");
+        }
+        else
+        {
+            // Set the line width and color for visibility
+            lineRenderer.startWidth = 0.1f;
+            lineRenderer.endWidth = 0.05f;
+            lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+            lineRenderer.startColor = Color.green;
+            lineRenderer.endColor = Color.green;
         }
     }
 
@@ -70,7 +86,7 @@ public class PlayerAiming : MonoBehaviour
         }
     }
 
-    private void AssignInputs(int ID)
+    public void AssignInputs(int ID)
     {
         if (playerID == ID)
         {
@@ -109,20 +125,34 @@ public class PlayerAiming : MonoBehaviour
             if (aimIndicator != null)
             {
                 aimIndicator.transform.localRotation = initialRotation * Quaternion.Euler(currentAngle, 0, 0);
+                Debug.DrawRay(aimIndicator.transform.position, aimIndicator.transform.forward * 5, Color.red); // Visualize the aim direction
             }
 
-            if (visualIndicator != null)
+            if (isShooter && lineRenderer != null)
             {
-                visualIndicator.transform.localRotation = initialRotation * Quaternion.Euler(currentAngle, 0, 0);
+                DrawAimLine();
             }
         }
+    }
+
+    void DrawAimLine()
+    {
+        Vector3 aimDirection = aimIndicator.transform.forward;
+        Vector3 startPosition = shootPoint.position; // Ensure the shootPoint is centered and aligned correctly
+        Vector3 endPosition = startPosition + (aimDirection * lineLength);
+
+        lineRenderer.SetPosition(0, startPosition);
+        lineRenderer.SetPosition(1, endPosition);
     }
 
     private void ShootProjectile()
     {
         if (projectilePrefab != null && shootPoint != null)
         {
-            GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+            // Get the forward direction from the aim indicator
+            Vector3 shootDirection = aimIndicator.transform.forward;
+
+            GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
             Projectile projectileScript = projectile.GetComponent<Projectile>();
             if (projectileScript != null)
             {
@@ -130,7 +160,7 @@ public class PlayerAiming : MonoBehaviour
             }
 
             Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-            projectileRb.velocity = shootPoint.forward * projectileSpeed;
+            projectileRb.velocity = shootDirection * projectileSpeed;
         }
     }
 
