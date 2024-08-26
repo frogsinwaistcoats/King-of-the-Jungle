@@ -44,13 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d7cf09037c943a41b0be063aa4ea596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4077669764042806189, guid: e2c916860b499ee44a6344c14a7afbca,
-    type: 3}
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   players:
   - playerName: 
     playerID: 0
@@ -64,3 +57,14 @@ MonoBehaviour:
   - playerName: 
     playerID: 0
     characterIndex: 0
+  mazePlayerPrefab: {fileID: 4069846549571117552, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+    type: 3}
+  mazeSpawnPoints: []
+  racePlayerPrefab: {fileID: 0}
+  raceSpawnPoints: []
+  dodgeballPlayerPrefab: {fileID: 0}
+  dodgeballSpawnPoints: []
+  bumperPlayerPrefab: {fileID: 0}
+  bumperSpawnPoints: []
+  tugOWarPlayerPrefab: {fileID: 0}
+  tugOWarSpawnPoints: []
