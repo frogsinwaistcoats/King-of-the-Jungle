@@ -10,9 +10,12 @@ public class SceneLoader : MonoBehaviour
 
     MultiplayerInputManager inputManager;
 
+    GameManager gameManager;
+
     private void Awake()
     {
         inputManager = MultiplayerInputManager.instance;
+        gameManager = GameManager.instance;
 
         if (instance == null)
         {
@@ -24,9 +27,35 @@ public class SceneLoader : MonoBehaviour
             Destroy(gameObject);
         }
 
-        inputManager.inputControls.MasterControls.NextButton.performed += NextButton_performed;
+        //inputManager.inputControls.MasterControls.NextButton.performed += NextButton_performed;
     }
 
+
+
+    //private void NextButton_performed(InputAction.CallbackContext obj)
+    //{
+    //    if (SceneManager.GetActiveScene().name == "MainMenu")
+    //    {
+    //        LoadCharacterSelection();
+    //    }
+
+    //    if (SceneManager.GetActiveScene().name == "CharacterSelection 1")
+    //    {
+    //        if (inputManager.players.Count >= 2) 
+    //        {
+    //            LoadMinigameSelection();
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Not enough Players");
+    //        }
+    //    }
+    //}
+    
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void LoadCharacterSelection()
     {
         SceneManager.LoadScene("CharacterSelection 1");
@@ -34,57 +63,45 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMinigameSelection()
     {
-        SceneManager.LoadScene("MinigameSelection");
+        if (gameManager.players.Count >= 2)
+        {
+            SceneManager.LoadScene("MinigameSelection");
+        }
+        else
+        {
+            Debug.Log("Not enough players");
+        }
+        
     }
 
-    private void NextButton_performed(InputAction.CallbackContext obj)
+    public void LoadMazeMinigame()
     {
-        if (SceneManager.GetActiveScene().name == "MainMenu")
-        {
-            LoadCharacterSelection();
-        }
-
-        if (SceneManager.GetActiveScene().name == "CharacterSelection 1")
-        {
-            if (inputManager.players.Count >= 2) 
-            {
-                LoadMinigameSelection();
-            }
-            else
-            {
-                Debug.Log("Not enough Players");
-            }
-        }
-    }
-
-    public void PlayMazeMinigame()
-    {
+        Debug.Log("Maze Minigame Selected");
         SceneManager.LoadScene("MazeMinigame");
     }
 
-    public void PlayRaceMinigame()
+    public void LoadRaceMinigame()
     {
+        Debug.Log("Race Minigame Selected");
         SceneManager.LoadScene("RaceMinigame");
     }
 
-    public void PlayDodgeballMinigame()
+    public void LoadDodgeballMinigame()
     {
+        Debug.Log("Dodgeball Minigame Selected");
         SceneManager.LoadScene("DodgeballMinigame");
     }
 
-    public void PlayBumperMinigame()
+    public void LoadBumperMinigame()
     {
+        Debug.Log("Bumper Minigame Selected");
         SceneManager.LoadScene("BumperMinigame");
     }
 
-    public void PlayTugOWarMinigame()
+    public void LoadTugOWarMinigame()
     {
+        Debug.Log("Tug O War Minigame Selected");
         SceneManager.LoadScene("TugOWarMinigame");
-    }
-
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 
     public void LoadPreviousScene()

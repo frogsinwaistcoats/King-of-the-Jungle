@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerSelect : MonoBehaviour
 {
+    public static PlayerSelect instance;
+
     public int playerID;
 
     [SerializeField] GameManager gameManager;
@@ -18,6 +20,11 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] TMP_InputField playerInputField;
 
     int currentCharacter = 0;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -55,6 +62,6 @@ public class PlayerSelect : MonoBehaviour
     public void Confirm()
     {
         playerName = playerInputField.text;
-        gameManager.SetPlayer(playerID, currentCharacter, playerName);
+        gameManager.AddPlayer(playerID, currentCharacter, playerName);
     }
 }
