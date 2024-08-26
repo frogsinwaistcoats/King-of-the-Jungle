@@ -29,7 +29,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadCharacterSelection()
     {
-        SceneManager.LoadScene("CharacterSelection");
+        SceneManager.LoadScene("CharacterSelection 1");
     }
 
     public void LoadMinigameSelection()
@@ -44,7 +44,7 @@ public class SceneLoader : MonoBehaviour
             LoadCharacterSelection();
         }
 
-        if (SceneManager.GetActiveScene().name == "CharacterSelection")
+        if (SceneManager.GetActiveScene().name == "CharacterSelection 1")
         {
             if (inputManager.players.Count >= 2) 
             {

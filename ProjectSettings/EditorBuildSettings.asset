@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 0446413972878114d983ce3ec33711ae
   - enabled: 1
-    path: Assets/Scenes/CharacterSelection.unity
-    guid: 6c08def2af4311346945a6802e2d8464
-  - enabled: 1
     path: Assets/Scenes/MinigameSelection.unity
     guid: 06a0d82bca8b603418da8ea560aeade5
   - enabled: 1
@@ -32,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scores.unity
     guid: b5d6d5fab8a952d4182d476ea0ddc62c
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelection 1.unity
+    guid: c3141888cdcb0624ab0ecc5e3ca0d42e
   m_configObjects: {}
