@@ -448,9 +448,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2025129949}
+      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
+          type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: PlayMazeMinigame
+        m_MethodName: LoadMazeMinigame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -699,9 +700,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2025129949}
+      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
+          type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: PlayRaceMinigame
+        m_MethodName: LoadRaceMinigame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -907,9 +909,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2025129949}
+      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
+          type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: PlayDodgeballMinigame
+        m_MethodName: LoadDodgeballMinigame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1176,9 +1179,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2025129949}
+      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
+          type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: PlayTugOWarMinigame
+        m_MethodName: LoadTugOWarMinigame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2035,18 +2039,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0387b0450ac62784a9791cad3c953991, type: 3}
---- !u!114 &2025129949 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
-    type: 3}
-  m_PrefabInstance: {fileID: 2025129948}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a228cd1ced1abf7499a5af81a82b6a6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2030862826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2130,9 +2122,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2025129949}
+      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
+          type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: PlayBumperMinigame
+        m_MethodName: LoadBumperMinigame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2242,6 +2235,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InputManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517570906941264456, guid: ed6ae43dcabf6f64b9dfc1831203c7fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

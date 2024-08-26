@@ -12,7 +12,7 @@ public class MultiplayerInputManager : MonoBehaviour
     public List<IndividualPlayerControls> players = new List<IndividualPlayerControls>();
     int maxPlayers = 4;
 
-    public Sprite[] characterSprites;
+    //public Sprite[] characterSprites;
 
     public InputControls inputControls;
 
@@ -50,10 +50,6 @@ public class MultiplayerInputManager : MonoBehaviour
             return;
         }
 
-        //if (SceneManager.GetActiveScene().name != "CharacterSelection")
-        //{
-        //    return;
-        //}
 
         //check if device is already assigned to a player
         foreach (IndividualPlayerControls player in players)

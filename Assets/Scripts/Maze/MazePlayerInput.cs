@@ -10,7 +10,7 @@ public class MazePlayerInput : MonoBehaviour
     public float moveSpeed;
     private Rigidbody rb;
 
-    public int characterSpriteID;
+    //public int characterSpriteID;
     
     public Collider finishCollider;
     public InputControls inputControls;
@@ -36,7 +36,7 @@ public class MazePlayerInput : MonoBehaviour
         if (inputManager.players.Count >= playerID + 1)
         {
             AssignInputs(playerID);
-            AssignCharacterSprite(playerID);
+            //AssignCharacterSprite(playerID);
         }
         else
         {
@@ -45,11 +45,11 @@ public class MazePlayerInput : MonoBehaviour
         
     }
 
-    public void AssignCharacterSprite(int playerID)
-    {
-        characterSpriteID = inputManager.players[playerID].characterID;
-        gameObject.GetComponent<SpriteRenderer>().sprite = inputManager.characterSprites[characterSpriteID];
-    }
+    //public void AssignCharacterSprite(int playerID)
+    //{
+    //    characterSpriteID = inputManager.players[playerID].characterID;
+    //    gameObject.GetComponent<SpriteRenderer>().sprite = inputManager.characterSprites[characterSpriteID];
+    //}
 
     public void OnDisable()
     {

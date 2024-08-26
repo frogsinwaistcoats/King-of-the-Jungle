@@ -1,21 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class PlayerSelect : MonoBehaviour
 {
+    public static PlayerSelect instance;
+
     public int playerID;
 
     [SerializeField] GameManager gameManager;
     [SerializeField] CharacterSelect characterSelect;
     [SerializeField] string playerName;
 
-    [Header ("UI Elements")]
+    [Header("UI Elements")]
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterText;
     [SerializeField] TMP_InputField playerInputField;
 
     int currentCharacter = 0;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -36,7 +45,7 @@ public class PlayerSelect : MonoBehaviour
     public void PreviousCharacter()
     {
         currentCharacter--;
-        if (currentCharacter <= - 1)
+        if (currentCharacter <= -1)
         {
             currentCharacter = characterSelect.characters.Count - 1;
         }
@@ -44,15 +53,15 @@ public class PlayerSelect : MonoBehaviour
         SetCharacter(currentCharacter);
     }
 
-    public void SetCharacter(int ID)
+    public void SetCharacter(int id)
     {
-        characterImage.sprite = characterSelect.characters[ID].characterSprite;
-        characterText.text = characterSelect.characters[ID].characterName;
+        characterImage.sprite = characterSelect.characters[id].characterSprite;
+        characterText.text = characterSelect.characters[id].characterName;
     }
 
     public void Confirm()
     {
         playerName = playerInputField.text;
-        gameManager.SetPlayer(playerID, currentCharacter, playerName);
+        gameManager.AddPlayer(playerID, currentCharacter, playerName);
     }
 }
