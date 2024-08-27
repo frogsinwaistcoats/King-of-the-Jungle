@@ -63,15 +63,17 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMinigameSelection()
     {
-        if (gameManager.players.Count >= 2)
-        {
-            SceneManager.LoadScene("MinigameSelection");
-        }
-        else
-        {
-            Debug.Log("Not enough players");
-        }
-        
+        //if (gameManager.players.Count >= 2)
+        //{
+        //    SceneManager.LoadScene("MinigameSelection");
+        //}
+        //else
+        //{
+        //    Debug.Log("Not enough players");
+        //}
+
+        SceneManager.LoadScene("MinigameSelection");
+
     }
 
     public void LoadMazeMinigame()

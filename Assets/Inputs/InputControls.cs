@@ -250,30 +250,8 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""396d19e7-aefc-4e8b-917a-04fd7c1de7e1"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""JoinButton"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""65424744-e286-48bb-8641-c7f288f60775"",
                     ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""JoinButton"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""39abb34d-0ea4-4489-bdf5-c1f1d72c08eb"",
-                    ""path"": ""<HID::Nintendo Wireless Gamepad>/button13"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

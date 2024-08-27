@@ -132,13 +132,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 841008669041703299, guid: bfb7775a61d408a49bfbc978d3ae91e1,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 841008669041703299, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+        type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.12000002
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 841008669041703299, guid: bfb7775a61d408a49bfbc978d3ae91e1,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.12000002
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 841008669041703299, guid: bfb7775a61d408a49bfbc978d3ae91e1,
         type: 3}
@@ -194,6 +199,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MazePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635165692950955854, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635165692950955854, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

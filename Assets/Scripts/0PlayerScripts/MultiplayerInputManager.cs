@@ -6,13 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MultiplayerInputManager : MonoBehaviour
 {
-
     public static MultiplayerInputManager instance;
-
     public List<IndividualPlayerControls> players = new List<IndividualPlayerControls>();
     int maxPlayers = 4;
-
-    //public Sprite[] characterSprites;
 
     public InputControls inputControls;
 
@@ -38,10 +34,10 @@ public class MultiplayerInputManager : MonoBehaviour
     {
         inputControls = new InputControls();
 
-
         inputControls.MasterControls.JoinButton.performed += JoinButtonPerformed;
         inputControls.Enable();
     }
+
 
     private void JoinButtonPerformed(InputAction.CallbackContext obj)
     {
@@ -60,15 +56,20 @@ public class MultiplayerInputManager : MonoBehaviour
                 return;
             }
         }
-
+       
+        //playerSelect.UpdatePrompts();
+        
         IndividualPlayerControls newPlayer = new IndividualPlayerControls();
         newPlayer.SetupPlayer(obj, players.Count);
         players.Add(newPlayer);
 
+        CharacterSelect.instance.UIPrompts[newPlayer.playerID].SetActive(false);
+        CharacterSelect.instance.characterSelections[newPlayer.playerID].SetActive(true);
+
         if (onPlayerJoined != null)
         {
             onPlayerJoined.Invoke(newPlayer.playerID);
-        }
+        } 
     }
 
     public int PlayerCount

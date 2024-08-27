@@ -12,28 +12,37 @@ public class GameManager : MonoBehaviour
 
     [Header("Maze")]
     public GameObject mazePlayerPrefab;
-    public List<Transform> mazeSpawnPoints = new List<Transform>();
+    public Transform[] mazeSpawnPoints;
 
-    [Header("Race")]
-    public GameObject racePlayerPrefab;
-    public List<Transform> raceSpawnPoints = new List<Transform>();
+    //[Header("Race")]
+    //public GameObject racePlayerPrefab;
+    //public List<Transform> raceSpawnPoints = new List<Transform>();
 
-    [Header("Dodgeball")]
-    public GameObject dodgeballPlayerPrefab;
-    public List<Transform> dodgeballSpawnPoints = new List<Transform>();
+    //[Header("Dodgeball")]
+    //public GameObject dodgeballPlayerPrefab;
+    //public List<Transform> dodgeballSpawnPoints = new List<Transform>();
 
-    [Header("Bumper")]
-    public GameObject bumperPlayerPrefab;
-    public List<Transform> bumperSpawnPoints = new List<Transform>();
+    //[Header("Bumper")]
+    //public GameObject bumperPlayerPrefab;
+    //public List<Transform> bumperSpawnPoints = new List<Transform>();
 
-    [Header("TugOWar")]
-    public GameObject tugOWarPlayerPrefab;
-    public List<Transform> tugOWarSpawnPoints = new List<Transform>();
+    //[Header("TugOWar")]
+    //public GameObject tugOWarPlayerPrefab;
+    //public List<Transform> tugOWarSpawnPoints = new List<Transform>();
 
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void AddPlayer(int playerID, int characterIndex, string playerName)
@@ -44,19 +53,6 @@ public class GameManager : MonoBehaviour
         newPlayer.SetPlayerID(playerID);
 
         players.Add(newPlayer);
-    }
-
-    public void SpawnPlayer()
-    {
-        if (SceneManager.GetActiveScene().name == "MazeMinigame")
-        {
-            foreach (PlayerData player in players)
-            {
-                GameObject obj = Instantiate(mazePlayerPrefab, mazeSpawnPoints[player.playerID].position, Quaternion.identity);
-                obj.GetComponent<TutorialPlayerStats>().UpdatePlayer(players[player.playerID]);
-            }
-        }
-        
     }
 }
 

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class SpinHandler : MonoBehaviour
 {
-    public Collider spinCollider;
     public float spinDuration = 1f;
-
     MazePlayerInput mazePlayerInput;
 
     private void Awake()
@@ -23,7 +21,13 @@ public class SpinHandler : MonoBehaviour
     private IEnumerator SpinPlayer()
     {
         mazePlayerInput.OnDisable();
-        spinCollider.enabled = false;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null )
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
 
         float timeElapsed = 0f;
         float rotationSpeed = (1f * 360f) / spinDuration;

@@ -4,20 +4,20 @@ public class MazePlayerInput : MonoBehaviour
 {
     public static MazePlayerInput instance;
 
+    public MultiplayerInputManager inputManager;
+    public InputControls inputControls;
+    private SpinHandler spinHandler;
+
     public int playerID;
-    public MultiplayerInputManager inputManager; 
+    private Rigidbody rb;
+    private Vector3 startPosition;
+    private bool hasFinished = false;
+
     public Vector2 moveInput;
     public float moveSpeed;
-    private Rigidbody rb;
-
-    //public int characterSpriteID;
     
+    private Collider disabledSpinCollider;
     public Collider finishCollider;
-    public InputControls inputControls;
-
-    private Vector3 startPosition;
-    private SpinHandler spinHandler;
-    private bool hasFinished = false;
 
     private void Awake()
     {
@@ -42,14 +42,7 @@ public class MazePlayerInput : MonoBehaviour
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
-        
     }
-
-    //public void AssignCharacterSprite(int playerID)
-    //{
-    //    characterSpriteID = inputManager.players[playerID].characterID;
-    //    gameObject.GetComponent<SpriteRenderer>().sprite = inputManager.characterSprites[characterSpriteID];
-    //}
 
     public void OnDisable()
     {
@@ -64,7 +57,7 @@ public class MazePlayerInput : MonoBehaviour
         }
     }
 
-    void AssignInputs(int ID)
+    public void AssignInputs(int ID)
     {
         if (playerID == ID)
         {
@@ -99,12 +92,13 @@ public class MazePlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == spinHandler.spinCollider)
+        if (other.gameObject.CompareTag("MazeSpin"))
         {
             spinHandler.StartSpin();
+            other.enabled = false;
+            disabledSpinCollider = other;
         }
-
-        if (other == finishCollider)
+        else if (other.gameObject.CompareTag("MazeFinish"))
         {
             hasFinished = true;
         }
@@ -112,9 +106,14 @@ public class MazePlayerInput : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("MazeBoulder"))
         {
             ReturnToStart();
+            if (disabledSpinCollider != null)
+            {
+                disabledSpinCollider.enabled = true;
+                disabledSpinCollider = null;
+            }
         }
     }
 
@@ -122,7 +121,6 @@ public class MazePlayerInput : MonoBehaviour
     {
         gameObject.transform.position = startPosition;
         ResetToMasterControls();
-        spinHandler.spinCollider.enabled = true;
     }
 
     private void ResetToMasterControls()
