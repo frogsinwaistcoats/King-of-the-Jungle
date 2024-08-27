@@ -22,10 +22,11 @@ public class PlayerAiming : MonoBehaviour
     private bool canShoot = true;
 
     public LineRenderer lineRenderer;
-    public float lineLength = 5f; // Adjust to match Debug.DrawRay's length
+    public float lineLength = 0.5f; // Adjust to match Debug.DrawRay's length
 
     private void Start()
     {
+        lineLength = 1f; // Example length, can be changed dynamically
         MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
 
         if (aimIndicator != null)
@@ -52,37 +53,81 @@ public class PlayerAiming : MonoBehaviour
 
     public void SetupControls()
     {
+        playerControls.Player.Enable(); // Enable the entire Player action map
+
         if (playerControls != null)
         {
+            // Handle the Line Renderer visibility based on the player's role
+            if (lineRenderer != null)
+            {
+                lineRenderer.enabled = isShooter; // Only enable the line renderer if the player is a shooter
+            }
+
+            // Unsubscribe from previous events to avoid duplicate listeners
+            UnsubscribeFromEvents();
+
             if (isShooter)
             {
-                playerControls.Player.AimKeyboardLeft.performed += ctx => keyboardAimInput = -1f;
-                playerControls.Player.AimKeyboardLeft.canceled += ctx => keyboardAimInput = 0;
-
-                playerControls.Player.AimKeyboardRight.performed += ctx => keyboardAimInput = 1f;
-                playerControls.Player.AimKeyboardRight.canceled += ctx => keyboardAimInput = 0;
-
-                playerControls.Player.AimJoystick.performed += ctx => joystickAimInput = ctx.ReadValue<Vector2>();
-                playerControls.Player.AimJoystick.canceled += ctx => joystickAimInput = Vector2.zero;
-
-                playerControls.Player.Shoot.performed += ctx => {
-                    if (canShoot)
-                    {
-                        ShootProjectile();
-                        StartCoroutine(ShootCooldown());
-                    }
-                };
+                // Re-subscribe the input controls for shooters
+                SubscribeToShooterControls();
 
                 Debug.Log($"Player {playerID} set as shooter with controls assigned.");
             }
             else
             {
+                // Disable shooting for the target player
+                playerControls.Player.Shoot.Disable(); // Ensures the target cannot shoot
                 Debug.Log($"Player {playerID} is not a shooter.");
             }
         }
         else
         {
             Debug.LogError("Cannot set up controls - playerControls is null!");
+        }
+    }
+
+    // Method to unsubscribe from all events
+    private void UnsubscribeFromEvents()
+    {
+        playerControls.Player.Shoot.performed -= OnShoot;
+        playerControls.Player.AimKeyboardLeft.performed -= OnAimKeyboardLeft;
+        playerControls.Player.AimKeyboardLeft.canceled -= OnAimKeyboardLeftCanceled;
+        playerControls.Player.AimKeyboardRight.performed -= OnAimKeyboardRight;
+        playerControls.Player.AimKeyboardRight.canceled -= OnAimKeyboardRightCanceled;
+        playerControls.Player.AimJoystick.performed -= OnAimJoystick;
+        playerControls.Player.AimJoystick.canceled -= OnAimJoystickCanceled;
+    }
+
+    // Method to subscribe to shooter-specific controls
+    private void SubscribeToShooterControls()
+    {
+        playerControls.Player.Shoot.performed += OnShoot;
+        playerControls.Player.AimKeyboardLeft.performed += OnAimKeyboardLeft;
+        playerControls.Player.AimKeyboardLeft.canceled += OnAimKeyboardLeftCanceled;
+        playerControls.Player.AimKeyboardRight.performed += OnAimKeyboardRight;
+        playerControls.Player.AimKeyboardRight.canceled += OnAimKeyboardRightCanceled;
+        playerControls.Player.AimJoystick.performed += OnAimJoystick;
+        playerControls.Player.AimJoystick.canceled += OnAimJoystickCanceled;
+    }
+
+    // Separate methods to handle aiming and shooting
+    private void OnAimKeyboardLeft(InputAction.CallbackContext ctx) => keyboardAimInput = -1f;
+    private void OnAimKeyboardLeftCanceled(InputAction.CallbackContext ctx) => keyboardAimInput = 0;
+
+    private void OnAimKeyboardRight(InputAction.CallbackContext ctx) => keyboardAimInput = 1f;
+    private void OnAimKeyboardRightCanceled(InputAction.CallbackContext ctx) => keyboardAimInput = 0;
+
+    private void OnAimJoystick(InputAction.CallbackContext ctx) => joystickAimInput = ctx.ReadValue<Vector2>();
+    private void OnAimJoystickCanceled(InputAction.CallbackContext ctx) => joystickAimInput = Vector2.zero;
+
+    private void OnShoot(InputAction.CallbackContext ctx)
+    {
+        Debug.Log($"Player {playerID}: Shoot button pressed.");
+
+        if (canShoot)
+        {
+            ShootProjectile();
+            StartCoroutine(ShootCooldown());
         }
     }
 
@@ -95,8 +140,8 @@ public class PlayerAiming : MonoBehaviour
 
             if (playerControls != null)
             {
+                Debug.Log($"Player {playerID}: Input controls found. Setting up controls...");
                 SetupControls();
-                Debug.Log($"Player {playerID} controls assigned successfully.");
             }
             else
             {
@@ -137,30 +182,70 @@ public class PlayerAiming : MonoBehaviour
 
     void DrawAimLine()
     {
-        Vector3 aimDirection = aimIndicator.transform.forward;
-        Vector3 startPosition = shootPoint.position; // Ensure the shootPoint is centered and aligned correctly
-        Vector3 endPosition = startPosition + (aimDirection * lineLength);
+        if (lineRenderer != null)
+        {
+            lineRenderer.positionCount = 2; // Ensure there are exactly 2 points in the line (start and end)
 
-        lineRenderer.SetPosition(0, startPosition);
-        lineRenderer.SetPosition(1, endPosition);
+            // Use the same aimDirection and startPosition as the Debug.DrawRay
+            Vector3 aimDirection = aimIndicator.transform.forward;
+            Vector3 startPosition = aimIndicator.transform.position; // Match this with Debug.DrawRay
+
+            // Calculate the end position based on the lineLength variable
+            Vector3 endPosition = startPosition + (aimDirection.normalized * lineLength);
+
+            // Update the LineRenderer positions
+            lineRenderer.SetPosition(0, startPosition);
+            lineRenderer.SetPosition(1, endPosition);
+        }
     }
 
     private void ShootProjectile()
     {
         if (projectilePrefab != null && shootPoint != null)
         {
-            // Get the forward direction from the aim indicator
+            // Log the shoot point and direction
             Vector3 shootDirection = aimIndicator.transform.forward;
+            Debug.Log($"Player {playerID}: Spawning projectile. ShootPoint: {shootPoint.position}, Direction: {shootDirection}");
 
+            // Instantiate the projectile
             GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
-            Projectile projectileScript = projectile.GetComponent<Projectile>();
-            if (projectileScript != null)
-            {
-                projectileScript.shooterID = playerID;
-            }
 
-            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
-            projectileRb.velocity = shootDirection * projectileSpeed;
+            if (projectile != null)
+            {
+                Debug.Log($"Player {playerID}: Projectile spawned successfully.");
+
+                // Assign shooter ID
+                Projectile projectileScript = projectile.GetComponent<Projectile>();
+                if (projectileScript != null)
+                {
+                    projectileScript.shooterID = playerID;
+                    Debug.Log($"Player {playerID}: Shooter ID set for the projectile.");
+                }
+                else
+                {
+                    Debug.LogError($"Player {playerID}: Projectile script missing on the instantiated object.");
+                }
+
+                // Set the projectile velocity
+                Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+                if (projectileRb != null)
+                {
+                    projectileRb.velocity = shootDirection * projectileSpeed;
+                    Debug.Log($"Player {playerID}: Projectile velocity set to {projectileRb.velocity}");
+                }
+                else
+                {
+                    Debug.LogError($"Player {playerID}: Rigidbody component missing on the projectile.");
+                }
+            }
+            else
+            {
+                Debug.LogError($"Player {playerID}: Failed to spawn the projectile.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Player {playerID}: Missing projectilePrefab or shootPoint.");
         }
     }
 

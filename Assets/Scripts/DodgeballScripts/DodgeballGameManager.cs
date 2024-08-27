@@ -73,7 +73,7 @@ public class DodgeballGameManager : MonoBehaviour
 
         // Create the player instance
         int prefabIndex = PlayerManager.Instance.selectedPrefabsIndex[playerID];
-        GameObject player = Instantiate(PlayerManager.Instance.playerPrefabs[prefabIndex], spawnPoints[playerID].position, Quaternion.identity);
+        GameObject player = Instantiate(PlayerManager.Instance.playerPrefabs[prefabIndex], spawnPoints[0].position, Quaternion.identity); // Default to the target spawn point initially
 
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         playerMovement.playerID = playerID;
@@ -87,12 +87,14 @@ public class DodgeballGameManager : MonoBehaviour
         players.Add(playerMovement);
     }
 
+
     private void StartRound()
     {
         if (players.Count > 0)
         {
             roundTimer = roundDuration;
-            SetTargetPlayer(currentTargetIndex);
+            ReassignPlayerRolesAndSpawnPoints();
+            RespawnPlayers(); // Make sure roles are set up before the round starts
             StartCoroutine(RoundTimer());
         }
         else
@@ -112,6 +114,75 @@ public class DodgeballGameManager : MonoBehaviour
         EndRound();
     }
 
+    private void ReassignPlayerRolesAndSpawnPoints()
+    {
+        // Custom logic based on player count
+        if (players.Count == 2)
+        {
+            AssignTwoPlayerSpawns();
+        }
+        else if (players.Count == 3)
+        {
+            AssignThreePlayerSpawns();
+        }
+        else if (players.Count == 4)
+        {
+            AssignFourPlayerSpawns();
+        }
+    }
+
+    private void AssignTwoPlayerSpawns()
+    {
+        if (currentTargetIndex == 0)
+        {
+            // Player 1 becomes shooter, Player 2 becomes target
+            players[0].transform.position = spawnPoints[2].position; // Move to Point C
+            players[1].transform.position = spawnPoints[0].position; // Move to Point A
+        }
+        else
+        {
+            // Player 2 becomes shooter, Player 1 becomes target
+            players[0].transform.position = spawnPoints[0].position; // Move to Point A
+            players[1].transform.position = spawnPoints[2].position; // Move to Point C
+        }
+    }
+
+    private void AssignThreePlayerSpawns()
+    {
+        if (currentTargetIndex == 0)
+        {
+            players[0].transform.position = spawnPoints[1].position; // Move to Point B
+            players[1].transform.position = spawnPoints[3].position; // Move to Point D
+            players[2].transform.position = spawnPoints[0].position; // Move to Point A
+        }
+        else if (currentTargetIndex == 1)
+        {
+            players[0].transform.position = spawnPoints[3].position; // Move to Point D
+            players[1].transform.position = spawnPoints[0].position; // Move to Point A
+            players[2].transform.position = spawnPoints[1].position; // Move to Point B
+        }
+        else
+        {
+            players[0].transform.position = spawnPoints[0].position; // Move to Point A
+            players[1].transform.position = spawnPoints[1].position; // Move to Point B
+            players[2].transform.position = spawnPoints[3].position; // Move to Point D
+        }
+    }
+
+    private void AssignFourPlayerSpawns()
+    {
+        Transform temp = spawnPoints[0];
+        spawnPoints[0] = spawnPoints[3];
+        spawnPoints[3] = spawnPoints[2];
+        spawnPoints[2] = spawnPoints[1];
+        spawnPoints[1] = temp;
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].transform.position = spawnPoints[i].position;
+        }
+    }
+
     private void SetTargetPlayer(int index)
     {
         for (int i = 0; i < players.Count; i++)
@@ -119,28 +190,31 @@ public class DodgeballGameManager : MonoBehaviour
             PlayerAiming playerAiming = players[i].GetComponent<PlayerAiming>();
             PlayerMovement playerMovement = players[i].GetComponent<PlayerMovement>();
 
-            if (playerMovement.playerControls == null)
-            {
-                Debug.LogError($"playerControls is null for player {i} (ID: {players[i].playerID}).");
-            }
-
             if (i == index)
             {
+                // Make this player the target
                 players[i].isTarget = true;
                 playerAiming.isShooter = false;
-                playerMovement.EnableMovementControls(); // Make sure the target can move
+                playerMovement.EnableMovementControls(); // Ensure they can move
+
+                // Ensure the player spawns at Point A
+                players[i].transform.position = spawnPoints[0].position;
+                players[i].transform.rotation = spawnPoints[0].rotation;
             }
             else
             {
+                // Make other players shooters
                 players[i].isTarget = false;
                 playerAiming.isShooter = true;
-                playerMovement.DisableMovementControls(); // Make sure shooters cannot move but can aim
-                playerAiming.SetupControls();  // Ensure the shooter controls are correctly set
+                playerMovement.DisableMovementControls(); // Shooters should not move
+
+                // Update spawn point for shooters based on rotation logic
+                int shooterSpawnIndex = (i < index) ? i + 1 : i;
+                players[i].transform.position = spawnPoints[shooterSpawnIndex].position;
+                players[i].transform.rotation = spawnPoints[shooterSpawnIndex].rotation;
             }
 
-            // Set the player position based on the spawn points
-            players[i].transform.position = spawnPoints[i].position;
-            players[i].transform.rotation = spawnPoints[i].rotation;
+            playerAiming.SetupControls(); // Ensure controls are set correctly for each role
         }
     }
 
@@ -169,9 +243,6 @@ public class DodgeballGameManager : MonoBehaviour
         players[currentTargetIndex].AddScore(roundDuration - roundTimer);
         DebugScores();
 
-        // Rotate the spawn points for new positions
-        RotateSpawnPoints();
-
         // Calculate new target index and continue the game or end it
         currentTargetIndex = (currentTargetIndex + 1) % players.Count;
         roundsPlayed++;
@@ -182,23 +253,25 @@ public class DodgeballGameManager : MonoBehaviour
         }
         else
         {
-            RespawnPlayers();
+            RotateSpawnPointsDown(); // Swap the spawn points before respawning players
+            RespawnPlayers(); // Reassign roles and reset controls
             StartRound();
         }
     }
 
-    private void RotateSpawnPoints()
+    private void RotateSpawnPointsDown()
     {
-        Transform firstSpawn = spawnPoints[0];
-        spawnPoints.RemoveAt(0);
-        spawnPoints.Add(firstSpawn);  // Move the first to the last
+        // Store the last spawn point temporarily
+        Transform lastSpawn = spawnPoints[spawnPoints.Count - 1];
 
-        // Reassign player positions based on new order
-        for (int i = 0; i < players.Count; i++)
+        // Shift all spawn points downward by one position
+        for (int i = spawnPoints.Count - 1; i > 0; i--)
         {
-            players[i].transform.position = spawnPoints[i].position;
-            players[i].transform.rotation = spawnPoints[i].rotation;
+            spawnPoints[i] = spawnPoints[i - 1];
         }
+
+        // Move the original last spawn point to the first position
+        spawnPoints[0] = lastSpawn;
     }
 
     private void RespawnPlayers()

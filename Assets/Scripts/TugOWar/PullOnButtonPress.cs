@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PullOnButtonPress : MonoBehaviour
 {
+    public static PullOnButtonPress instance;  
+
     public Transform target; // The point to pull the object towards
     public float pullForce = 10f; // The strength of the pull
     public KeyCode pullKey = KeyCode.Space; // The key to pull the object
 
     private Rigidbody rb;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -24,7 +31,7 @@ public class PullOnButtonPress : MonoBehaviour
         }
     }
 
-    void PullTowardsTarget()
+    public void PullTowardsTarget()
     {
         if (target != null)
         {
