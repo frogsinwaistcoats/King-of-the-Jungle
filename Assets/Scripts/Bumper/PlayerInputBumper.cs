@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,12 @@ public class PlayerInputBumper : MonoBehaviour
     MultiplayerInputManager inputManager; 
     public Vector2 moveInput;
     public float moveSpeed;
+    public float hitTimer;
+    public float pushForce;
     private Rigidbody rb;
 
     InputControls inputControls;
+    bool isHit;
 
     private void Awake()
     {
@@ -68,7 +72,29 @@ public class PlayerInputBumper : MonoBehaviour
 
     private void MovePlayer()
     {
-        Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
+        if (isHit == false)
+        {
+            Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime * 100;
+            //rb.MovePosition(rb.position + movement);
+            movement.y = rb.velocity.y;
+            rb.velocity = movement;
+        }
+    }
+
+    public void PlayerHit(Vector3 direction)
+    {
+        if (isHit == false)
+        {
+            isHit = true;
+            rb.AddForce(direction * pushForce, ForceMode.Impulse);
+            Invoke("HitCooldown", hitTimer);
+        }
+    }
+
+    public void HitCooldown()
+    {
+        isHit = false;
+        rb.velocity = Vector3.zero;
+        rb.angularDrag = 0;
     }
 }
