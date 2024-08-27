@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class TOWPlayerInput : MonoBehaviour
 {
+    public static TOWPlayerInput instance;
     public int playerID;
     public Transform rope;
     public float moveSpeed = 1f;
@@ -14,6 +15,8 @@ public class TOWPlayerInput : MonoBehaviour
     MultiplayerInputManager inputManager; 
     InputControls inputControls;
 
+
+ 
     private void Start()
     {
 
@@ -44,7 +47,7 @@ public class TOWPlayerInput : MonoBehaviour
         }
     }
 
-    void AssignInputs(int ID)
+    public void AssignInputs(int ID)
     {
         if (playerID == ID)
         {
@@ -72,7 +75,7 @@ public class TOWPlayerInput : MonoBehaviour
         CheckWinCondition();
     }
 
-    private void OnPull(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    public void OnPull(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (obj.performed)
         {
