@@ -61,8 +61,8 @@ public class MultiplayerInputManager : MonoBehaviour
         newPlayer.SetupPlayer(obj, players.Count);
         players.Add(newPlayer);
 
-        CharacterSelect.instance.UIPrompts[newPlayer.playerID].SetActive(false);
-        CharacterSelect.instance.characterSelections[newPlayer.playerID].SetActive(true);
+        //CharacterSelect.instance.UIPrompts[newPlayer.playerID].SetActive(false);
+        //CharacterSelect.instance.characterSelections[newPlayer.playerID].SetActive(true);
 
         if (onPlayerJoined != null)
         {

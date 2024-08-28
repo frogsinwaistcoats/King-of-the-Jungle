@@ -72,7 +72,7 @@ public class TOWPlayerInput : MonoBehaviour
         //update rope position along x axis
         rope.position = new Vector3(newXPosition, rope.position.y, rope.position.z);
         
-        CheckWinCondition();
+        //CheckWinCondition();
     }
 
     public void OnPull(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -93,17 +93,17 @@ public class TOWPlayerInput : MonoBehaviour
         }
     }
 
-    private void CheckWinCondition()
-    {
-        if (rope.position.x <= maxDistance)
-        {
-            Debug.Log("Player 1 wins");
-            //SceneManager.LoadScene("Scores");
-        }
-        else if (rope.position.x >= -maxDistance)
-        {
-            Debug.Log("Player 2 wins");
-            //SceneManager.LoadScene("Scores");
-        }
-    }
+    //private void CheckWinCondition()
+    //{
+    //    if (rope.position.x <= maxDistance)
+    //    {
+    //        Debug.Log("Player 1 wins");
+    //        //SceneManager.LoadScene("Scores");
+    //    }
+    //    else if (rope.position.x >= -maxDistance)
+    //    {
+    //        Debug.Log("Player 2 wins");
+    //        //SceneManager.LoadScene("Scores");
+    //    }
+    //}
 }

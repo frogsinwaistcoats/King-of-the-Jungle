@@ -26,15 +26,17 @@ public class QTE_placeholder : MonoBehaviour
     //    }
     //}
 
-        void Start()
+    void Start()
     {
-
         QTE_Buttons = GetComponentsInChildren <Ui_QTE_button>(true); // tbh the vid showed a diff script  i just merged it
     }
     public void AttemptToReload()
     {
         if (QTEsteps > 0)
+        {
             QTEsteps--;
+        }
+            
         if (QTEsteps <=0)
         {
            // _input.OnPull();
