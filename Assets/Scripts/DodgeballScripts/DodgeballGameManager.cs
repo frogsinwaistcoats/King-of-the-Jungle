@@ -65,15 +65,15 @@ public class DodgeballGameManager : MonoBehaviour
     void InstantiatePlayers(int playerID)
     {
         // Ensure playerID is within bounds
-        if (playerID >= PlayerManager.Instance.selectedPrefabsIndex.Count)
+        if (playerID >= DodgeballPlayerManager.instance.selectedPrefabsIndex.Count)
         {
             Debug.LogError("Player ID exceeds the number of selected prefabs.");
             return;
         }
 
         // Create the player instance
-        int prefabIndex = PlayerManager.Instance.selectedPrefabsIndex[playerID];
-        GameObject player = Instantiate(PlayerManager.Instance.playerPrefabs[prefabIndex], spawnPoints[0].position, Quaternion.identity); // Default to the target spawn point initially
+        int prefabIndex = DodgeballPlayerManager.instance.selectedPrefabsIndex[playerID];
+        GameObject player = Instantiate(DodgeballPlayerManager.instance.playerPrefabs[prefabIndex], spawnPoints[0].position, Quaternion.identity); // Default to the target spawn point initially
 
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         playerMovement.playerID = playerID;

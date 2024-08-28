@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class DodgeballPlayerManager : MonoBehaviour
 {
-    public static PlayerManager Instance;
+    public static DodgeballPlayerManager instance;
     public List<GameObject> playerPrefabs = new List<GameObject>(); // Assign these in the inspector
     public List<int> selectedPrefabsIndex = new List<int>();
 
     void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
