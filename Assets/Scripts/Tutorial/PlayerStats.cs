@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialPlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour
 {
     public PlayerData playerData;
 

@@ -3,31 +3,34 @@ using UnityEngine;
 
 public class CountdownTimer : MonoBehaviour
 {
-   public float countdownDuration = 10f;
-   private float countdownTimer;
-   private bool canMove = false;
+    public static CountdownTimer instance;
+   
+    public float countdownDuration = 3f;
+    public bool canMove;
 
-   void Start()
-   {
-        countdownTimer = countdownDuration;
+    private void Awake()
+    {
+        instance = this;
+    }
+    void Start()
+    {
         StartCoroutine(StartCountdown());
-   }
+    }
 
-   IEnumerator StartCountdown()
-   {
-        while (countdownTimer > 0f)
+    IEnumerator StartCountdown()
+    {
+        canMove = false;
+
+        float currentTime = countdownDuration;
+
+        while (currentTime > 0)
         {
             yield return new WaitForSeconds(1f);
-            countdownTimer -= 1f;
+            currentTime--;
         }
-        countdownTimer = 2f;
-        canMove = true;
-   }
 
-   public bool CanMove()
-   {
-        return canMove;
-   }
+        canMove = true;
+    }
 
 
 }

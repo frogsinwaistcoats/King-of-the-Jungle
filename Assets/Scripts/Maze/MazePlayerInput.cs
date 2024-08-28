@@ -30,7 +30,7 @@ public class MazePlayerInput : MonoBehaviour
 
     private void Start()
     {
-        TutorialPlayerStats playerStats = GetComponent<TutorialPlayerStats>();
+        PlayerStats playerStats = GetComponent<PlayerStats>();
         if (playerStats != null && playerStats.playerData != null)
         {
             playerID = playerStats.playerData.playerID;

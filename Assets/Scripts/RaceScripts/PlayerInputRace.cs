@@ -23,6 +23,13 @@ public class PlayerInputRace : MonoBehaviour
 
     void Start()
     {
+        PlayerStats playerStats = GetComponent<PlayerStats>();
+        if (playerStats != null && playerStats.playerData != null)
+        {
+            playerID = playerStats.playerData.playerID;
+        }
+
+
         inputManager = MultiplayerInputManager.instance;
 
         if (inputManager.players.Count >= playerID + 1)
@@ -52,12 +59,12 @@ public class PlayerInputRace : MonoBehaviour
         }
     }
 
-    private void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void OnMove(InputAction.CallbackContext obj)
     {
         moveInput = obj.ReadValue<Vector2>();
     }
 
-    private void OnJump(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    private void OnJump(InputAction.CallbackContext obj)
     {
         if (obj.performed)
         {
@@ -73,10 +80,9 @@ public class PlayerInputRace : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (countdownTimer.CanMove())
+        if (countdownTimer.canMove == true)
         {
             MovePlayer();
-            
         }  
     }
 

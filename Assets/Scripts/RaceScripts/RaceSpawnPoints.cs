@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MazeSpawnPoints : MonoBehaviour
+public class RaceSpawnPoints : MonoBehaviour
 {
-    MazeCountdown mazeCountdown;
+    //MazeCountdown mazeCountdown;
 
     public GameObject playerPrefab;
     public List<Camera> cameraObjects;
@@ -15,7 +15,7 @@ public class MazeSpawnPoints : MonoBehaviour
 
     private void Start()
     {
-        mazeCountdown = MazeCountdown.instance;
+        //mazeCountdown = MazeCountdown.instance;
 
         if (GameManager.instance != null)
         {
