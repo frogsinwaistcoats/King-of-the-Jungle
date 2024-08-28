@@ -45,8 +45,8 @@ public class PlayerInputRace : MonoBehaviour
         {
             inputManager.onPlayerJoined -= AssignInputs;
             inputControls = inputManager.players[playerID].playerControls;
-            inputControls.MasterControls.Move.performed += OnMove;
-            inputControls.MasterControls.Move.canceled += OnMove;
+            inputControls.MasterControls.RaceMovement.performed += OnMove;
+            inputControls.MasterControls.RaceMovement.canceled += OnMove;
             inputControls.MasterControls.Jump.performed += OnJump;
             inputControls.MasterControls.Jump.canceled += OnJump;
         }
