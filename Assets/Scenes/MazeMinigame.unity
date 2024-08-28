@@ -1884,7 +1884,6 @@ MonoBehaviour:
   - {fileID: 379685876}
   - {fileID: 653876137}
   gameFinishText: {fileID: 846785307}
-  inputManager: {fileID: 0}
 --- !u!4 &519454338
 Transform:
   m_ObjectHideFlags: 0
@@ -6037,7 +6036,7 @@ MonoBehaviour:
   - {x: 0.5, y: 0.5}
   - {x: 0, y: 0}
   - {x: 0.5, y: 0}
-  playerCount: 2
+  playerCount: 0
 --- !u!4 &1700181449
 Transform:
   m_ObjectHideFlags: 0

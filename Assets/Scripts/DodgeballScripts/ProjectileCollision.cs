@@ -4,7 +4,7 @@ public class ProjectileCollision : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+        DodgeballPlayerMovement player = collision.gameObject.GetComponent<DodgeballPlayerMovement>();
 
         if (player != null && player.isTarget)
         {

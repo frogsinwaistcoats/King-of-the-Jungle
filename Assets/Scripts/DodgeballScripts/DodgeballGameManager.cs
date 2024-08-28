@@ -8,7 +8,7 @@ public class DodgeballGameManager : MonoBehaviour
 {
     public static DodgeballGameManager instance;
 
-    public List<PlayerMovement> players = new List<PlayerMovement>();
+    public List<DodgeballPlayerMovement> players = new List<DodgeballPlayerMovement>();
     public float roundDuration = 30f;
     private float roundTimer;
     private int currentTargetIndex = 0;
@@ -17,6 +17,8 @@ public class DodgeballGameManager : MonoBehaviour
     public List<Transform> spawnPoints;  // Reference the actual spawn points (children)
 
     private bool allPlayersReady = false;
+
+    public int playerCount;
 
     private void Awake()
     {
@@ -33,8 +35,17 @@ public class DodgeballGameManager : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.instance != null)
+        {
+            playerCount = GameManager.instance.players.Count;
+        }
+
         // Ensure that InstantiatePlayers is only called when players join
-        MultiplayerInputManager.instance.onPlayerJoined += InstantiatePlayers;
+        for (int i = 0; i < playerCount; i++)
+        {
+            InstantiatePlayers(i);
+        }
+        
 
         // Start a coroutine that checks every second if all players are ready
         StartCoroutine(WaitForPlayersToBeReady());
@@ -74,8 +85,9 @@ public class DodgeballGameManager : MonoBehaviour
         // Create the player instance
         int prefabIndex = DodgeballPlayerManager.instance.selectedPrefabsIndex[playerID];
         GameObject player = Instantiate(DodgeballPlayerManager.instance.playerPrefabs[prefabIndex], spawnPoints[0].position, Quaternion.identity); // Default to the target spawn point initially
+        player.GetComponentInChildren<PlayerStats>().UpdatePlayer(GameManager.instance.players[playerID]);
 
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        DodgeballPlayerMovement playerMovement = player.GetComponent<DodgeballPlayerMovement>();
         playerMovement.playerID = playerID;
 
         // Assign inputs (for movement and aiming)
@@ -83,7 +95,6 @@ public class DodgeballGameManager : MonoBehaviour
         PlayerAiming playerAiming = player.GetComponent<PlayerAiming>();
         playerAiming.AssignInputs(playerID);
 
-        // Add to players list
         players.Add(playerMovement);
     }
 
@@ -188,7 +199,7 @@ public class DodgeballGameManager : MonoBehaviour
         for (int i = 0; i < players.Count; i++)
         {
             PlayerAiming playerAiming = players[i].GetComponent<PlayerAiming>();
-            PlayerMovement playerMovement = players[i].GetComponent<PlayerMovement>();
+            DodgeballPlayerMovement playerMovement = players[i].GetComponent<DodgeballPlayerMovement>();
 
             if (i == index)
             {
@@ -282,7 +293,7 @@ public class DodgeballGameManager : MonoBehaviour
             players[i].transform.rotation = spawnPoints[i].rotation;
 
             PlayerAiming playerAiming = players[i].GetComponent<PlayerAiming>();
-            PlayerMovement playerMovement = players[i].GetComponent<PlayerMovement>();
+            DodgeballPlayerMovement playerMovement = players[i].GetComponent<DodgeballPlayerMovement>();
 
             if (i == currentTargetIndex)
             {
@@ -303,7 +314,7 @@ public class DodgeballGameManager : MonoBehaviour
 
     private void DebugScores()
     {
-        foreach (PlayerMovement player in players)
+        foreach (DodgeballPlayerMovement player in players)
         {
             Debug.Log($"Player {player.playerID} score: {player.GetScore()}");
         }

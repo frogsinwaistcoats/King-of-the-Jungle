@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+public class DodgeballPlayerMovement : MonoBehaviour
 {
     public int playerID;
     public Rigidbody rb;
@@ -22,8 +22,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
+        PlayerStats playerStats = GetComponent<PlayerStats>();
+        if (playerStats != null && playerStats.playerData != null)
+        {
+            playerID = playerStats.playerData.playerID;
+        }
+
         multiplayerInputManager = MultiplayerInputManager.instance;
+        multiplayerInputManager.onPlayerJoined += AssignInputs;
         rb = GetComponent<Rigidbody>();
     }
 
