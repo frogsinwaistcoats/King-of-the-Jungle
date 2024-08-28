@@ -80,6 +80,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RaceMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""69ed067f-9b45-42c7-a213-2e80e1aa40cf"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -401,6 +410,39 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pull"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""584c38a5-8d7a-4328-930d-ab44e7334473"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2a94b482-38f4-4eb2-9a82-bd05be7c7b68"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""96a392f8-27b0-48dc-90c4-d267ce8065ea"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1102,6 +1144,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_MasterControls_Jump = m_MasterControls.FindAction("Jump", throwIfNotFound: true);
         m_MasterControls_NextButton = m_MasterControls.FindAction("NextButton", throwIfNotFound: true);
         m_MasterControls_Pull = m_MasterControls.FindAction("Pull", throwIfNotFound: true);
+        m_MasterControls_RaceMovement = m_MasterControls.FindAction("RaceMovement", throwIfNotFound: true);
         // SpinControl1
         m_SpinControl1 = asset.FindActionMap("SpinControl1", throwIfNotFound: true);
         m_SpinControl1_Movement = m_SpinControl1.FindAction("Movement", throwIfNotFound: true);
@@ -1191,6 +1234,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_MasterControls_Jump;
     private readonly InputAction m_MasterControls_NextButton;
     private readonly InputAction m_MasterControls_Pull;
+    private readonly InputAction m_MasterControls_RaceMovement;
     public struct MasterControlsActions
     {
         private @InputControls m_Wrapper;
@@ -1201,6 +1245,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_MasterControls_Jump;
         public InputAction @NextButton => m_Wrapper.m_MasterControls_NextButton;
         public InputAction @Pull => m_Wrapper.m_MasterControls_Pull;
+        public InputAction @RaceMovement => m_Wrapper.m_MasterControls_RaceMovement;
         public InputActionMap Get() { return m_Wrapper.m_MasterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1228,6 +1273,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Pull.started += instance.OnPull;
             @Pull.performed += instance.OnPull;
             @Pull.canceled += instance.OnPull;
+            @RaceMovement.started += instance.OnRaceMovement;
+            @RaceMovement.performed += instance.OnRaceMovement;
+            @RaceMovement.canceled += instance.OnRaceMovement;
         }
 
         private void UnregisterCallbacks(IMasterControlsActions instance)
@@ -1250,6 +1298,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Pull.started -= instance.OnPull;
             @Pull.performed -= instance.OnPull;
             @Pull.canceled -= instance.OnPull;
+            @RaceMovement.started -= instance.OnRaceMovement;
+            @RaceMovement.performed -= instance.OnRaceMovement;
+            @RaceMovement.canceled -= instance.OnRaceMovement;
         }
 
         public void RemoveCallbacks(IMasterControlsActions instance)
@@ -1561,6 +1612,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnNextButton(InputAction.CallbackContext context);
         void OnPull(InputAction.CallbackContext context);
+        void OnRaceMovement(InputAction.CallbackContext context);
     }
     public interface ISpinControl1Actions
     {
