@@ -238,6 +238,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "60d14c18-3328-46d6-9e25-25018f71d324",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JoinButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "57989200-fdaf-410e-a3cb-bf87bc0cfc2d",
                     "path": "2DVector",

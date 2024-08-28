@@ -1,12 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class MazeCountdown : MonoBehaviour
 {
+    public static MazeCountdown instance;
+
     public float countdownTime = 3f;
     public TextMeshProUGUI countdownText;
-    public MonoBehaviour[] scriptsToDisable;
+    public bool isRunning;
+    //public List<MonoBehaviour> scriptsToDisable = new List<MonoBehaviour>();
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -15,10 +24,7 @@ public class MazeCountdown : MonoBehaviour
 
     IEnumerator StartCountdown()
     {
-        foreach (MonoBehaviour script in scriptsToDisable)
-        {
-            script.enabled = false;
-        }
+        isRunning = true;
 
         float currentTime = countdownTime;
 
@@ -34,12 +40,8 @@ public class MazeCountdown : MonoBehaviour
 
         if (countdownText != null)
         {
+            isRunning = false;
             countdownText.text = "Go!";
-        }
-
-        foreach (MonoBehaviour script in scriptsToDisable)
-        {
-            script.enabled = true;
         }
 
         if (countdownText != null)

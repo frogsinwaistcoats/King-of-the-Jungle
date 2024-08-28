@@ -63,53 +63,52 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMinigameSelection()
     {
-        //if (gameManager.players.Count >= 2)
-        //{
-        //    SceneManager.LoadScene("MinigameSelection");
-        //}
-        //else
-        //{
-        //    Debug.Log("Not enough players");
-        //}
-
-        SceneManager.LoadScene("MinigameSelection");
-
+        if (SceneManager.GetActiveScene().name == "CharacterSelection 1")
+        {
+            if (gameManager.players.Count >= 2)
+            {
+                SceneManager.LoadScene("MinigameSelection");
+            }
+            else
+            {
+                Debug.Log("Not enough players");
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene("MinigameSelection");
+        }
     }
 
     public void LoadMazeMinigame()
     {
-        Debug.Log("Maze Minigame Selected");
         SceneManager.LoadScene("MazeMinigame");
     }
 
     public void LoadRaceMinigame()
     {
-        Debug.Log("Race Minigame Selected");
         SceneManager.LoadScene("RaceMinigame");
     }
 
     public void LoadDodgeballMinigame()
     {
-        Debug.Log("Dodgeball Minigame Selected");
         SceneManager.LoadScene("DodgeballMinigame");
     }
 
     public void LoadBumperMinigame()
     {
-        Debug.Log("Bumper Minigame Selected");
         SceneManager.LoadScene("BumperMinigame");
     }
 
     public void LoadTugOWarMinigame()
     {
-        Debug.Log("Tug O War Minigame Selected");
         SceneManager.LoadScene("TugOWarMinigame");
     }
 
     public void LoadPreviousScene()
     {
-        int currentScene;
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentScene - 1);
+        //int currentScene;
+        //currentScene = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene(currentScene - 1);
     }
 }

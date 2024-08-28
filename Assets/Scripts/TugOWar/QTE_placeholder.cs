@@ -37,7 +37,7 @@ public class QTE_placeholder : MonoBehaviour
             QTEsteps--;
         if (QTEsteps <=0)
         {
-            _input.OnPull();
+           // _input.OnPull();
         }
     }
     public void OpenQTE()

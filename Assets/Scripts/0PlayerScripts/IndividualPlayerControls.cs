@@ -9,7 +9,6 @@ public class IndividualPlayerControls
 {
 
     public int playerID;
-    public int characterID;
     public InputDevice inputDevice;
     InputUser inputUser;
 
@@ -53,7 +52,7 @@ public class IndividualPlayerControls
         {
             controllerType = ControllerType.Switch;
         }
-        else if (inputDevice is UnityEngine.InputSystem.Keyboard)
+        else if (inputDevice is Keyboard)
         {
             controllerType = ControllerType.Keyboard;
         }

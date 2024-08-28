@@ -5,32 +5,44 @@ using UnityEngine.SceneManagement;
 
 public class MazeFinishManager : MonoBehaviour
 {
-    public TextMeshProUGUI playerFinishText;
-    //public TextMeshPro gameFinishText;
+    public static MazeFinishManager instance;
+
+    public TextMeshProUGUI[] playerFinishText;
+    public TextMeshPro gameFinishText;
 
     private static int finishedPlayers = 0;
     private static int totalPlayers;
 
-    public MultiplayerInputManager inputManager;
+    GameManager gameManager;
 
     private void Awake()
     {
-        playerFinishText.enabled = false;
-        //gameFinishText.enabled = false;
-        inputManager = MultiplayerInputManager.instance;
+        instance = this;
+        gameManager = GameManager.instance;
+
+        for (int i = 0; i < playerFinishText.Length; i++)
+        {
+            if (playerFinishText[i] != null)
+            {
+                playerFinishText[i].enabled = false;
+            }
+        }
+
+        gameFinishText.enabled = false;
     }
 
     private void Start()
     {
-        //totalPlayers = inputManager.PlayerCount;
-        //Debug.Log("Number of players: " + totalPlayers);
+        totalPlayers = gameManager.players.Count;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void PlayerFinish(int id)
     {
         finishedPlayers++;
+        playerFinishText[id].enabled = true;
         Debug.Log("Finished players: " + finishedPlayers);
-        playerFinishText.enabled = true;
+        
+        //playerFinishText.enabled = true;
         //if ()
         //{
         //    playerFinishText.text = "1st";
@@ -44,14 +56,12 @@ public class MazeFinishManager : MonoBehaviour
         //    playerFinishText.text = "3rd";
         //}
 
-
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
-            //gameFinishText.enabled = true;
+            gameFinishText.enabled = true;
             StartCoroutine(NextScene());
             Debug.Log("Next scene");
         }
-        
     }
 
     IEnumerator NextScene()
@@ -59,5 +69,4 @@ public class MazeFinishManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("Scores");
     }
-
 }

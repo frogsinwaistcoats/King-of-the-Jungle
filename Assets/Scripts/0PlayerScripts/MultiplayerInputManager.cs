@@ -56,8 +56,6 @@ public class MultiplayerInputManager : MonoBehaviour
                 return;
             }
         }
-       
-        //playerSelect.UpdatePrompts();
         
         IndividualPlayerControls newPlayer = new IndividualPlayerControls();
         newPlayer.SetupPlayer(obj, players.Count);

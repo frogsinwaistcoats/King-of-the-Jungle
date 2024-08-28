@@ -10,13 +10,11 @@ public class PlayerSelect : MonoBehaviour
 
     [SerializeField] GameManager gameManager;
     [SerializeField] CharacterSelect characterSelect;
-    [SerializeField] string playerName;
 
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI joinText;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterText;
-    [SerializeField] TMP_InputField playerInputField;
 
     int currentCharacter = 0;
 
@@ -55,7 +53,6 @@ public class PlayerSelect : MonoBehaviour
 
     public void Confirm()
     {
-        playerName = playerInputField.text;
-        gameManager.AddPlayer(playerID, currentCharacter, playerName);
+        gameManager.AddPlayer(playerID, currentCharacter);
     }
 }

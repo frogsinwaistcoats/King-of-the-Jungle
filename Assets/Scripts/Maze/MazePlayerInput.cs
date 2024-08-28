@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class MazePlayerInput : MonoBehaviour
 {
-    public static MazePlayerInput instance;
-
     public MultiplayerInputManager inputManager;
     public InputControls inputControls;
     private SpinHandler spinHandler;
+    MazeCountdown mazeCountdown;
+    MazeFinishManager finishManager;
 
     public int playerID;
     private Rigidbody rb;
@@ -17,26 +17,29 @@ public class MazePlayerInput : MonoBehaviour
     public float moveSpeed;
     
     private Collider disabledSpinCollider;
-    public Collider finishCollider;
 
     private void Awake()
     {
-        instance = this;
-
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
 
         spinHandler = GetComponent<SpinHandler>();
+        mazeCountdown = MazeCountdown.instance;
+        finishManager = MazeFinishManager.instance;
     }
 
     private void Start()
     {
-        
+        TutorialPlayerStats playerStats = GetComponent<TutorialPlayerStats>();
+        if (playerStats != null && playerStats.playerData != null)
+        {
+            playerID = playerStats.playerData.playerID;
+        }
+
         inputManager = MultiplayerInputManager.instance;
         if (inputManager.players.Count >= playerID + 1)
         {
             AssignInputs(playerID);
-            //AssignCharacterSprite(playerID);
         }
         else
         {
@@ -70,7 +73,7 @@ public class MazePlayerInput : MonoBehaviour
 
     public void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (!hasFinished)
+        if (!hasFinished && !mazeCountdown.isRunning)
         {
             moveInput = obj.ReadValue<Vector2>();
         }  
@@ -101,6 +104,7 @@ public class MazePlayerInput : MonoBehaviour
         else if (other.gameObject.CompareTag("MazeFinish"))
         {
             hasFinished = true;
+            finishManager.PlayerFinish(playerID);
         }
     }
 

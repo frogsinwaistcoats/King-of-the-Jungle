@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 260769871}
   - component: {fileID: 260769870}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PlayAgain_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 746950894}
   - component: {fileID: 746950893}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Main_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,10 +870,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8003912606533369932, guid: 0387b0450ac62784a9791cad3c953991,
+      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
           type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1178,7 +1178,7 @@ GameObject:
   - component: {fileID: 1001997044}
   - component: {fileID: 1001997043}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Minigame_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
