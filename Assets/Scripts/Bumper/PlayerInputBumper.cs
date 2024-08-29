@@ -23,7 +23,12 @@ public class PlayerInputBumper : MonoBehaviour
 
     private void Start()
     {
-        
+        PlayerStats playerStats = GetComponent<PlayerStats>();
+        if (playerStats != null && playerStats.playerData != null)
+        {
+            playerID = playerStats.playerData.playerID;
+        }
+
         inputManager = MultiplayerInputManager.instance;
         if (inputManager.players.Count >= playerID + 1)
         {

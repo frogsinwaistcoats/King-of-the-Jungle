@@ -49,6 +49,21 @@ public class PlayerSelect : MonoBehaviour
         }
     }
 
+    public void OnDisable()
+    {
+        if (inputControls != null)
+        {
+            inputControls.CharacterSelectControls.Next.performed -= OnNext;
+            inputControls.CharacterSelectControls.Previous.performed -= OnPrevious;
+            inputControls.CharacterSelectControls.Confirm.performed -= OnConfirm;
+            inputControls.CharacterSelectControls.Start.performed -= OnStart;
+        }
+        else
+        {
+            inputManager.onPlayerJoined -= AssignInputs;
+        }
+    }
+
     private void OnNext(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         NextCharacter();
@@ -62,15 +77,18 @@ public class PlayerSelect : MonoBehaviour
     private void OnConfirm(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         Confirm();
-        inputControls.CharacterSelectControls.Next.performed -= OnNext;
-        inputControls.CharacterSelectControls.Previous.performed -= OnPrevious;
-        inputControls.CharacterSelectControls.Confirm.performed -= OnConfirm;
+
+        if (playerID != 0)
+        {
+            OnDisable();
+        }
     }
 
     private void OnStart(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (playerID == 0 && inputManager.players.Count == gameManager.players.Count)
         {
+            OnDisable();
             SceneLoader.instance.LoadMinigameSelection();
         }
         

@@ -34,7 +34,7 @@ public class AutoPushObjects : MonoBehaviour
                 {
                     // Calculate direction to push
                     Vector3 pushDirection = (collider.transform.position - transform.position).normalized;
-                    collider.gameObject.GetComponent<PlayerInputBumper>().PlayerHit(pushDirection);
+                    //collider.GetComponent<PlayerInputBumper>().PlayerHit(pushDirection);
                 }
             }
         }
