@@ -53,6 +53,8 @@ public class PlayerSelect : MonoBehaviour
 
     public void Confirm()
     {
-        gameManager.AddPlayer(playerID, currentCharacter);
+        ControllerType controllerType = MultiplayerInputManager.instance.players[playerID].controllerType;
+
+        gameManager.AddPlayer(playerID, currentCharacter, controllerType);
     }
 }

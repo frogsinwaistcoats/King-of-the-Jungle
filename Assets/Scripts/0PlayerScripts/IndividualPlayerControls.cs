@@ -16,13 +16,7 @@ public class IndividualPlayerControls
     public ControllerType controllerType;
 
     //to change on-screen prompts
-    public enum ControllerType
-    {
-        Keyboard,
-        Playstation,
-        Xbox,
-        Switch,
-    }
+    
 
     public void SetupPlayer(InputAction.CallbackContext obj, int ID)
     {

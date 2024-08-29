@@ -102,7 +102,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadTugOWarMinigame()
     {
-        SceneManager.LoadScene("TugOWarMinigame");
+        SceneManager.LoadScene("TugOWarMinigame 1");
     }
 
     public void LoadPreviousScene()

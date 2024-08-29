@@ -25,11 +25,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void AddPlayer(int playerID, int characterIndex)
+    public void AddPlayer(int playerID, int characterIndex, ControllerType controllerType)
     {
         PlayerData newPlayer = new PlayerData();
         newPlayer.SetCharacter(characterIndex);
         newPlayer.SetPlayerID(playerID);
+        newPlayer.SetControllerType(controllerType);
 
         players.Add(newPlayer);
     }

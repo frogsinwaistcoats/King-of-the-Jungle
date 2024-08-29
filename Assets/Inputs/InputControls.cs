@@ -1165,6 +1165,402 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TugOWarControls"",
+            ""id"": ""c91ba0d2-077c-4a06-9d5c-62c136d1eb30"",
+            ""actions"": [
+                {
+                    ""name"": ""Pull0"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae06971f-ef9e-42f8-8d48-13c9d8551147"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pull1"",
+                    ""type"": ""Button"",
+                    ""id"": ""f80b3c45-e58c-4170-b3b6-2cad3b9b6536"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pull2"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c9c4199-a2c7-4299-aad0-11aaf339a55d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pull3"",
+                    ""type"": ""Button"",
+                    ""id"": ""d25faa67-2366-4557-944a-812159ada7b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""15303db7-c7cf-44ef-ba7c-46f61aba63c6"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b492ebf2-66dc-4233-a205-77a8e4e8722b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cff3087f-0c59-4eea-bed1-066116222871"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d540eaae-b215-4039-a54e-fa81efc86d3f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ab25ae3-843c-4a25-9970-1f72e452aa6b"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98042004-a63c-4b39-b859-b2788f637ee5"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1ba6964-2c09-439c-a98b-95d4395304ff"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14bc355a-8468-48c9-b04b-80123b0b8a3d"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull0"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f616d62-b020-4bd7-934c-e8d7bb2b448c"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""750b4e8b-5172-4707-b562-5e0b1add457c"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""737499c5-e5a9-497d-bfb9-72052f4bcc3f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82b3b8c7-e072-426d-a4a0-5eb75a5477a1"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27ae9e56-b6a4-4715-aa72-4a6c865a201f"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09fa5b90-ebab-445b-878d-89d1189b7b49"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29a9d73d-d514-4d61-9972-67298dbeff53"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5225fcc-db61-4247-9d97-a6f4b8ff4922"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd2a4082-f154-4c7a-b730-ed3a5bdd761d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ec7e726-b36e-428d-a9b9-2a94b897b022"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b25fc65f-afc6-47dd-99b4-135a34d75882"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2a3c3f7-73d1-437f-afe2-cfd7f08f2652"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b4395ad-0c97-4694-aa4e-3dfedc3bf08f"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46a357fa-cc7f-4f23-8f07-d4dca2a20b83"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77f0aab5-0e2e-4843-9821-59fd69183a97"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b365e7f4-8729-4832-8107-2fdcb22302ce"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3aea8a0f-723f-426d-8cf8-81ac805e69fb"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce7ef104-c43e-419c-a651-e9c59bd15d1b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d52624f-a2a3-47c9-889f-a839db27ac37"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb875a55-7dde-4da3-b1ae-3dbdb42df71e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7122bac1-6937-4371-aa0e-327cac023f4a"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ecee449e-82e4-4480-93f7-2dd97d97b5dc"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0a8bb22-51f9-418f-907c-b40db60f34b7"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cd93cc6f-a39f-4b8c-bb83-3989a3196ba6"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pull3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -1200,6 +1596,12 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_CharacterSelectControls = asset.FindActionMap("CharacterSelectControls", throwIfNotFound: true);
         m_CharacterSelectControls_Next = m_CharacterSelectControls.FindAction("Next", throwIfNotFound: true);
         m_CharacterSelectControls_Previous = m_CharacterSelectControls.FindAction("Previous", throwIfNotFound: true);
+        // TugOWarControls
+        m_TugOWarControls = asset.FindActionMap("TugOWarControls", throwIfNotFound: true);
+        m_TugOWarControls_Pull0 = m_TugOWarControls.FindAction("Pull0", throwIfNotFound: true);
+        m_TugOWarControls_Pull1 = m_TugOWarControls.FindAction("Pull1", throwIfNotFound: true);
+        m_TugOWarControls_Pull2 = m_TugOWarControls.FindAction("Pull2", throwIfNotFound: true);
+        m_TugOWarControls_Pull3 = m_TugOWarControls.FindAction("Pull3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1637,6 +2039,76 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         }
     }
     public CharacterSelectControlsActions @CharacterSelectControls => new CharacterSelectControlsActions(this);
+
+    // TugOWarControls
+    private readonly InputActionMap m_TugOWarControls;
+    private List<ITugOWarControlsActions> m_TugOWarControlsActionsCallbackInterfaces = new List<ITugOWarControlsActions>();
+    private readonly InputAction m_TugOWarControls_Pull0;
+    private readonly InputAction m_TugOWarControls_Pull1;
+    private readonly InputAction m_TugOWarControls_Pull2;
+    private readonly InputAction m_TugOWarControls_Pull3;
+    public struct TugOWarControlsActions
+    {
+        private @InputControls m_Wrapper;
+        public TugOWarControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pull0 => m_Wrapper.m_TugOWarControls_Pull0;
+        public InputAction @Pull1 => m_Wrapper.m_TugOWarControls_Pull1;
+        public InputAction @Pull2 => m_Wrapper.m_TugOWarControls_Pull2;
+        public InputAction @Pull3 => m_Wrapper.m_TugOWarControls_Pull3;
+        public InputActionMap Get() { return m_Wrapper.m_TugOWarControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TugOWarControlsActions set) { return set.Get(); }
+        public void AddCallbacks(ITugOWarControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TugOWarControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TugOWarControlsActionsCallbackInterfaces.Add(instance);
+            @Pull0.started += instance.OnPull0;
+            @Pull0.performed += instance.OnPull0;
+            @Pull0.canceled += instance.OnPull0;
+            @Pull1.started += instance.OnPull1;
+            @Pull1.performed += instance.OnPull1;
+            @Pull1.canceled += instance.OnPull1;
+            @Pull2.started += instance.OnPull2;
+            @Pull2.performed += instance.OnPull2;
+            @Pull2.canceled += instance.OnPull2;
+            @Pull3.started += instance.OnPull3;
+            @Pull3.performed += instance.OnPull3;
+            @Pull3.canceled += instance.OnPull3;
+        }
+
+        private void UnregisterCallbacks(ITugOWarControlsActions instance)
+        {
+            @Pull0.started -= instance.OnPull0;
+            @Pull0.performed -= instance.OnPull0;
+            @Pull0.canceled -= instance.OnPull0;
+            @Pull1.started -= instance.OnPull1;
+            @Pull1.performed -= instance.OnPull1;
+            @Pull1.canceled -= instance.OnPull1;
+            @Pull2.started -= instance.OnPull2;
+            @Pull2.performed -= instance.OnPull2;
+            @Pull2.canceled -= instance.OnPull2;
+            @Pull3.started -= instance.OnPull3;
+            @Pull3.performed -= instance.OnPull3;
+            @Pull3.canceled -= instance.OnPull3;
+        }
+
+        public void RemoveCallbacks(ITugOWarControlsActions instance)
+        {
+            if (m_Wrapper.m_TugOWarControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITugOWarControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TugOWarControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TugOWarControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TugOWarControlsActions @TugOWarControls => new TugOWarControlsActions(this);
     public interface IMasterControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -1673,5 +2145,12 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     {
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+    }
+    public interface ITugOWarControlsActions
+    {
+        void OnPull0(InputAction.CallbackContext context);
+        void OnPull1(InputAction.CallbackContext context);
+        void OnPull2(InputAction.CallbackContext context);
+        void OnPull3(InputAction.CallbackContext context);
     }
 }
