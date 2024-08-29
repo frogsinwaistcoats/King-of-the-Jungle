@@ -131,6 +131,7 @@ public class DodgeballPlayerMovement : MonoBehaviour
     public void AddScore(float value)
     {
         score += value;
+        score = Mathf.Round(score * 100f) / 100f; // Round to 2 decimal places
     }
 
     public float GetScore()

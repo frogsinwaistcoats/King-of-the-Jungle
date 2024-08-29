@@ -111,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 11.31, y: 12.654251, z: 0.20000002}
-  m_Center: {x: 0.21, y: 0.03387153, z: 0}
+  m_Size: {x: 11.31, y: 12.654251, z: 4}
+  m_Center: {x: 0.21000028, y: 0.03387153, z: -0.036973953}
 --- !u!54 &296070648897374200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   playerData:
     playerID: 0
     characterIndex: 0
+    controllerType: 0
   rend: {fileID: 5905065579349012590}
 --- !u!1 &2321915746792936001
 GameObject:

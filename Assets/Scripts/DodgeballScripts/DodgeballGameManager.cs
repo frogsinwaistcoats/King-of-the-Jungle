@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class DodgeballGameManager : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class DodgeballGameManager : MonoBehaviour
     private bool allPlayersReady = false;
 
     public int playerCount;
+
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI[] playerScoreTexts;  // Array to hold the references to the TextMeshPro UI components
+
 
     private void Awake()
     {
@@ -119,10 +124,22 @@ public class DodgeballGameManager : MonoBehaviour
         while (roundTimer > 0)
         {
             roundTimer -= Time.deltaTime;
+            UpdateTimerText();
             yield return null;
         }
 
+        roundTimer = 0; // Ensure timer doesn't go below zero
+        UpdateTimerText(); // Final update when the timer hits zero
         EndRound();
+    }
+
+    private void UpdateTimerText()
+    {
+        if (timerText != null)
+        {
+            // Format the time to show seconds and milliseconds
+            timerText.text = $"{roundTimer:F2}"; // Display time with 2 decimal places
+        }
     }
 
     private void ReassignPlayerRolesAndSpawnPoints()
@@ -310,6 +327,7 @@ public class DodgeballGameManager : MonoBehaviour
 
             playerAiming.SetupControls();  // Setup controls based on new role
         }
+        UpdateScoreDisplay(); // Update the score display whenever players are respawned
     }
 
     private void DebugScores()
@@ -317,6 +335,18 @@ public class DodgeballGameManager : MonoBehaviour
         foreach (DodgeballPlayerMovement player in players)
         {
             Debug.Log($"Player {player.playerID} score: {player.GetScore()}");
+        }
+        UpdateScoreDisplay(); // Update the score display after the round ends
+    }
+
+    private void UpdateScoreDisplay()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (playerScoreTexts[i] != null)
+            {
+                playerScoreTexts[i].text = "Score: " + players[i].GetScore().ToString("F2");
+            }
         }
     }
 
