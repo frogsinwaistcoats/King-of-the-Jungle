@@ -138,4 +138,22 @@ public class DodgeballPlayerMovement : MonoBehaviour
     {
         return score;
     }
+
+    public void DisablePhysics()
+    {
+        if (rb != null)
+        {
+            rb.isKinematic = true; // This disables physics interactions
+            rb.useGravity = false;  // This disables gravity
+        }
+    }
+
+    public void EnablePhysics()
+    {
+        if (rb != null)
+        {
+            rb.isKinematic = false; // This enables physics interactions
+            rb.useGravity = true;   // This enables gravity
+        }
+    }
 }

@@ -316,18 +316,19 @@ public class DodgeballGameManager : MonoBehaviour
             {
                 players[i].isTarget = true;
                 playerAiming.isShooter = false;
-                playerMovement.EnableMovementControls();  // Ensure this method exists and correctly sets up movement controls
+                playerMovement.EnableMovementControls();
+                playerMovement.EnablePhysics(); // Enable physics for the target player
             }
             else
             {
                 players[i].isTarget = false;
                 playerAiming.isShooter = true;
-                playerMovement.DisableMovementControls();  // Ensure this method exists and disables movement controls, enabling aiming
+                playerMovement.DisableMovementControls();
+                playerMovement.DisablePhysics(); // Disable physics for the shooting players
             }
 
             playerAiming.SetupControls();  // Setup controls based on new role
         }
-        UpdateScoreDisplay(); // Update the score display whenever players are respawned
     }
 
     private void DebugScores()
@@ -345,7 +346,8 @@ public class DodgeballGameManager : MonoBehaviour
         {
             if (playerScoreTexts[i] != null)
             {
-                playerScoreTexts[i].text = "Score: " + players[i].GetScore().ToString("F2");
+                float roundedScore = Mathf.Round(players[i].GetScore() * 100f) / 100f; // Round to 2 decimal places
+                playerScoreTexts[i].text = roundedScore.ToString("F2"); // Display only the numerical value
             }
         }
     }
