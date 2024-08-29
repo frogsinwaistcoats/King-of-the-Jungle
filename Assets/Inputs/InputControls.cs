@@ -1117,13 +1117,31 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0bdb2a2-1cea-42e9-96d9-a423ca02a64f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""7fd880b0-c754-4f46-9dd9-32da972a97af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""1bde442a-cec2-4480-b41d-a9bc735197eb"",
-                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1134,7 +1152,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8e07c817-e1c4-43ef-bb1c-53b8480ba823"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1145,7 +1163,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5e30173a-5a0f-46ed-bab1-57654704bb24"",
-                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1156,11 +1174,55 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5a4f4367-d406-4aef-b886-dd7bab8b1d12"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31502520-7750-4f13-8beb-d7323a154511"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87f1c475-7da9-4b31-86b8-2267bd2149f5"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e449e161-7268-4446-82f5-60bed58d4ca4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dbc50e0-f8d8-4d77-961b-7b9b201a2f7c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Start"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1596,6 +1658,8 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_CharacterSelectControls = asset.FindActionMap("CharacterSelectControls", throwIfNotFound: true);
         m_CharacterSelectControls_Next = m_CharacterSelectControls.FindAction("Next", throwIfNotFound: true);
         m_CharacterSelectControls_Previous = m_CharacterSelectControls.FindAction("Previous", throwIfNotFound: true);
+        m_CharacterSelectControls_Confirm = m_CharacterSelectControls.FindAction("Confirm", throwIfNotFound: true);
+        m_CharacterSelectControls_Start = m_CharacterSelectControls.FindAction("Start", throwIfNotFound: true);
         // TugOWarControls
         m_TugOWarControls = asset.FindActionMap("TugOWarControls", throwIfNotFound: true);
         m_TugOWarControls_Pull0 = m_TugOWarControls.FindAction("Pull0", throwIfNotFound: true);
@@ -1991,12 +2055,16 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private List<ICharacterSelectControlsActions> m_CharacterSelectControlsActionsCallbackInterfaces = new List<ICharacterSelectControlsActions>();
     private readonly InputAction m_CharacterSelectControls_Next;
     private readonly InputAction m_CharacterSelectControls_Previous;
+    private readonly InputAction m_CharacterSelectControls_Confirm;
+    private readonly InputAction m_CharacterSelectControls_Start;
     public struct CharacterSelectControlsActions
     {
         private @InputControls m_Wrapper;
         public CharacterSelectControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Next => m_Wrapper.m_CharacterSelectControls_Next;
         public InputAction @Previous => m_Wrapper.m_CharacterSelectControls_Previous;
+        public InputAction @Confirm => m_Wrapper.m_CharacterSelectControls_Confirm;
+        public InputAction @Start => m_Wrapper.m_CharacterSelectControls_Start;
         public InputActionMap Get() { return m_Wrapper.m_CharacterSelectControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -2012,6 +2080,12 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Previous.started += instance.OnPrevious;
             @Previous.performed += instance.OnPrevious;
             @Previous.canceled += instance.OnPrevious;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @Start.started += instance.OnStart;
+            @Start.performed += instance.OnStart;
+            @Start.canceled += instance.OnStart;
         }
 
         private void UnregisterCallbacks(ICharacterSelectControlsActions instance)
@@ -2022,6 +2096,12 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Previous.started -= instance.OnPrevious;
             @Previous.performed -= instance.OnPrevious;
             @Previous.canceled -= instance.OnPrevious;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @Start.started -= instance.OnStart;
+            @Start.performed -= instance.OnStart;
+            @Start.canceled -= instance.OnStart;
         }
 
         public void RemoveCallbacks(ICharacterSelectControlsActions instance)
@@ -2145,6 +2225,8 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     {
         void OnNext(InputAction.CallbackContext context);
         void OnPrevious(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnStart(InputAction.CallbackContext context);
     }
     public interface ITugOWarControlsActions
     {

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerSelect : MonoBehaviour
 {
+    public MultiplayerInputManager inputManager;
+    public InputControls inputControls;
     public int playerID;
 
     [SerializeField] GameManager gameManager;
@@ -15,12 +17,63 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] TextMeshProUGUI joinText;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterText;
+    [SerializeField] GameObject buttons;
 
     int currentCharacter = 0;
 
     private void Start()
     {
         SetCharacter(currentCharacter);
+
+        inputManager = MultiplayerInputManager.instance;
+        if (inputManager.players.Count >= playerID + 1)
+        {
+            AssignInputs(playerID);
+        }
+        else
+        {
+            inputManager.onPlayerJoined += AssignInputs;
+        }
+    }
+
+    public void AssignInputs(int ID)
+    {
+        if (playerID == ID)
+        {
+            inputManager.onPlayerJoined += AssignInputs;
+            inputControls = inputManager.players[playerID].playerControls;
+            inputControls.CharacterSelectControls.Next.performed += OnNext;
+            inputControls.CharacterSelectControls.Previous.performed += OnPrevious;
+            inputControls.CharacterSelectControls.Confirm.performed += OnConfirm;
+            inputControls.CharacterSelectControls.Start.performed += OnStart;
+        }
+    }
+
+    private void OnNext(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        NextCharacter();
+    }
+
+    private void OnPrevious(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        PreviousCharacter();
+    }
+
+    private void OnConfirm(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        Confirm();
+        inputControls.CharacterSelectControls.Next.performed -= OnNext;
+        inputControls.CharacterSelectControls.Previous.performed -= OnPrevious;
+        inputControls.CharacterSelectControls.Confirm.performed -= OnConfirm;
+    }
+
+    private void OnStart(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (playerID == 0 && inputManager.players.Count == gameManager.players.Count)
+        {
+            SceneLoader.instance.LoadMinigameSelection();
+        }
+        
     }
 
     public void NextCharacter()
@@ -56,5 +109,6 @@ public class PlayerSelect : MonoBehaviour
         ControllerType controllerType = MultiplayerInputManager.instance.players[playerID].controllerType;
 
         gameManager.AddPlayer(playerID, currentCharacter, controllerType);
+        buttons.SetActive(false);
     }
 }
