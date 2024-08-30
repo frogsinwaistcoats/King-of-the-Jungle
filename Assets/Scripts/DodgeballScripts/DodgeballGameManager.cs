@@ -27,6 +27,12 @@ public class DodgeballGameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().name != "DodgeballMinigame")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (instance == null)
         {
             instance = this;

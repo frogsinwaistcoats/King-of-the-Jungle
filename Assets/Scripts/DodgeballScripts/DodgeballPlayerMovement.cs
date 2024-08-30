@@ -69,6 +69,22 @@ public class DodgeballPlayerMovement : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        if (playerControls != null)
+        {
+            playerControls.Player.Move.performed -= ctx => movementInput = ctx.ReadValue<Vector2>();
+            playerControls.Player.Move.canceled -= ctx => movementInput = Vector2.zero;
+
+            playerControls.Player.Dash.performed -= ctx => StartCoroutine(Dash());
+        }
+        else
+        {
+            MultiplayerInputManager.instance.onPlayerJoined -= AssignInputs;
+        }
+    }
+
+
     public bool HasValidControls()
     {
         return playerControls != null;
