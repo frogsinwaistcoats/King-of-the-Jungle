@@ -77,18 +77,13 @@ public class PlayerSelect : MonoBehaviour
     private void OnConfirm(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         Confirm();
-
-        if (playerID != 0)
-        {
-            OnDisable();
-        }
+        OnDisable();
     }
 
     private void OnStart(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         if (playerID == 0 && inputManager.players.Count == gameManager.players.Count)
         {
-            OnDisable();
             SceneLoader.instance.LoadMinigameSelection();
         }
         
