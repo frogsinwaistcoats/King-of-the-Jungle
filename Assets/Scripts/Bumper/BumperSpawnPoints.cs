@@ -18,8 +18,8 @@ public class BumperSpawnPoints : MonoBehaviour
 
         SpawnPlayers();
     }
-
-    void SpawnPlayers()
+    
+        void SpawnPlayers()
     {
         for (int i = 0; i < playerCount; i++)
         {

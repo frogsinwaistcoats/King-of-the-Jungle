@@ -955,7 +955,7 @@ Transform:
   m_GameObject: {fileID: 1028093823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.6, y: 12.2, z: 0}
+  m_LocalPosition: {x: -11.1, y: 12.2, z: 0}
   m_LocalScale: {x: 1, y: 25.51, z: 71.570526}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1365,10 +1365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302e15be5cddd73409baf301b6d1de18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadSteps: 0
-  buttonPrefab: {fileID: 4804138035407369803, guid: 296715453d6f3fb4281b01fb4788a62b,
-    type: 3}
-  reloadButtons: []
   playerButtonList: 7700000000000000
   playerCount: 0
 --- !u!1 &1490541826
@@ -1498,7 +1494,7 @@ Transform:
   m_GameObject: {fileID: 1877737820}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 56.4, y: 12.2, z: 0}
+  m_LocalPosition: {x: 40.6, y: 12.2, z: 0}
   m_LocalScale: {x: 1, y: 25.51, z: 71.570526}
   m_ConstrainProportionsScale: 0
   m_Children: []

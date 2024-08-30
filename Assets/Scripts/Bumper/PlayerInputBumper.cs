@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerInputBumper : MonoBehaviour
 {
@@ -12,6 +14,10 @@ public class PlayerInputBumper : MonoBehaviour
     public float hitTimer;
     public float pushForce;
     private Rigidbody rb;
+   
+    public float FallingThreshold = -10f;  
+    [HideInInspector]
+    public bool Falling = false;
 
     InputControls inputControls;
     bool isHit;
@@ -101,5 +107,27 @@ public class PlayerInputBumper : MonoBehaviour
         isHit = false;
         rb.velocity = Vector3.zero;
         rb.angularDrag = 0;
+    }
+    void Update()
+    {
+        if (rb.velocity.y < FallingThreshold)
+        {
+            Falling = true;
+        }
+        else
+        {
+            Falling = false;
+        }
+
+        if (Falling)
+        {
+            Fell();
+        }
+    }
+
+    private void Fell()
+    {
+        Debug.Log("lose");
+        SceneManager.LoadScene("Scores");
     }
 }
