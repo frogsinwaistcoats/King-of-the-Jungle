@@ -137,8 +137,10 @@ public class TOWPlayerInput : MonoBehaviour
         //update rope position along x axis
         rope.position = new Vector3(newXPosition, rope.position.y, rope.position.z);
         
-        //CheckWinCondition();
-        
+        if (newXPosition == maxDistance || newXPosition == -maxDistance)
+        {
+            CheckWinCondition();
+        }
     }
 
     public void OnPull(InputAction.CallbackContext obj)
