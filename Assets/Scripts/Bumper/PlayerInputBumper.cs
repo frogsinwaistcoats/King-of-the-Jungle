@@ -21,6 +21,7 @@ public class PlayerInputBumper : MonoBehaviour
 
     InputControls inputControls;
     bool isHit;
+    SpriteRenderer rend;
 
     private void Awake()
     {
@@ -59,7 +60,22 @@ public class PlayerInputBumper : MonoBehaviour
             inputManager.onPlayerJoined -= AssignInputs;
         }
     }
-
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("attack"))
+        {
+            
+            rend.material.color = Color.white;//turns white when hit
+            FindAnyObjectByType<Spawner>().Stop(0.5f);
+            StartCoroutine(WaitForSpawn());
+        }
+    }
+    
+    IEnumerator WaitForSpawn()
+    {
+        while (Time.timeScale != 0.5f)
+            yield return null;
+    }
     void AssignInputs(int ID)
     {
         if (playerID == ID)
