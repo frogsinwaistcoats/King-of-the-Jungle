@@ -133,11 +133,13 @@ public class PlayerInputBumper : MonoBehaviour
         else
         {
             Falling = false;
+            ScoreManagerBumper.instance.AddPoint();
         }
 
         if (Falling)
         {
             Fell();
+            ScoreManagerBumper.instance.LosePoint();
         }
     }
 
