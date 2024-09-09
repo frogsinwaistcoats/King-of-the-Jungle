@@ -212,11 +212,13 @@ public class TOWPlayerInput : MonoBehaviour
         {
             Debug.Log("Player 1 wins");
             SceneManager.LoadScene("Scores");
+            TOW_ScoreManager.instance.AddPoint();
         }
         else if (rope.position.x >= -maxDistance)
         {
             Debug.Log("Player 2 wins");
             SceneManager.LoadScene("Scores");
+            TOW_ScoreManager.instance.AddPoint();
         }
     }
 }
