@@ -107,6 +107,8 @@ public class MazePlayerInput : MonoBehaviour
         {
             hasFinished = true;
             finishManager.PlayerFinish(playerID);
+
+            //if
         }
     }
 
