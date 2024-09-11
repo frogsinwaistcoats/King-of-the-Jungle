@@ -23,16 +23,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BumperMinigame.unity
     guid: eff462bfb421f4046aa367b64ce670a3
-  - enabled: 0
-    path: Assets/Scenes/TugOWarMinigame.unity
-    guid: d280815bb3eb64341a236dd352d00c23
   - enabled: 1
     path: Assets/Scenes/Scores.unity
     guid: b5d6d5fab8a952d4182d476ea0ddc62c
   - enabled: 1
-    path: Assets/Scenes/CharacterSelection 1.unity
+    path: Assets/Scenes/CharacterSelection.unity
     guid: c3141888cdcb0624ab0ecc5e3ca0d42e
   - enabled: 1
     path: Assets/Scenes/TugOWarMinigame 1.unity
     guid: b5e6d4c566e0dc947984d53763d61999
+  - enabled: 1
+    path: Assets/Scenes/Instruction screens/MazeInstructionScreen.unity
+    guid: f01842d269da7444796d23f4cb512f98
+  - enabled: 1
+    path: Assets/Scenes/Instruction screens/BumperInstructionScreen.unity
+    guid: cc0cdea9a1b33834c8d955ba52dd1a09
+  - enabled: 1
+    path: Assets/Scenes/Instruction screens/DodgeballInstructionScreen.unity
+    guid: db6492dbd3be9c14e9f827c6d82f93f3
+  - enabled: 1
+    path: Assets/Scenes/Instruction screens/RaceInstructionScreen.unity
+    guid: 63fb31ad86a2d844aae303078f6f931c
+  - enabled: 1
+    path: Assets/Scenes/Instruction screens/TugOWarInstructionScreen.unity
+    guid: 1d5bf4dc4466c34409a115bbaee1e2fe
   m_configObjects: {}

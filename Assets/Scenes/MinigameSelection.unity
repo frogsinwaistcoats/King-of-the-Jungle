@@ -451,7 +451,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
           type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadMazeMinigame
+        m_MethodName: LoadMazeInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -703,7 +703,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
           type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadRaceMinigame
+        m_MethodName: LoadRaceInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -912,7 +912,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
           type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadDodgeballMinigame
+        m_MethodName: LoadDodgeballInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1182,7 +1182,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
           type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadTugOWarMinigame
+        m_MethodName: LoadTugOWarInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2125,7 +2125,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
           type: 3}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadBumperMinigame
+        m_MethodName: LoadBumperInstructions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

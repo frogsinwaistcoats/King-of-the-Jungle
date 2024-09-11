@@ -29,7 +29,7 @@ public class SceneLoader : MonoBehaviour
 
         //inputManager.inputControls.MasterControls.NextButton.performed += NextButton_performed;
     }
-
+    
 
 
     //private void NextButton_performed(InputAction.CallbackContext obj)
@@ -56,14 +56,15 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
     public void LoadCharacterSelection()
     {
-        SceneManager.LoadScene("CharacterSelection 1");
+        SceneManager.LoadScene("CharacterSelection");
     }
 
     public void LoadMinigameSelection()
     {
-        if (SceneManager.GetActiveScene().name == "CharacterSelection 1")
+        if (SceneManager.GetActiveScene().name == "CharacterSelection")
         {
             if (gameManager.players.Count >= 2)
             {
@@ -80,6 +81,15 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    public void LoadPreviousScene()
+    {
+        //int currentScene;
+        //currentScene = SceneManager.GetActiveScene().buildIndex;
+        //SceneManager.LoadScene(currentScene - 1);
+    }
+
+    //Load Minigames
+    #region load minigames
     public void LoadMazeMinigame()
     {
         SceneManager.LoadScene("MazeMinigame");
@@ -104,11 +114,34 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("TugOWarMinigame 1");
     }
+    #endregion
 
-    public void LoadPreviousScene()
+    //Load Instructions
+    #region load instructions
+    public void LoadMazeInstructions()
     {
-        //int currentScene;
-        //currentScene = SceneManager.GetActiveScene().buildIndex;
-        //SceneManager.LoadScene(currentScene - 1);
+        SceneManager.LoadScene("MazeInstructionScreen");
     }
+
+    public void LoadRaceInstructions()
+    {
+        SceneManager.LoadScene("RaceInstructionScreen");
+    }
+
+    public void LoadDodgeballInstructions()
+    {
+        SceneManager.LoadScene("DodgeballInstructionScreen");
+    }
+
+    public void LoadBumperInstructions()
+    {
+        SceneManager.LoadScene("BumperInstructionScreen");
+    }
+
+    public void LoadTugOWarInstructions()
+    {
+        SceneManager.LoadScene("TugOWarInstructionScreen");
+    }
+    #endregion
+
 }

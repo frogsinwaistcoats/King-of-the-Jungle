@@ -15,6 +15,8 @@ public class MazePlayerInput : MonoBehaviour
 
     public Vector2 moveInput;
     public float moveSpeed;
+
+    public int finishPosition;
     
     private Collider disabledSpinCollider;
 
