@@ -8,15 +8,11 @@ public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader instance;
 
-    MultiplayerInputManager inputManager;
-
-    GameManager gameManager;
+    [SerializeField] MultiplayerInputManager inputManager;
+    [SerializeField] GameManager gameManager;
 
     private void Awake()
     {
-        inputManager = MultiplayerInputManager.instance;
-        gameManager = GameManager.instance;
-
         if (instance == null)
         {
             instance = this;
@@ -27,32 +23,33 @@ public class SceneLoader : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //inputManager.inputControls.MasterControls.NextButton.performed += NextButton_performed;
+        inputManager = MultiplayerInputManager.instance;
+        gameManager = GameManager.instance;
     }
-    
 
+    private void Update()
+    {
+        if (inputManager == null)
+        {
+            inputManager = MultiplayerInputManager.instance;
+        }
 
-    //private void NextButton_performed(InputAction.CallbackContext obj)
-    //{
-    //    if (SceneManager.GetActiveScene().name == "MainMenu")
-    //    {
-    //        LoadCharacterSelection();
-    //    }
+        if (gameManager == null)
+        {
+            gameManager = GameManager.instance;
+        }
+    }
 
-    //    if (SceneManager.GetActiveScene().name == "CharacterSelection 1")
-    //    {
-    //        if (inputManager.players.Count >= 2) 
-    //        {
-    //            LoadMinigameSelection();
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Not enough Players");
-    //        }
-    //    }
-    //}
-    
     public void LoadMainMenu()
+    {
+        gameManager.ResetInstance();
+        inputManager.ResetInstance();
+        SceneManager.LoadScene("MainMenu");
+        //SceneManager.UnloadSceneAsync("ManagerScene").completed += OnManagerSceneUnloaded;
+
+    }
+
+    private void OnManagerSceneUnloaded(AsyncOperation obj)
     {
         SceneManager.LoadScene("MainMenu");
     }
@@ -62,8 +59,10 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("CharacterSelection");
     }
 
+
     public void LoadMinigameSelection()
     {
+
         if (SceneManager.GetActiveScene().name == "CharacterSelection")
         {
             if (gameManager.players.Count >= 2)
@@ -79,7 +78,9 @@ public class SceneLoader : MonoBehaviour
         {
             SceneManager.LoadScene("MinigameSelection");
         }
+
     }
+
 
     public void LoadPreviousScene()
     {
@@ -88,7 +89,7 @@ public class SceneLoader : MonoBehaviour
         //SceneManager.LoadScene(currentScene - 1);
     }
 
-    //Load Minigames
+    //  Load Minigames
     #region load minigames
     public void LoadMazeMinigame()
     {
@@ -116,7 +117,35 @@ public class SceneLoader : MonoBehaviour
     }
     #endregion
 
-    //Load Instructions
+    public void LoadMinigame()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        switch (currentSceneName)
+        {
+            case "BumperInstructionScreen":
+                    LoadBumperMinigame();
+                break;
+
+            case "DodgeballInstructionScreen":
+                LoadDodgeballMinigame();
+                break;
+
+            case "MazeInstructionScreen":
+                LoadMazeMinigame();
+                break;
+
+            case "RaceInstructionScreen":
+                LoadRaceMinigame();
+                break;
+
+            case "TugOWarInstructionScreen":
+                LoadTugOWarMinigame();
+                break;
+        }
+    }
+
+    //  Load Instructions
     #region load instructions
     public void LoadMazeInstructions()
     {

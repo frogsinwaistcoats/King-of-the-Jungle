@@ -9,6 +9,7 @@ public class CharacterSelect : MonoBehaviour
     public List<Character> characters = new List<Character>();
     public List<GameObject> UIPrompts;
     public List<GameObject> characterSelections;
+    public GameObject startButton;
 
 
     public void Awake()

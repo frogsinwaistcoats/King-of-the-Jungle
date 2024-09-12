@@ -50,6 +50,11 @@ public class IndividualPlayerControls
         {
             controllerType = ControllerType.Keyboard;
         }
+
+        if (playerID == 0)
+        {
+            GameManager.instance.player1ControllerType = controllerType;
+        }
     }
 
     public void DisableControls()
