@@ -1623,6 +1623,54 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UIControls"",
+            ""id"": ""519f7196-abab-47f9-a36a-c89697bed771"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""b7382658-f540-44b2-b5c9-4e3c858516a9"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""43b2bdd9-077d-4fc1-8aa6-95c0de29c24d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6c3e4885-6d1a-4985-81de-b4311f213813"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0b3ba3e-606d-4db2-8a8a-8e6c81104a0e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -1666,6 +1714,10 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_TugOWarControls_Pull1 = m_TugOWarControls.FindAction("Pull1", throwIfNotFound: true);
         m_TugOWarControls_Pull2 = m_TugOWarControls.FindAction("Pull2", throwIfNotFound: true);
         m_TugOWarControls_Pull3 = m_TugOWarControls.FindAction("Pull3", throwIfNotFound: true);
+        // UIControls
+        m_UIControls = asset.FindActionMap("UIControls", throwIfNotFound: true);
+        m_UIControls_Move = m_UIControls.FindAction("Move", throwIfNotFound: true);
+        m_UIControls_Submit = m_UIControls.FindAction("Submit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -2189,6 +2241,60 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         }
     }
     public TugOWarControlsActions @TugOWarControls => new TugOWarControlsActions(this);
+
+    // UIControls
+    private readonly InputActionMap m_UIControls;
+    private List<IUIControlsActions> m_UIControlsActionsCallbackInterfaces = new List<IUIControlsActions>();
+    private readonly InputAction m_UIControls_Move;
+    private readonly InputAction m_UIControls_Submit;
+    public struct UIControlsActions
+    {
+        private @InputControls m_Wrapper;
+        public UIControlsActions(@InputControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_UIControls_Move;
+        public InputAction @Submit => m_Wrapper.m_UIControls_Submit;
+        public InputActionMap Get() { return m_Wrapper.m_UIControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIControlsActions set) { return set.Get(); }
+        public void AddCallbacks(IUIControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIControlsActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Submit.started += instance.OnSubmit;
+            @Submit.performed += instance.OnSubmit;
+            @Submit.canceled += instance.OnSubmit;
+        }
+
+        private void UnregisterCallbacks(IUIControlsActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Submit.started -= instance.OnSubmit;
+            @Submit.performed -= instance.OnSubmit;
+            @Submit.canceled -= instance.OnSubmit;
+        }
+
+        public void RemoveCallbacks(IUIControlsActions instance)
+        {
+            if (m_Wrapper.m_UIControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIControlsActions @UIControls => new UIControlsActions(this);
     public interface IMasterControlsActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -2234,5 +2340,10 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnPull1(InputAction.CallbackContext context);
         void OnPull2(InputAction.CallbackContext context);
         void OnPull3(InputAction.CallbackContext context);
+    }
+    public interface IUIControlsActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
     }
 }
