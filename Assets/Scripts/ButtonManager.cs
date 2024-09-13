@@ -22,4 +22,16 @@ public class ButtonManager : MonoBehaviour
             Debug.LogError("Scene loader instance not found");
         }
     }
+
+    public void PlayAgainClick()
+    {
+        if (sceneLoader != null)
+        {
+            sceneLoader.LoadPreviousScene();
+        }
+        else
+        {
+            Debug.LogError("Scene loader instance not found");
+        }
+    }
 }

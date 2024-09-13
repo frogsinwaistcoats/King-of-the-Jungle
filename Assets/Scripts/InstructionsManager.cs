@@ -36,7 +36,7 @@ public class InstructionsManager : MonoBehaviour
         }
         else if (gameManager.player1ControllerType == ControllerType.Keyboard)
         {
-            text.text = "Player 1 press Enter to Continue";
+            text.text = "Player 1 press Space to Continue";
         }
     }
 

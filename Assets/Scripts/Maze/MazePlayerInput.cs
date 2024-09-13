@@ -106,11 +106,14 @@ public class MazePlayerInput : MonoBehaviour
         else if (other.gameObject.CompareTag("MazeFinish"))
         {
             hasFinished = true;
-            finishManager.PlayerFinish(playerID);
-
-            //if
+            int placing = finishManager.PlayerFinish(playerID);
+            int score = finishManager.CalculateScore(placing);
+            GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+            Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
     }
+
+    
 
     private void OnCollisionEnter(Collision collision)
     {

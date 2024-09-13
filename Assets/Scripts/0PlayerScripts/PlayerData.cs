@@ -8,6 +8,7 @@ public class PlayerData
     public int playerID;
     public int characterIndex;
     public ControllerType controllerType;
+    public int playerScore;
 
     public void SetPlayerID(int n)
     {
@@ -22,5 +23,10 @@ public class PlayerData
     public void SetControllerType(ControllerType t)
     {
         controllerType = t;
+    }
+
+    public void SetPlayerScore(int score)
+    {
+        playerScore = score;
     }
 }
