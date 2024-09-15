@@ -62,4 +62,12 @@ public class ScoreManager : MonoBehaviour
         }
 
     }
+
+    public void ResetScore()
+    {
+        foreach (var player in gameManager.players)
+        {
+            player.playerScore = 0;
+        }
+    }
 }

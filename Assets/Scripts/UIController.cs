@@ -38,7 +38,6 @@ public class UIController : MonoBehaviour
                 inputControls.UIControls.Move.performed += Move;
                 inputControls.UIControls.Submit.performed += OnSubmit;
             }
-            
         }
     }
 
@@ -50,12 +49,10 @@ public class UIController : MonoBehaviour
         {
             EventSystem.current.SendMessage("Move", moveInput);
         }
-
     }
 
     private void OnSubmit(InputAction.CallbackContext obj)
     {
-
         EventSystem.current.currentSelectedGameObject.GetComponent<Button>().onClick.Invoke();
     }
 

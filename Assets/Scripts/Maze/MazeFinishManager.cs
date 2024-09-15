@@ -82,6 +82,7 @@ public class MazeFinishManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         sceneLoader.SetPreviousScene();
+        finishedPlayers = 0;
         SceneManager.LoadScene("Scores");
     }
 }

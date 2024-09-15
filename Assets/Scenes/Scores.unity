@@ -1278,10 +1278,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8369913648372741622, guid: 0387b0450ac62784a9791cad3c953991,
-          type: 3}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadMinigameSelection
+      - m_Target: {fileID: 989688861}
+        m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
+        m_MethodName: MinigameSelectClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

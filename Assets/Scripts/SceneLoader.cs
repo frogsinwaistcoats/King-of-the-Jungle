@@ -66,6 +66,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadMinigameSelection()
     {
         SetPreviousScene();
+        
         if (SceneManager.GetActiveScene().name == "CharacterSelection")
         {
             if (gameManager.players.Count >= 2)

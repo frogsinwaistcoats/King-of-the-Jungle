@@ -5,16 +5,19 @@ using UnityEngine;
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField] SceneLoader sceneLoader;
+    ScoreManager scoreManager;
 
     private void Start()
     {
         sceneLoader = FindObjectOfType<SceneLoader>();
+        scoreManager = GetComponent<ScoreManager>();
     }
 
     public void MainMenuClick()
     {
         if (sceneLoader != null)
         {
+            scoreManager.ResetScore();
             sceneLoader.LoadMainMenu();
         }
         else
@@ -27,7 +30,21 @@ public class ButtonManager : MonoBehaviour
     {
         if (sceneLoader != null)
         {
+            scoreManager.ResetScore();
             sceneLoader.LoadPreviousScene();
+        }
+        else
+        {
+            Debug.LogError("Scene loader instance not found");
+        }
+    }
+
+    public void MinigameSelectClick()
+    {
+        if (sceneLoader != null)
+        {
+            scoreManager.ResetScore();
+            sceneLoader.LoadMinigameSelection();
         }
         else
         {

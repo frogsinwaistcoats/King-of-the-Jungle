@@ -109,6 +109,7 @@ public class MazePlayerInput : MonoBehaviour
             int placing = finishManager.PlayerFinish(playerID);
             int score = finishManager.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+            GetComponent<PlayerStats>().playerData.SetTotalScore(score);
             Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
     }
