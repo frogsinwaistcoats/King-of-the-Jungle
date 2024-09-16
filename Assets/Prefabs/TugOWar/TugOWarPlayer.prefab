@@ -101,7 +101,7 @@ MonoBehaviour:
   playerID: 0
   controllerType: 0
   rope: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: -1
   maxDistance: 15
   buttonPrefab: {fileID: 4804138035407369803, guid: 296715453d6f3fb4281b01fb4788a62b,
     type: 3}
@@ -125,4 +125,6 @@ MonoBehaviour:
     playerID: 0
     characterIndex: 0
     controllerType: 0
+    playerScore: 0
+    totalScore: 0
   rend: {fileID: 3520042638757726338}

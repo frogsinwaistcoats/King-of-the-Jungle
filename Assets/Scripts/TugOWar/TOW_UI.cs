@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TOW_UI : MonoBehaviour
 {
@@ -44,23 +45,27 @@ public class TOW_UI : MonoBehaviour
         switch (playerID)
         {
             case 0:
-                randomX = Random.Range(300, 700);
-                randomY = Random.Range(300, 900);
+                randomX = Random.Range(300, 500);
+                randomY = Random.Range(300, 700);
                 break;
 
             case 1:
-                randomX = Random.Range(900, 1600);
-                randomY = Random.Range(300, 900);
+                randomX = Random.Range(900, 1100);
+                randomY = Random.Range(300, 700);
+                button.GetComponent<Image>().color = Color.red;
                 break;
 
             case 2:
-                randomX = Random.Range(400, 1600);
-                randomY = Random.Range(300, 900);
+                randomX = Random.Range(500, 700);
+                randomY = Random.Range(300, 700);
+                button.GetComponent<Image>().color = Color.blue;
+
                 break;
 
             case 3:
-                randomX = Random.Range(400, 1600);
-                randomY = Random.Range(300, 900);
+                randomX = Random.Range(1100, 1300);
+                randomY = Random.Range(300, 700);
+                button.GetComponent<Image>().color = Color.green;
                 break;
         }
 
