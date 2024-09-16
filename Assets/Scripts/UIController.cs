@@ -35,21 +35,26 @@ public class UIController : MonoBehaviour
             if (inputManager.players.Count > ID)
             {
                 inputControls = inputManager.players[playerID].playerControls;
-                inputControls.UIControls.Move.performed += Move;
+                //inputControls.UIControls.Move.performed += Move;
                 inputControls.UIControls.Submit.performed += OnSubmit;
             }
         }
     }
 
+    /*
     private void Move(InputAction.CallbackContext obj)
     {
         Vector2 moveInput = obj.ReadValue<Vector2>();
 
         if (moveInput != Vector2.zero)
         {
-            EventSystem.current.SendMessage("Move", moveInput);
+            if (EventSystem.current != null)
+            {
+                EventSystem.current.SendMessage("Move", moveInput);
+            }
         }
     }
+    */
 
     private void OnSubmit(InputAction.CallbackContext obj)
     {
@@ -60,7 +65,7 @@ public class UIController : MonoBehaviour
     {
         if (inputControls != null)
         {
-            inputControls.UIControls.Move.performed -= Move;
+            //inputControls.UIControls.Move.performed -= Move;
             inputControls.UIControls.Submit.performed -= OnSubmit;
         }
         else
