@@ -4,12 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Spin Trigger
   - Ground
-  - Obstacle
   - Floor
   - TargetPlayer
   - Arrow
+  - MazeFinish
+  - MazeSpin
+  - MazeBoulder
+  - attack
+  - RaceFinish
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
+  - Pushable
   - 
   - 
   - 

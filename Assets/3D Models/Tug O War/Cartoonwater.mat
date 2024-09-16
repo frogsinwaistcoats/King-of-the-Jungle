@@ -26,7 +26,8 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -51,13 +52,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 1
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 2
+    - _DstBlend: 10
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
-    - _Basw_color: {r: 0.06274507, g: 0.71530443, b: 0.77254903, a: 0}
-    - _ripple_color: {r: 0.7064792, g: 1.849057, b: 1.334872, a: 0}
-    - _ripple_density: {r: 4, g: 0, b: 0, a: 0}
+    - _Basw_color: {r: 0.32280168, g: 0.5849056, b: 0.51261324, a: 0}
+    - _ripple_color: {r: 0.25925514, g: 0.9315609, b: 0.39755526, a: 0}
+    - _ripple_density: {r: 10, g: 10, b: 0, a: 0}
     - _ripple_slimness: {r: 0, g: 3, b: 0, a: 0}
-    - _ripple_speed: {r: 2, g: 1, b: 0, a: 0}
-    - _wave_speed: {r: 0.1, g: 0, b: 0, a: 0}
+    - _ripple_speed: {r: 1, g: 0.5, b: 0, a: 0}
+    - _wave_speed: {r: 0.5, g: 0.2, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff3557d9ba8efa48bd5ef53e8156fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
   inputManager: {fileID: 0}
+  playerID: 0
   moveInput: {x: 0, y: 0}
   moveSpeed: 5
   finishCollider: {fileID: 0}
@@ -165,5 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f6137f778a02ca45a513c0d930487e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinCollider: {fileID: 0}
   spinDuration: 1

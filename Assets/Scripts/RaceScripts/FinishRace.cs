@@ -1,27 +1,73 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class FinishRace : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI finishText;
+    public static FinishRace instance;
+
+    public TextMeshProUGUI finishText;
+
+    private static int finishedPlayers = 0;
+    private static int totalPlayers;
+
+    GameManager gameManager;
+    SceneLoader sceneLoader;
 
     private void Awake()
     {
+        instance = this;
+        gameManager = GameManager.instance;
+        sceneLoader = SceneLoader.instance;
+
         finishText.enabled = false;
+        totalPlayers = gameManager.players.Count;
+
     }
 
-    private void OnTriggerEnter(Collider other)
+    public int PlayerFinish(int id)
     {
-        finishText.enabled = true;
-        StartCoroutine(nextScene());
+        finishedPlayers++;
+
+        if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
+        {
+            finishText.enabled = true;
+            StartCoroutine(NextScene());
+        }
+
+        return finishedPlayers;
     }
 
-    IEnumerator nextScene()
+    public int CalculateScore(int placing)
+    {
+        int score = 0;
+
+        if (placing == 1)
+        {
+            score = totalPlayers - 1;
+        }
+        else if (placing == 2)
+        {
+            score = totalPlayers - 2;
+        }
+        else if (placing == 3)
+        {
+            score = totalPlayers - 3;
+        }
+        else if (placing == 4)
+        {
+            score = totalPlayers - 4;
+        }
+
+        return score;
+    }
+
+    IEnumerator NextScene()
     {
         yield return new WaitForSeconds(3);
+        sceneLoader.SetPreviousScene();
+        finishedPlayers = 0;
         SceneManager.LoadScene("Scores");
     }
 

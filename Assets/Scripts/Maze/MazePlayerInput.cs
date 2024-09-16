@@ -2,54 +2,52 @@ using UnityEngine;
 
 public class MazePlayerInput : MonoBehaviour
 {
-    public static MazePlayerInput instance;
+    public MultiplayerInputManager inputManager;
+    public InputControls inputControls;
+    private SpinHandler spinHandler;
+    MazeCountdown mazeCountdown;
+    MazeFinishManager finishManager;
 
     public int playerID;
-    public MultiplayerInputManager inputManager; 
+    private Rigidbody rb;
+    private Vector3 startPosition;
+    private bool hasFinished = false;
+
     public Vector2 moveInput;
     public float moveSpeed;
-    private Rigidbody rb;
 
-    //public int characterSpriteID;
+    public int finishPosition;
     
-    public Collider finishCollider;
-    public InputControls inputControls;
-
-    private Vector3 startPosition;
-    private SpinHandler spinHandler;
-    private bool hasFinished = false;
+    private Collider disabledSpinCollider;
 
     private void Awake()
     {
-        instance = this;
-
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
 
         spinHandler = GetComponent<SpinHandler>();
+        mazeCountdown = MazeCountdown.instance;
+        finishManager = MazeFinishManager.instance;
     }
 
     private void Start()
     {
-        
+        PlayerStats playerStats = GetComponent<PlayerStats>();
+        if (playerStats != null && playerStats.playerData != null)
+        {
+            playerID = playerStats.playerData.playerID;
+        }
+
         inputManager = MultiplayerInputManager.instance;
         if (inputManager.players.Count >= playerID + 1)
         {
             AssignInputs(playerID);
-            //AssignCharacterSprite(playerID);
         }
         else
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
-        
     }
-
-    //public void AssignCharacterSprite(int playerID)
-    //{
-    //    characterSpriteID = inputManager.players[playerID].characterID;
-    //    gameObject.GetComponent<SpriteRenderer>().sprite = inputManager.characterSprites[characterSpriteID];
-    //}
 
     public void OnDisable()
     {
@@ -64,7 +62,7 @@ public class MazePlayerInput : MonoBehaviour
         }
     }
 
-    void AssignInputs(int ID)
+    public void AssignInputs(int ID)
     {
         if (playerID == ID)
         {
@@ -77,7 +75,7 @@ public class MazePlayerInput : MonoBehaviour
 
     public void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (!hasFinished)
+        if (!hasFinished && !mazeCountdown.isRunning)
         {
             moveInput = obj.ReadValue<Vector2>();
         }  
@@ -99,22 +97,35 @@ public class MazePlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other == spinHandler.spinCollider)
+        if (other.gameObject.CompareTag("MazeSpin"))
         {
             spinHandler.StartSpin();
+            other.enabled = false;
+            disabledSpinCollider = other;
         }
-
-        if (other == finishCollider)
+        else if (other.gameObject.CompareTag("MazeFinish"))
         {
             hasFinished = true;
+            int placing = finishManager.PlayerFinish(playerID);
+            float score = finishManager.CalculateScore(placing);
+            GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+            GetComponent<PlayerStats>().playerData.SetTotalScore(score);
+            Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
     }
 
+    
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("MazeBoulder"))
         {
             ReturnToStart();
+            if (disabledSpinCollider != null)
+            {
+                disabledSpinCollider.enabled = true;
+                disabledSpinCollider = null;
+            }
         }
     }
 
@@ -122,7 +133,6 @@ public class MazePlayerInput : MonoBehaviour
     {
         gameObject.transform.position = startPosition;
         ResetToMasterControls();
-        spinHandler.spinCollider.enabled = true;
     }
 
     private void ResetToMasterControls()

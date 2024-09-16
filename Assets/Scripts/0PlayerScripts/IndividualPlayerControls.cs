@@ -9,7 +9,6 @@ public class IndividualPlayerControls
 {
 
     public int playerID;
-    public int characterID;
     public InputDevice inputDevice;
     InputUser inputUser;
 
@@ -17,13 +16,7 @@ public class IndividualPlayerControls
     public ControllerType controllerType;
 
     //to change on-screen prompts
-    public enum ControllerType
-    {
-        Keyboard,
-        Playstation,
-        Xbox,
-        Switch,
-    }
+    
 
     public void SetupPlayer(InputAction.CallbackContext obj, int ID)
     {
@@ -53,9 +46,14 @@ public class IndividualPlayerControls
         {
             controllerType = ControllerType.Switch;
         }
-        else if (inputDevice is UnityEngine.InputSystem.Keyboard)
+        else if (inputDevice is Keyboard)
         {
             controllerType = ControllerType.Keyboard;
+        }
+
+        if (playerID == 0)
+        {
+            GameManager.instance.player1ControllerType = controllerType;
         }
     }
 
