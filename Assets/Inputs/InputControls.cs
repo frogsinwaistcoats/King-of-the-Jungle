@@ -80,6 +80,15 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RaceMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""396686e6-9997-4c98-a6d6-bff696c47ddd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -412,6 +421,72 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pull"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""af604ca0-ac99-43f0-b84c-bb5b4d87d732"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""d02d2955-192b-4570-a88a-34d59854b011"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9a131a45-f115-4f55-9bf9-7c6bc918d493"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""d2cc5b86-8809-4de1-b738-60048a061814"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""6e21dd0b-00ee-4826-bf3a-f376d2894ff7"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""91feb9a0-77bc-4cdd-a2c2-7360d8257917"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RaceMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1113,6 +1188,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         m_MasterControls_Jump = m_MasterControls.FindAction("Jump", throwIfNotFound: true);
         m_MasterControls_NextButton = m_MasterControls.FindAction("NextButton", throwIfNotFound: true);
         m_MasterControls_Pull = m_MasterControls.FindAction("Pull", throwIfNotFound: true);
+        m_MasterControls_RaceMove = m_MasterControls.FindAction("RaceMove", throwIfNotFound: true);
         // SpinControl1
         m_SpinControl1 = asset.FindActionMap("SpinControl1", throwIfNotFound: true);
         m_SpinControl1_Movement = m_SpinControl1.FindAction("Movement", throwIfNotFound: true);
@@ -1202,6 +1278,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_MasterControls_Jump;
     private readonly InputAction m_MasterControls_NextButton;
     private readonly InputAction m_MasterControls_Pull;
+    private readonly InputAction m_MasterControls_RaceMove;
     public struct MasterControlsActions
     {
         private @InputControls m_Wrapper;
@@ -1212,6 +1289,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_MasterControls_Jump;
         public InputAction @NextButton => m_Wrapper.m_MasterControls_NextButton;
         public InputAction @Pull => m_Wrapper.m_MasterControls_Pull;
+        public InputAction @RaceMove => m_Wrapper.m_MasterControls_RaceMove;
         public InputActionMap Get() { return m_Wrapper.m_MasterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1239,6 +1317,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Pull.started += instance.OnPull;
             @Pull.performed += instance.OnPull;
             @Pull.canceled += instance.OnPull;
+            @RaceMove.started += instance.OnRaceMove;
+            @RaceMove.performed += instance.OnRaceMove;
+            @RaceMove.canceled += instance.OnRaceMove;
         }
 
         private void UnregisterCallbacks(IMasterControlsActions instance)
@@ -1261,6 +1342,9 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
             @Pull.started -= instance.OnPull;
             @Pull.performed -= instance.OnPull;
             @Pull.canceled -= instance.OnPull;
+            @RaceMove.started -= instance.OnRaceMove;
+            @RaceMove.performed -= instance.OnRaceMove;
+            @RaceMove.canceled -= instance.OnRaceMove;
         }
 
         public void RemoveCallbacks(IMasterControlsActions instance)
@@ -1572,6 +1656,7 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnNextButton(InputAction.CallbackContext context);
         void OnPull(InputAction.CallbackContext context);
+        void OnRaceMove(InputAction.CallbackContext context);
     }
     public interface ISpinControl1Actions
     {
