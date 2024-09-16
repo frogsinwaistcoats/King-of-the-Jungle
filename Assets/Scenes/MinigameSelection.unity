@@ -655,7 +655,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375653266}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab6d4128edee974498f033d877460401, type: 3}
   m_Name: 
@@ -691,7 +691,7 @@ MonoBehaviour:
   m_Actions: {fileID: -944628639613478452, guid: 1b9d4e2a490d11b478ce487656760ae4,
     type: 3}
   m_NotificationBehavior: 1
-  m_UIInputModule: {fileID: 0}
+  m_UIInputModule: {fileID: 1031414531}
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls: []
