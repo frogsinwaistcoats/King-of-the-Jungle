@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RaceSpawnPoints : MonoBehaviour
 {
@@ -12,14 +13,20 @@ public class RaceSpawnPoints : MonoBehaviour
     public Vector2[] cameraRect;
 
     public int playerCount;
+    bool debugging;
 
-    private void Start()
+    private void Awake()
     {
         //mazeCountdown = MazeCountdown.instance;
 
         if (GameManager.instance != null)
         {
             playerCount = GameManager.instance.players.Count;
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("ManagerScene", LoadSceneMode.Additive);
+            debugging = true;
         }
 
         SpawnPlayers();
@@ -30,7 +37,10 @@ public class RaceSpawnPoints : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             GameObject obj = Instantiate(playerPrefab, spawnPoints[i].position, Quaternion.identity);
-            obj.GetComponentInChildren<PlayerStats>().UpdatePlayer(GameManager.instance.players[i]);
+            if (debugging ==false)
+            {
+                obj.GetComponentInChildren<PlayerStats>().UpdatePlayer(GameManager.instance.players[i]);
+            }
             cameraObjects.Add(obj.GetComponentInChildren<Camera>());
             HandleCamera(i);
         }

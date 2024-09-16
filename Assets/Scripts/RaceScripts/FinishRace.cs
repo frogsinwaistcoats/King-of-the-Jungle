@@ -15,7 +15,7 @@ public class FinishRace : MonoBehaviour
     GameManager gameManager;
     SceneLoader sceneLoader;
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
         gameManager = GameManager.instance;
