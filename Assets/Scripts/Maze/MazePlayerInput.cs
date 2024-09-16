@@ -107,7 +107,7 @@ public class MazePlayerInput : MonoBehaviour
         {
             hasFinished = true;
             int placing = finishManager.PlayerFinish(playerID);
-            int score = finishManager.CalculateScore(placing);
+            float score = finishManager.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
             GetComponent<PlayerStats>().playerData.SetTotalScore(score);
             Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);

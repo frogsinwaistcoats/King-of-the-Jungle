@@ -12,6 +12,7 @@ TagManager:
   - MazeSpin
   - MazeBoulder
   - attack
+  - RaceFinish
   layers:
   - Default
   - TransparentFX
