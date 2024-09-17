@@ -28,7 +28,7 @@ public class PlayerInputRace : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         countdownTimer = CountdownTimer.instance;
-        finishRace = FinishRace.instance;
+        finishRace = FindObjectOfType<FinishRace>();
     }
 
     void Start()
