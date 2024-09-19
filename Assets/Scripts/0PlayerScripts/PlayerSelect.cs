@@ -17,6 +17,7 @@ public class PlayerSelect : MonoBehaviour
     [SerializeField] TextMeshProUGUI joinText;
     [SerializeField] Image characterImage;
     [SerializeField] TextMeshProUGUI characterText;
+    [SerializeField] Image BG;
     public GameObject buttons;
 
     GameObject startButton;
