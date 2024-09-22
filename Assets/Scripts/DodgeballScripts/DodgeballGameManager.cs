@@ -362,5 +362,7 @@ public class DodgeballGameManager : MonoBehaviour
     {
         Debug.Log("Game Over!");
         SceneManager.LoadScene("Scores");
+        Destroy(DodgeballPlayerManager.instance);
+        Destroy(gameObject);
     }
 }

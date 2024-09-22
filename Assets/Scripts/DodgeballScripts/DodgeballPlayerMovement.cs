@@ -148,11 +148,14 @@ public class DodgeballPlayerMovement : MonoBehaviour
     {
         score += value;
         score = Mathf.Round(score * 100f) / 100f; // Round to 2 decimal places
+        GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+        GetComponent<PlayerStats>().playerData.SetTotalScore(score);
     }
 
     public float GetScore()
     {
         return score;
+
     }
 
     public void DisablePhysics()

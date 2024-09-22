@@ -7,7 +7,7 @@ public class TOWPlayerInput : MonoBehaviour
     public int playerID;
     public ControllerType controllerType;
     public Transform rope;
-    public float moveSpeed = 1f;
+    public float moveSpeed = -1f;
     public float maxDistance = 10f;
     public UI_ReloadButton buttonPrefab;
     string chosenKey;
@@ -210,15 +210,24 @@ public class TOWPlayerInput : MonoBehaviour
     {
         if (rope.position.x <= maxDistance)
         {
-            Debug.Log("Player 1 wins");
+            Debug.Log("Player 1/3 wins");
+            if (playerID == 0 || playerID == 2)
+            {
+                GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
+                GetComponent<PlayerStats>().playerData.SetTotalScore(1);
+            }
+            
             SceneManager.LoadScene("Scores");
-            TOW_ScoreManager.instance.AddPoint();
         }
         else if (rope.position.x >= -maxDistance)
         {
-            Debug.Log("Player 2 wins");
+            Debug.Log("Player 2/4 wins");
+            if (playerID == 1 || playerID == 3)
+            {
+                GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
+                GetComponent<PlayerStats>().playerData.SetTotalScore(1);
+            }
             SceneManager.LoadScene("Scores");
-            TOW_ScoreManager.instance.AddPoint();
         }
     }
 }

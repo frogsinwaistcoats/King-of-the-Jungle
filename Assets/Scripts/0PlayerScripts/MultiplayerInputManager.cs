@@ -9,6 +9,7 @@ public class MultiplayerInputManager : MonoBehaviour
     public static MultiplayerInputManager instance;
     public List<IndividualPlayerControls> players = new List<IndividualPlayerControls>();
     int maxPlayers = 4;
+    
 
     public InputControls inputControls;
 
@@ -27,6 +28,16 @@ public class MultiplayerInputManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ResetInstance()
+    {
+        if (instance != null)
+        {
+            Destroy(instance.gameObject);
+            instance = null;
+        }
+        
     }
 
     //sets up the inputs for detecting different players

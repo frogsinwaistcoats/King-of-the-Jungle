@@ -14,11 +14,13 @@ public class MazeFinishManager : MonoBehaviour
     private static int totalPlayers;
 
     GameManager gameManager;
+    SceneLoader sceneLoader;
 
     private void Awake()
     {
         instance = this;
         gameManager = GameManager.instance;
+        sceneLoader = SceneLoader.instance;
 
         for (int i = 0; i < playerFinishText.Length; i++)
         {
@@ -36,37 +38,51 @@ public class MazeFinishManager : MonoBehaviour
         totalPlayers = gameManager.players.Count;
     }
 
-    public void PlayerFinish(int id)
+    public int PlayerFinish(int id)
     {
         finishedPlayers++;
         playerFinishText[id].enabled = true;
+        playerFinishText[id].text = finishedPlayers + " !";
         Debug.Log("Finished players: " + finishedPlayers);
-        
-        //playerFinishText.enabled = true;
-        //if ()
-        //{
-        //    playerFinishText.text = "1st";
-        //}
-        //else if ()
-        //{
-        //    playerFinishText.text = "2nd";
-        //}
-        //else if ()
-        //{
-        //    playerFinishText.text = "3rd";
-        //}
 
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
             gameFinishText.enabled = true;
             StartCoroutine(NextScene());
-            Debug.Log("Next scene");
         }
+
+        return finishedPlayers;
+    }
+
+    public int CalculateScore(int placing)
+    {
+        int score = 0;
+
+        if (placing == 1)
+        {
+            score = totalPlayers - 1;
+        }
+        else if (placing == 2)
+        {
+            score = totalPlayers - 2;
+        }
+        else if (placing == 3)
+        {
+            score = totalPlayers - 3;
+        }
+        else if (placing == 4)
+        {
+            score = totalPlayers - 4;
+        }
+
+        return score;
     }
 
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(3);
+        sceneLoader.SetPreviousScene();
+        finishedPlayers = 0;
         SceneManager.LoadScene("Scores");
     }
 }

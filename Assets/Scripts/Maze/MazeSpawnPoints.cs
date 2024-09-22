@@ -6,6 +6,8 @@ public class MazeSpawnPoints : MonoBehaviour
 {
     MazeCountdown mazeCountdown;
 
+    public static MazeSpawnPoints instance;
+
     public GameObject playerPrefab;
     public List<Camera> cameraObjects;
     public Transform[] spawnPoints;
@@ -15,11 +17,16 @@ public class MazeSpawnPoints : MonoBehaviour
 
     private void Start()
     {
+
         mazeCountdown = MazeCountdown.instance;
 
         if (GameManager.instance != null)
         {
             playerCount = GameManager.instance.players.Count;
+        }
+        else
+        {
+            Debug.Log("Game Manager is null");
         }
 
         SpawnPlayers();

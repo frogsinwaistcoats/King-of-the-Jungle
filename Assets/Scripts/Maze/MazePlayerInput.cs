@@ -15,6 +15,8 @@ public class MazePlayerInput : MonoBehaviour
 
     public Vector2 moveInput;
     public float moveSpeed;
+
+    public int finishPosition;
     
     private Collider disabledSpinCollider;
 
@@ -104,9 +106,15 @@ public class MazePlayerInput : MonoBehaviour
         else if (other.gameObject.CompareTag("MazeFinish"))
         {
             hasFinished = true;
-            finishManager.PlayerFinish(playerID);
+            int placing = finishManager.PlayerFinish(playerID);
+            float score = finishManager.CalculateScore(placing);
+            GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+            GetComponent<PlayerStats>().playerData.SetTotalScore(score);
+            Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
     }
+
+    
 
     private void OnCollisionEnter(Collision collision)
     {

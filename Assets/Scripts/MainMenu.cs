@@ -3,8 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void LoadCharacterSelection()
+    private void Start()
     {
-        SceneManager.LoadScene("CharacterSelection 1");
+        SceneManager.LoadSceneAsync("ManagerScene", LoadSceneMode.Additive);
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            if (Input.anyKeyDown)
+            {
+                SceneManager.LoadScene("CharacterSelection");
+            }
+        }
     }
 }

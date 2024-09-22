@@ -19,6 +19,8 @@ public class PlayerInputBumper : MonoBehaviour
     [HideInInspector]
     public bool Falling = false;
 
+    float startingScore = 1;
+
     InputControls inputControls;
     bool isHit;
     SpriteRenderer rend;
@@ -26,6 +28,7 @@ public class PlayerInputBumper : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        
     }
 
     private void Start()
@@ -45,7 +48,10 @@ public class PlayerInputBumper : MonoBehaviour
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
-        
+
+        GetComponent<PlayerStats>().playerData.SetPlayerScore(startingScore); //added this for now, so they start with a point and whoever falls off loses that point
+        GetComponent<PlayerStats>().playerData.SetTotalScore(startingScore);
+        Debug.Log("Player " + playerID + " score: " + GetComponent<PlayerStats>().playerData.playerScore);
     }
 
     private void OnDisable()
@@ -64,7 +70,6 @@ public class PlayerInputBumper : MonoBehaviour
     {
         if (other.gameObject.CompareTag("attack"))
         {
-            
             rend.material.color = Color.white;//turns white when hit
             FindAnyObjectByType<Spawner>().Stop(0.5f);
             StartCoroutine(WaitForSpawn());
@@ -76,6 +81,7 @@ public class PlayerInputBumper : MonoBehaviour
         while (Time.timeScale != 0.5f)
             yield return null;
     }
+
     void AssignInputs(int ID)
     {
         if (playerID == ID)
@@ -133,19 +139,19 @@ public class PlayerInputBumper : MonoBehaviour
         else
         {
             Falling = false;
-            ScoreManagerBumper.instance.AddPoint();
         }
 
         if (Falling)
         {
             Fell();
-            ScoreManagerBumper.instance.LosePoint();
         }
     }
 
     private void Fell()
     {
-        Debug.Log("lose");
+        Debug.Log("Player " + playerID + " lose");
+        GetComponent<PlayerStats>().playerData.SetPlayerScore(-1);
+        GetComponent<PlayerStats>().playerData.SetTotalScore(-1);
         SceneManager.LoadScene("Scores");
     }
 }

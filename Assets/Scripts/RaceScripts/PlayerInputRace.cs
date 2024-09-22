@@ -18,8 +18,18 @@ public class PlayerInputRace : MonoBehaviour
     private CountdownTimer countdownTimer;
     MultiplayerInputManager inputManager;
     InputControls inputControls;
+    FinishRace finishRace;
 
     [SerializeField] private bool isGrounded;
+    private bool hasFinished = false;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        countdownTimer = CountdownTimer.instance;
+        finishRace = FinishRace.instance;
+    }
 
     void Start()
     {
@@ -40,10 +50,6 @@ public class PlayerInputRace : MonoBehaviour
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
-
-        rb = GetComponent<Rigidbody>();
-        countdownTimer = FindObjectOfType<CountdownTimer>();
-       
     }
 
     void AssignInputs(int ID)
@@ -61,7 +67,10 @@ public class PlayerInputRace : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext obj)
     {
-        moveInput = obj.ReadValue<Vector2>();
+        if (!hasFinished && countdownTimer.canMove)
+        {
+            moveInput = obj.ReadValue<Vector2>();
+        }
     }
 
     private void OnJump(InputAction.CallbackContext obj)
@@ -80,21 +89,21 @@ public class PlayerInputRace : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (countdownTimer.canMove == true)
-        {
-            MovePlayer();
-        }  
+        MovePlayer();
     }
 
     private void MovePlayer()
     {
-        Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
+        if (!hasFinished)
+        {
+            Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + movement);
+        }
     }
 
     private void JumpPlayer()
     {
-        if (isGrounded == true)
+        if (isGrounded && countdownTimer.canMove)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpInput = Vector2.zero;
@@ -108,6 +117,19 @@ public class PlayerInputRace : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("RaceFinish"))
+        {
+            hasFinished = true;
+            int placing = finishRace.PlayerFinish(playerID);
+            float score = finishRace.CalculateScore(placing);
+            GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+            GetComponent<PlayerStats>().playerData.SetTotalScore(score);
+            Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
     }
 }
