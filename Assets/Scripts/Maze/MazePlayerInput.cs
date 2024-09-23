@@ -88,7 +88,7 @@ public class MazePlayerInput : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (!hasFinished)
+        if (!hasFinished && MazeTimer.instance.timerIsRunning)
         {
             Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
