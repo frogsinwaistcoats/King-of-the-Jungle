@@ -42,6 +42,7 @@ public class MazeCountdown : MonoBehaviour
         {
             isRunning = false;
             countdownText.text = "Go!";
+            MazeTimer.instance.timerIsRunning = true;
         }
 
         if (countdownText != null)

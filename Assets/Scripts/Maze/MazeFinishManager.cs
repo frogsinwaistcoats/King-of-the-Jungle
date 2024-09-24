@@ -8,7 +8,7 @@ public class MazeFinishManager : MonoBehaviour
     public static MazeFinishManager instance;
 
     public TextMeshProUGUI[] playerFinishText;
-    public TextMeshPro gameFinishText;
+    public TextMeshProUGUI gameFinishText;
 
     private static int finishedPlayers = 0;
     private static int totalPlayers;
@@ -47,11 +47,16 @@ public class MazeFinishManager : MonoBehaviour
 
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
-            gameFinishText.enabled = true;
-            StartCoroutine(NextScene());
+            GameFinish();
         }
 
         return finishedPlayers;
+    }
+
+    public void GameFinish()
+    {
+        gameFinishText.enabled = true;
+        StartCoroutine(NextScene());
     }
 
     public int CalculateScore(int placing)
