@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
+        Gamepad gamepad = Gamepad.current;
+
         if (SceneManager.GetActiveScene().name == "MainMenu")
         {
-            if (Input.anyKeyDown)
+            if (Input.GetKey(KeyCode.Space) || (gamepad!=null && gamepad.buttonSouth.isPressed))
             {
                 SceneManager.LoadScene("CharacterSelection");
             }
