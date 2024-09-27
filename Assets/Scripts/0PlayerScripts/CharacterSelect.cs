@@ -18,5 +18,15 @@ public class CharacterSelect : MonoBehaviour
         {
             instance = this;
         }
+
+        ResetCharacterChoices();
+    }
+
+    public void ResetCharacterChoices()
+    {
+        foreach (Character character in characters)
+        {
+            character.isChosen = false;
+        }
     }
 }

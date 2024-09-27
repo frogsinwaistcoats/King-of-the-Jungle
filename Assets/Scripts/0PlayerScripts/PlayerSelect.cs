@@ -176,30 +176,51 @@ public class PlayerSelect : MonoBehaviour
 
     public void NextCharacter()
     {
-        currentCharacter++;
-        if (currentCharacter >= characterSelect.characters.Count)
+        do
         {
-            currentCharacter = 0;
-        }
+            currentCharacter++;
+            if (currentCharacter >= characterSelect.characters.Count)
+            {
+                currentCharacter = 0;
+            }
+        } while (characterSelect.characters[currentCharacter].isChosen);
+        
 
         SetCharacter(currentCharacter);
     }
 
     public void PreviousCharacter()
     {
-        currentCharacter--;
-        if (currentCharacter <= -1)
+        do
         {
-            currentCharacter = characterSelect.characters.Count - 1;
-        }
+            currentCharacter--;
+            if (currentCharacter <= -1)
+            {
+                currentCharacter = characterSelect.characters.Count - 1;
+            }
+        } while (characterSelect.characters[currentCharacter].isChosen);
+
 
         SetCharacter(currentCharacter);
     }
 
     public void SetCharacter(int id)
     {
+        if (characterSelect.characters[id].isChosen)
+        {
+            NextCharacter();
+            return;
+        }
         characterImage.sprite = characterSelect.characters[id].characterSprite;
         characterText.text = characterSelect.characters[id].characterName;
+    }
+
+    private void Update()
+    {
+        if (characterSelect.characters[currentCharacter].isChosen)
+        {
+            SetCharacter(currentCharacter);
+        }
     }
 
     public void Confirm()
@@ -208,6 +229,12 @@ public class PlayerSelect : MonoBehaviour
 
         gameManager.AddPlayer(playerID, currentCharacter, controllerType);
         buttons.SetActive(false);
+
+        characterSelect.characters[currentCharacter].isChosen = true;
+
+        ForceOtherPlayersToSwitch();
+
+        SetCharacter(currentCharacter);
 
         if (inputManager.players.Count == gameManager.players.Count && gameManager.players.Count >= 2)
         {
@@ -232,6 +259,19 @@ public class PlayerSelect : MonoBehaviour
             else
             {
                 Debug.LogError("start button not found");
+            }
+        }
+    }
+
+    private void ForceOtherPlayersToSwitch()
+    {
+        foreach (var player in FindObjectsOfType<PlayerSelect>())
+        {
+            if (player.playerID == this.playerID) continue;
+
+            if (player.currentCharacter == this.currentCharacter)
+            {
+                player.NextCharacter();
             }
         }
     }
