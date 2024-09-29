@@ -186,6 +186,8 @@ MonoBehaviour:
   moveSpeed: 20
   hitTimer: 1
   pushForce: 800
+  FallingThreshold: -10
+  Falling: 0
 --- !u!114 &9042390056430742254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +220,8 @@ MonoBehaviour:
     playerID: 0
     characterIndex: 0
     controllerType: 0
+    playerScore: 0
+    totalScore: 0
   rend: {fileID: 7597269286194593977}
 --- !u!1 &9015000819614593388
 GameObject:
@@ -231,7 +235,7 @@ GameObject:
   - component: {fileID: 7597269286194593977}
   m_Layer: 6
   m_Name: PlayerSprite
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

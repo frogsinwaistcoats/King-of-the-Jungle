@@ -5,29 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerBumper : MonoBehaviour
 {
-    public GameObject[] players;
-    public float arenaRadius = 10f;
-    public TextMeshProUGUI gameStatusText;
+    public GameObject Player;
+    public GameObject Boundary;
 
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        foreach (GameObject player in players)
+        Debug.Log("has entered");
+        if (other.tag == "Player" )
         {
-            if (Vector3.Distance(player.transform.position, Vector3.zero) > arenaRadius)
-            {
-                gameStatusText.text = player.name + " has fallen out!";
-                Destroy(player);
-                CheckGameOver();
-            }
+            Destroy(Player);
         }
+
     }
 
-    void CheckGameOver()
-    {
-        if (GameObject.FindGameObjectsWithTag("Player").Length <= 1)
-        {
-            gameStatusText.text = "Game Over";
-            SceneManager.LoadScene("Scores");
-        }
-    }
 }
