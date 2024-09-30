@@ -137,6 +137,7 @@ public class PlayerInputBumper : MonoBehaviour
         Debug.Log("Player " + playerID + " lose");
         GetComponent<PlayerStats>().playerData.SetPlayerScore(-1);
         GetComponent<PlayerStats>().playerData.SetTotalScore(-1);
+        SceneLoader.instance.SetPreviousScene();
         SceneManager.LoadScene("Scores");
     }
 }

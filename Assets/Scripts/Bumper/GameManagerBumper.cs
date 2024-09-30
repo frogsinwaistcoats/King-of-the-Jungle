@@ -34,6 +34,12 @@ public class GameManagerBumper : MonoBehaviour
         instance = this;
         gameManager = GameManager.instance;
         sceneLoader = SceneLoader.instance;
+
+        if ( sceneLoader == null)
+        {
+            sceneLoader = FindAnyObjectByType<SceneLoader>();
+        }
+
        _timeBump = FindObjectOfType<TimerBumper>();
 
         for (int i = 0; i < playerFinishText.Length; i++)
@@ -69,8 +75,10 @@ public class GameManagerBumper : MonoBehaviour
 
     public void GameFinish()
     {
+        sceneLoader.SetPreviousScene();
         _timeBump.CancelTimer();
         gameFinishText.enabled = true;
+
         StartCoroutine(NextScene());
     }
 
@@ -101,7 +109,7 @@ public class GameManagerBumper : MonoBehaviour
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(3);
-        sceneLoader.SetPreviousScene();
+
         finishedPlayers = 0;
         SceneManager.LoadScene("Scores");
     }

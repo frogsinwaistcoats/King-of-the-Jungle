@@ -28,8 +28,8 @@ public class CountdownTimer : MonoBehaviour
             yield return new WaitForSeconds(1f);
             currentTime--;
         }
-
         canMove = true;
+
     }
 
 

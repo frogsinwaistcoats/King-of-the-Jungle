@@ -238,12 +238,12 @@ public class SceneLoader : MonoBehaviour
                 LoadTugOWarInstructions();
                 break;
 
-            case "TugOWarMinigame":
+            case "TugOWarMinigame 1":
                 LoadBumperInstructions();
                 break;
 
             case "BumperMinigame":
-                //load podium scene
+                SceneManager.LoadScene("EndingAnimatic");
                 break;
         }
     }

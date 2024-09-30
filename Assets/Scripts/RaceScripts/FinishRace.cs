@@ -33,17 +33,22 @@ public class FinishRace : MonoBehaviour
 
     }
 
-    public int PlayerFinish(int id)
+    public int PlayerFinish()
     {
         finishedPlayers++;
 
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
-            finishText.enabled = true;
-            StartCoroutine(NextScene());
+            RaceGameFinish();
         }
 
         return finishedPlayers;
+    }
+
+    public void RaceGameFinish()
+    {
+        finishText.enabled = true;
+        StartCoroutine(NextScene());
     }
 
     public int CalculateScore(int placing)

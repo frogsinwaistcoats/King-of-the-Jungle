@@ -125,7 +125,7 @@ public class PlayerInputRace : MonoBehaviour
         if (other.gameObject.CompareTag("RaceFinish"))
         {
             hasFinished = true;
-            int placing = finishRace.PlayerFinish(playerID);
+            int placing = finishRace.PlayerFinish();
             float score = finishRace.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
             GetComponent<PlayerStats>().playerData.SetTotalScore(score);

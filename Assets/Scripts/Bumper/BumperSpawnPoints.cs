@@ -9,6 +9,13 @@ public class BumperSpawnPoints : MonoBehaviour
 
     public int playerCount;
 
+    SceneLoader sceneLoader;
+
+    private void Awake()
+    {
+        sceneLoader = SceneLoader.instance;
+    }
+
     private void Start()
     {
         if (GameManager.instance != null)
@@ -21,6 +28,8 @@ public class BumperSpawnPoints : MonoBehaviour
     
     void SpawnPlayers()
     {
+        sceneLoader.SetPreviousScene();
+
         for (int i = 0; i < playerCount; i++)
         {
             GameObject obj = Instantiate(playerPrefab, spawnPoints[i].position, Quaternion.identity);

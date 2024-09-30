@@ -20,6 +20,12 @@ public class TOWPlayerInput : MonoBehaviour
     MultiplayerInputManager inputManager; 
     InputControls inputControls;
     private UI_ReloadButton newbutton;
+    SceneLoader sceneLoader;
+
+    private void Awake()
+    {
+        sceneLoader = SceneLoader.instance;
+    }
 
     private void Start()
     {
@@ -216,7 +222,8 @@ public class TOWPlayerInput : MonoBehaviour
                 GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
                 GetComponent<PlayerStats>().playerData.SetTotalScore(1);
             }
-            
+
+            sceneLoader.SetPreviousScene();
             SceneManager.LoadScene("Scores");
         }
         else if (rope.position.x >= -maxDistance)
@@ -227,6 +234,8 @@ public class TOWPlayerInput : MonoBehaviour
                 GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
                 GetComponent<PlayerStats>().playerData.SetTotalScore(1);
             }
+
+            sceneLoader.SetPreviousScene();
             SceneManager.LoadScene("Scores");
         }
     }

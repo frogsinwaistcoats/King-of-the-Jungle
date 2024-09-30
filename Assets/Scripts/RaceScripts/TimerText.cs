@@ -11,6 +11,18 @@ public class TimerText : MonoBehaviour
 
     private bool isTiming = false;
 
+    FinishRace finishRace;
+
+    private void Awake()
+    {
+        finishRace = FinishRace.instance;
+
+        if (finishRace == null )
+        {
+            finishRace = FindObjectOfType<FinishRace>();
+        }
+    }
+
     void Start()
     {
         StartCoroutine(StartTimerWithDelay());
@@ -34,6 +46,7 @@ public class TimerText : MonoBehaviour
             else if (remainingTime < 0)
             {
                 remainingTime = 0;
+                finishRace.RaceGameFinish();
                 //GameOver();
                 timerText.color = Color.red;
             }
