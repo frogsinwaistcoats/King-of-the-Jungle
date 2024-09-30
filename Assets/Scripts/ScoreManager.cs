@@ -38,27 +38,27 @@ public class ScoreManager : MonoBehaviour
 
         if (scoreTexts[0] != null)
         {
-            int displayID = playerFirst.playerID + 1;
-            scoreTexts[0].text = "1st - Player " + displayID + "    " + playerFirst.playerScore;
+            string displayName = playerFirst.characterName;
+            scoreTexts[0].text = "1st - " + displayName; // + playerFirst.playerScore;
         }
 
         if (scoreTexts[1] != null)
         {
-            int displayID = playerSecond.playerID + 1;
-            scoreTexts[1].text = "2nd - Player " + displayID + "    " + playerSecond.playerScore;
+            string displayName = playerSecond.characterName;
+            scoreTexts[1].text = "2nd - " + displayName; //  + playerSecond.playerScore;
         }
 
         if (scoreTexts[2] != null)
         {
-            int displayID = playerThird.playerID + 1;
-            scoreTexts[2].text = "3rd - Player " + displayID + "    " + playerThird.playerScore;
+            string displayName = playerThird.characterName;
+            scoreTexts[2].text = "3rd - " + displayName; // + playerThird.playerScore;
         }
 
 
         if (scoreTexts[3] != null)
         {
-            int displayID = playerFourth.playerID + 1;
-            scoreTexts[3].text = "4th - Player " + displayID + "    " + playerFourth.playerScore;
+            string displayName = playerFourth.characterName;
+            scoreTexts[3].text = "4th - " + displayName; // + playerFourth.playerScore;
         }
 
     }

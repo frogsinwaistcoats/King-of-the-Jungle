@@ -7,6 +7,7 @@ public class PlayerData
 {
     public int playerID;
     public int characterIndex;
+    public string characterName;
     public ControllerType controllerType;
     public float playerScore;
     public float totalScore;
@@ -19,6 +20,11 @@ public class PlayerData
     public void SetCharacter(int index)
     {
         characterIndex = index;
+    }
+
+    public void SetName(string name)
+    {
+        characterName = name;
     }
 
     public void SetControllerType(ControllerType t)
