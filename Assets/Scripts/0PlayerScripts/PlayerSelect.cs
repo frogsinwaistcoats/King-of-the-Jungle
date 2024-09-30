@@ -206,11 +206,6 @@ public class PlayerSelect : MonoBehaviour
 
     public void SetCharacter(int id)
     {
-        if (characterSelect.characters[id].isChosen)
-        {
-            NextCharacter();
-            return;
-        }
         characterImage.sprite = characterSelect.characters[id].characterSprite;
         characterText.text = characterSelect.characters[id].characterName;
     }
@@ -227,7 +222,7 @@ public class PlayerSelect : MonoBehaviour
     {
         ControllerType controllerType = MultiplayerInputManager.instance.players[playerID].controllerType;
 
-        gameManager.AddPlayer(playerID, currentCharacter, controllerType);
+        gameManager.AddPlayer(playerID, currentCharacter, characterSelect.characters[currentCharacter].characterName, controllerType);
         buttons.SetActive(false);
 
         characterSelect.characters[currentCharacter].isChosen = true;

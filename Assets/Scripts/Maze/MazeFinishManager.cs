@@ -15,12 +15,14 @@ public class MazeFinishManager : MonoBehaviour
 
     GameManager gameManager;
     SceneLoader sceneLoader;
+    MazeTimer mazeTimer;
 
     private void Awake()
     {
         instance = this;
         gameManager = GameManager.instance;
         sceneLoader = SceneLoader.instance;
+        mazeTimer = FindObjectOfType<MazeTimer>();
 
         for (int i = 0; i < playerFinishText.Length; i++)
         {
@@ -55,6 +57,7 @@ public class MazeFinishManager : MonoBehaviour
 
     public void GameFinish()
     {
+        mazeTimer.CancelTimer();
         gameFinishText.enabled = true;
         StartCoroutine(NextScene());
     }

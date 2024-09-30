@@ -50,4 +50,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ManagerScene.unity
     guid: 860ae8f97845395429ae144b7d5a39ea
+  - enabled: 1
+    path: Assets/Scenes/TotalScores.unity
+    guid: ce8ac07df3fa18e4bad04575a574ff6e
+  - enabled: 1
+    path: Assets/Scenes/EndingAnimatic.unity
+    guid: a94b026920c34df4d9f959488a31b81a
+  - enabled: 1
+    path: Assets/Scenes/IntroAnimatic.unity
+    guid: 5ea200d13218ad44197d43e1a0f96ad7
   m_configObjects: {}

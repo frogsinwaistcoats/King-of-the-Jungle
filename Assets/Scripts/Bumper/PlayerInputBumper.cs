@@ -130,22 +130,7 @@ public class PlayerInputBumper : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularDrag = 0;
     }
-    void Update()
-    {
-        if (rb.velocity.y < FallingThreshold)
-        {
-            Falling = true;
-        }
-        else
-        {
-            Falling = false;
-        }
-
-        if (Falling)
-        {
-            Fell();
-        }
-    }
+   
 
     private void Fell()
     {

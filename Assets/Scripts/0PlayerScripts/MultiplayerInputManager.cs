@@ -52,36 +52,40 @@ public class MultiplayerInputManager : MonoBehaviour
 
     private void JoinButtonPerformed(InputAction.CallbackContext obj)
     {
-        if (players.Count >= maxPlayers)
+        if (SceneManager.GetActiveScene().name != "Main Menu")
         {
-            return;
-        }
-
-
-        //check if device is already assigned to a player
-        foreach (IndividualPlayerControls player in players)
-        {
-            if (player.inputDevice == obj.control.device)
+            if (players.Count >= maxPlayers)
             {
-                //this device is already assigned so we can return out of this function
                 return;
+            }
+
+
+            //check if device is already assigned to a player
+            foreach (IndividualPlayerControls player in players)
+            {
+                if (player.inputDevice == obj.control.device)
+                {
+                    //this device is already assigned so we can return out of this function
+                    return;
+                }
+            }
+
+            IndividualPlayerControls newPlayer = new IndividualPlayerControls();
+            newPlayer.SetupPlayer(obj, players.Count);
+            players.Add(newPlayer);
+
+            if (CharacterSelect.instance != null)
+            {
+                CharacterSelect.instance.UIPrompts[newPlayer.playerID].SetActive(false);
+                CharacterSelect.instance.characterSelections[newPlayer.playerID].SetActive(true);
+            }
+
+            if (onPlayerJoined != null)
+            {
+                onPlayerJoined.Invoke(newPlayer.playerID);
             }
         }
         
-        IndividualPlayerControls newPlayer = new IndividualPlayerControls();
-        newPlayer.SetupPlayer(obj, players.Count);
-        players.Add(newPlayer);
-
-        if (CharacterSelect.instance != null)
-        {
-            CharacterSelect.instance.UIPrompts[newPlayer.playerID].SetActive(false);
-            CharacterSelect.instance.characterSelections[newPlayer.playerID].SetActive(true);
-        }
-
-        if (onPlayerJoined != null)
-        {
-            onPlayerJoined.Invoke(newPlayer.playerID);
-        } 
     }
 
     public int PlayerCount

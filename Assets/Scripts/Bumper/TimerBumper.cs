@@ -24,4 +24,9 @@ public class TimerBumper : MonoBehaviour
         int seconds = Mathf.FloorToInt(remainingTime % 60);
         timerText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
     }
+    public void CancelTimer()
+    {
+        remainingTime = 0;
+        timerText.enabled = false;
+    }
 }

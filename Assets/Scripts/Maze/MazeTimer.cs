@@ -54,4 +54,10 @@ public class MazeTimer : MonoBehaviour
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    public void CancelTimer()
+    {
+        timeRemaining = 0;
+        timerText.enabled = false;
+    }
 }

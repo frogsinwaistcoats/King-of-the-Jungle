@@ -4,16 +4,20 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI[] scoreTexts;
 
     GameManager gameManager;
+    SceneLoader sceneLoader;
 
     private void Awake()
     {
+        sceneLoader = FindObjectOfType<SceneLoader>();
         gameManager = GameManager.instance;
+
 
         if (gameManager.players.Count <= 3)
         {
@@ -26,7 +30,15 @@ public class ScoreManager : MonoBehaviour
             scoreTexts[scoreTexts.Length - 2] = null;
         }
 
-        DisplayScores();
+        if (SceneManager.GetActiveScene().name == "Scores")
+        {
+            DisplayScores();
+        }
+        else if (SceneManager.GetActiveScene().name == "TotalScores")
+        {
+            DisplayTotalScores();
+        }
+        
     }
 
     public void DisplayScores()
@@ -38,27 +50,61 @@ public class ScoreManager : MonoBehaviour
 
         if (scoreTexts[0] != null)
         {
-            int displayID = playerFirst.playerID + 1;
-            scoreTexts[0].text = "1st - Player " + displayID + "    " + playerFirst.playerScore;
+            string displayName = playerFirst.characterName;
+            scoreTexts[0].text = "1st - " + displayName + "   +" + playerFirst.playerScore;
         }
 
         if (scoreTexts[1] != null)
         {
-            int displayID = playerSecond.playerID + 1;
-            scoreTexts[1].text = "2nd - Player " + displayID + "    " + playerSecond.playerScore;
+            string displayName = playerSecond.characterName;
+            scoreTexts[1].text = "2nd - " + displayName + "   +" + playerSecond.playerScore;
         }
 
         if (scoreTexts[2] != null)
         {
-            int displayID = playerThird.playerID + 1;
-            scoreTexts[2].text = "3rd - Player " + displayID + "    " + playerThird.playerScore;
+            string displayName = playerThird.characterName;
+            scoreTexts[2].text = "3rd - " + displayName + "   +" + playerThird.playerScore;
         }
 
 
         if (scoreTexts[3] != null)
         {
-            int displayID = playerFourth.playerID + 1;
-            scoreTexts[3].text = "4th - Player " + displayID + "    " + playerFourth.playerScore;
+            string displayName = playerFourth.characterName;
+            scoreTexts[3].text = "4th - " + displayName + "   +" + playerFourth.playerScore;
+        }
+
+    }
+
+    public void DisplayTotalScores()
+    {
+        PlayerData playerFirst = gameManager.players.OrderByDescending(p => p.totalScore).FirstOrDefault();
+        PlayerData playerSecond = gameManager.players.OrderByDescending(p => p.totalScore).Skip(1).FirstOrDefault();
+        PlayerData playerThird = gameManager.players.OrderByDescending(p => p.totalScore).Skip(2).FirstOrDefault();
+        PlayerData playerFourth = gameManager.players.OrderByDescending(p => p.totalScore).Skip(3).FirstOrDefault();
+
+        if (scoreTexts[0] != null)
+        {
+            string displayName = playerFirst.characterName;
+            scoreTexts[0].text = "1st - " + displayName + "    " + playerFirst.totalScore;
+        }
+
+        if (scoreTexts[1] != null)
+        {
+            string displayName = playerSecond.characterName;
+            scoreTexts[1].text = "2nd - " + displayName + "    " + playerSecond.totalScore;
+        }
+
+        if (scoreTexts[2] != null)
+        {
+            string displayName = playerThird.characterName;
+            scoreTexts[2].text = "3rd - " + displayName + "    " + playerThird.totalScore;
+        }
+
+
+        if (scoreTexts[3] != null)
+        {
+            string displayName = playerFourth.characterName;
+            scoreTexts[3].text = "4th - " + displayName + "    " + playerFourth.totalScore;
         }
 
     }
