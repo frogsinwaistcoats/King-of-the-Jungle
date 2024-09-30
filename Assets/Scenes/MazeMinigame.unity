@@ -2259,6 +2259,7 @@ MonoBehaviour:
   - {fileID: 379685876}
   - {fileID: 653876137}
   gameFinishText: {fileID: 946047792}
+  timerText: {fileID: 1166548995}
 --- !u!4 &519454338
 Transform:
   m_ObjectHideFlags: 0
@@ -4502,7 +4503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1166548995}
-  timeRemaining: 90
+  timeRemaining: 120
   timerIsRunning: 0
 --- !u!4 &1075344333
 Transform:
@@ -61689,11 +61690,12 @@ SceneRoots:
   m_Roots:
   - {fileID: 3222401732837342488}
   - {fileID: 519454338}
+  - {fileID: 1075344333}
+  - {fileID: 925317536}
   - {fileID: 1700181449}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 139926060}
-  - {fileID: 925317536}
   - {fileID: 1499001723}
   - {fileID: 2129156285}
   - {fileID: 7556561897529934556}
@@ -61704,4 +61706,3 @@ SceneRoots:
   - {fileID: 931025357}
   - {fileID: 1826511497}
   - {fileID: 1107200184}
-  - {fileID: 1075344333}
