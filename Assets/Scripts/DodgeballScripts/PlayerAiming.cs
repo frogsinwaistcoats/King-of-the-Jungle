@@ -11,7 +11,7 @@ public class PlayerAiming : MonoBehaviour
     public float maxAngle = 60f;
     public GameObject projectilePrefab;
     public Transform shootPoint;
-    public float projectileSpeed = 10f;
+    public float projectileSpeed = 20f;
     public float shootCooldown = 1f;
 
     private InputControls playerControls;
@@ -32,7 +32,7 @@ public class PlayerAiming : MonoBehaviour
         if (aimIndicator != null)
         {
             initialRotation = aimIndicator.transform.localRotation;
-            aimIndicator.transform.localRotation = Quaternion.Euler(-90f, -90f, 0f);
+            //aimIndicator.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             currentAngle = 0;
         }
 
@@ -205,21 +205,18 @@ public class PlayerAiming : MonoBehaviour
         {
             // Log the shoot point and direction
             Vector3 shootDirection = aimIndicator.transform.forward;
-            Debug.Log($"Player {playerID}: Spawning projectile. ShootPoint: {shootPoint.position}, Direction: {shootDirection}");
 
             // Instantiate the projectile
             GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
 
             if (projectile != null)
             {
-                Debug.Log($"Player {playerID}: Projectile spawned successfully.");
 
                 // Assign shooter ID
                 Projectile projectileScript = projectile.GetComponent<Projectile>();
                 if (projectileScript != null)
                 {
                     projectileScript.shooterID = playerID;
-                    Debug.Log($"Player {playerID}: Shooter ID set for the projectile.");
                 }
                 else
                 {

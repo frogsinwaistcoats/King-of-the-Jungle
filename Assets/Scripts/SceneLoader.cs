@@ -63,6 +63,9 @@ public class SceneLoader : MonoBehaviour
         gameManager.ResetInstance();
         inputManager.ResetInstance();
         SceneManager.LoadScene("MainMenu");
+
+        // Play main theme when loading the main menu
+        AudioManager.instance.Play("MainTheme");
     }
 
     public void LoadCharacterSelection()
@@ -142,30 +145,40 @@ public class SceneLoader : MonoBehaviour
     {
         SetPreviousScene();
         SceneManager.LoadScene("MazeInstructionScreen");
+        // Play instruction music when loading instructions
+        //AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadRaceInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("RaceInstructionScreen");
+        // Play instruction music when loading instructions
+        //AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadDodgeballInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("DodgeballInstructionScreen");
+        // Play instruction music when loading instructions
+        //AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadBumperInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("BumperInstructionScreen");
+        // Play instruction music when loading instructions
+        //AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadTugOWarInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("TugOWarInstructionScreen");
+        // Play instruction music when loading instructions
+        //AudioManager.instance.Play("InstructionMusic");
     }
     #endregion
 
