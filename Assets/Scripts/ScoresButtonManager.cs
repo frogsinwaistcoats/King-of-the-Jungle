@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -6,8 +7,8 @@ public class ScoresButtonManager : MonoBehaviour
 {
     [SerializeField] SceneLoader sceneLoader;
     ScoreManager scoreManager;
-    public GameObject[] buttons;
-    public GameObject minigameButton;
+    public Button[] buttons;
+    public Button minigameButton;
 
     private void Awake()
     {
@@ -16,22 +17,44 @@ public class ScoresButtonManager : MonoBehaviour
 
         if (sceneLoader.storyMode)
         {
-            foreach (GameObject button in buttons)
+            foreach (Button button in buttons)
             {
-                button.SetActive(false);
+                button.gameObject.SetActive(false);
             }
 
             minigameButton.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         }
         else if (!sceneLoader.storyMode)
         {
-            foreach (GameObject button in buttons)
+            foreach (Button button in buttons)
             {
-                button.SetActive(true);
+                button.gameObject.SetActive(true);
             }
 
-            minigameButton.GetComponentInChildren<Text>().text = "Play Again";
+            minigameButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play Again";
         }
+    }
+
+    private void Start()
+    {
+        SetButtonsInteractable(false);
+        StartCoroutine(EnableButtons(3f));
+    }
+
+    IEnumerator EnableButtons(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SetButtonsInteractable(true);
+    }
+
+    private void SetButtonsInteractable(bool isInteractable)
+    {
+        foreach (Button button in buttons)
+        {
+            button.interactable = isInteractable;
+        }
+
+        minigameButton.interactable = isInteractable;
     }
 
     public void MainMenuClick()

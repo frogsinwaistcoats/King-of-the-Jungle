@@ -54,7 +54,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadStoryMode()
     {
         storyMode = true;
-        LoadMazeInstructions();
+        SceneManager.LoadScene("IntroAnimatic");
     }
 
     public void LoadMainMenu()
