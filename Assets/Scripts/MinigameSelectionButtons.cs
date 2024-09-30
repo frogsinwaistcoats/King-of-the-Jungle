@@ -11,6 +11,18 @@ public class MinigameSelectionButtons : MonoBehaviour
         sceneLoader = FindObjectOfType<SceneLoader>();
     }
 
+    public void StoryMode()
+    {
+        if (sceneLoader != null)
+        {
+            sceneLoader.LoadStoryMode();
+        }
+        else
+        {
+            Debug.LogError("Scene loader instance not found");
+        }
+    }
+
     public void MazeMinigame()
     {
         if (sceneLoader != null)
