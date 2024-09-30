@@ -12,6 +12,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] GameManager gameManager;
 
     string previousScene;
+    public bool storyMode;
 
     private void Awake()
     {
@@ -27,6 +28,8 @@ public class SceneLoader : MonoBehaviour
 
         inputManager = MultiplayerInputManager.instance;
         gameManager = GameManager.instance;
+
+        storyMode = false;
     }
 
     private void Update()
@@ -46,6 +49,12 @@ public class SceneLoader : MonoBehaviour
     {
         previousScene = SceneManager.GetActiveScene().name;
         Debug.Log("Previous scene: " +  previousScene);
+    }
+
+    public void LoadStoryMode()
+    {
+        storyMode = true;
+        LoadMazeInstructions();
     }
 
     public void LoadMainMenu()
@@ -125,34 +134,7 @@ public class SceneLoader : MonoBehaviour
     }
     #endregion
 
-    public void LoadMinigame()
-    {
-        SetPreviousScene();
-        string currentSceneName = SceneManager.GetActiveScene().name;
 
-        switch (currentSceneName)
-        {
-            case "BumperInstructionScreen":
-                    LoadBumperMinigame();
-                break;
-
-            case "DodgeballInstructionScreen":
-                LoadDodgeballMinigame();
-                break;
-
-            case "MazeInstructionScreen":
-                LoadMazeMinigame();
-                break;
-
-            case "RaceInstructionScreen":
-                LoadRaceMinigame();
-                break;
-
-            case "TugOWarInstructionScreen":
-                LoadTugOWarMinigame();
-                break;
-        }
-    }
 
     //  Load Instructions
     #region load instructions
@@ -187,4 +169,69 @@ public class SceneLoader : MonoBehaviour
     }
     #endregion
 
+    public void LoadTotalScores()
+    {
+        SceneManager.LoadScene("TotalScores");
+    }
+
+    //switch cases
+    public void LoadMinigame()
+    {
+        SetPreviousScene();
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        switch (currentSceneName)
+        {
+            case "BumperInstructionScreen":
+                LoadBumperMinigame();
+                break;
+
+            case "DodgeballInstructionScreen":
+                LoadDodgeballMinigame();
+                break;
+
+            case "MazeInstructionScreen":
+                LoadMazeMinigame();
+                break;
+
+            case "RaceInstructionScreen":
+                LoadRaceMinigame();
+                break;
+
+            case "TugOWarInstructionScreen":
+                LoadTugOWarMinigame();
+                break;
+        }
+    }
+
+    
+
+    public void LoadInstructions()
+    {
+        //SetPreviousScene();
+        
+
+        switch (previousScene)
+        {
+            case "MazeMinigame":
+                LoadRaceInstructions();
+                break;
+
+            case "RaceMinigame":
+                LoadDodgeballInstructions();
+                break;
+
+            case "DodgeballMinigame":
+                LoadTugOWarInstructions();
+                break;
+
+            case "TugOWarMinigame":
+                LoadBumperInstructions();
+                break;
+
+            case "BumperMinigame":
+                //load podium scene
+                break;
+        }
+    }
 }

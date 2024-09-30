@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ManagerScene.unity
     guid: 860ae8f97845395429ae144b7d5a39ea
+  - enabled: 1
+    path: Assets/Scenes/TotalScores.unity
+    guid: ce8ac07df3fa18e4bad04575a574ff6e
   m_configObjects: {}
