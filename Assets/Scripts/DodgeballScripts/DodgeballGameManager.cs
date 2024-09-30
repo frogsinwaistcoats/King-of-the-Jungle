@@ -8,6 +8,7 @@ using TMPro;
 public class DodgeballGameManager : MonoBehaviour
 {
     public static DodgeballGameManager instance;
+    SceneLoader sceneLoader;
 
     public List<DodgeballPlayerMovement> players = new List<DodgeballPlayerMovement>();
     public float roundDuration = 30f;
@@ -27,6 +28,8 @@ public class DodgeballGameManager : MonoBehaviour
 
     private void Awake()
     {
+        sceneLoader = SceneLoader.instance;
+
         if (SceneManager.GetActiveScene().name != "DodgeballMinigame")
         {
             Destroy(gameObject);
@@ -361,6 +364,7 @@ public class DodgeballGameManager : MonoBehaviour
     public void EndGame()
     {
         Debug.Log("Game Over!");
+        sceneLoader.SetPreviousScene();
         SceneManager.LoadScene("Scores");
         Destroy(DodgeballPlayerManager.instance);
         Destroy(gameObject);

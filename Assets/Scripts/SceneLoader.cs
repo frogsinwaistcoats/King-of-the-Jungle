@@ -227,14 +227,14 @@ public class SceneLoader : MonoBehaviour
         switch (previousScene)
         {
             case "MazeMinigame":
-                LoadRaceInstructions();
-                break;
-
-            case "RaceMinigame":
                 LoadDodgeballInstructions();
                 break;
 
             case "DodgeballMinigame":
+                LoadRaceInstructions();
+                break;
+
+            case "RaceMinigame":
                 LoadTugOWarInstructions();
                 break;
 
