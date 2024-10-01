@@ -25,7 +25,7 @@ public class GameManagerBumper : MonoBehaviour
         Debug.Log("has entered");
         if (other.tag == "Player" )
         {
-            Destroy(Player);
+            Destroy(other.gameObject);
         }
 
     }
