@@ -222,7 +222,7 @@ public class PlayerSelect : MonoBehaviour
     {
         ControllerType controllerType = MultiplayerInputManager.instance.players[playerID].controllerType;
 
-        gameManager.AddPlayer(playerID, currentCharacter, characterSelect.characters[currentCharacter].characterName, controllerType);
+        gameManager.AddPlayer(gameManager.players[playerID], playerID, currentCharacter, characterSelect.characters[currentCharacter].characterName, controllerType);
         buttons.SetActive(false);
 
         characterSelect.characters[currentCharacter].isChosen = true;

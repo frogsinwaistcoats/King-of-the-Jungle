@@ -33,15 +33,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(int playerID, int characterIndex, string characterName, ControllerType controllerType)
+    public void AddPlayer(PlayerData newPlayer, int playerID, int characterIndex, string characterName, ControllerType controllerType)
     {
-        PlayerData newPlayer = new PlayerData();
+        //PlayerData newPlayer = new PlayerData();
         newPlayer.SetCharacter(characterIndex);
         newPlayer.SetName(characterName);
         newPlayer.SetPlayerID(playerID);
         newPlayer.SetControllerType(controllerType);
+        
+        if(!players.Contains(newPlayer)) 
+        {
+            players.Add(newPlayer);
+        }
 
-        players.Add(newPlayer);
     }
 }
 
