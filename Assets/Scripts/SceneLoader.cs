@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -78,7 +79,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadMinigameSelection()
     {
         SetPreviousScene();
-        
+
         if (SceneManager.GetActiveScene().name == "CharacterSelection")
         {
             if (gameManager.players.Count >= 2)
