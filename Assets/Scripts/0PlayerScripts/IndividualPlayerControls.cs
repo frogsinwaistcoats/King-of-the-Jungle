@@ -30,6 +30,8 @@ public class IndividualPlayerControls
 
         playerControls.Enable();
         SetControllerType();
+
+        GameManager.instance.AddPlayer(new PlayerData(), playerID, 0, "", controllerType);
     }
 
     void SetControllerType()
