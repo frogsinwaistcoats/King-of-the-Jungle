@@ -16,7 +16,7 @@ public class DodgeballPlayerMovement : MonoBehaviour
     private Vector2 movementInput;
 
     public InputControls playerControls;
-    private float score;
+    [SerializeField] public float score;
 
     MultiplayerInputManager multiplayerInputManager;
 
@@ -148,14 +148,13 @@ public class DodgeballPlayerMovement : MonoBehaviour
     {
         score += value;
         score = Mathf.Round(score * 100f) / 100f; // Round to 2 decimal places
-        GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
-        GetComponent<PlayerStats>().playerData.SetTotalScore(score);
+        //GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
+        //GetComponent<PlayerStats>().playerData.SetTotalScore(score);
     }
 
     public float GetScore()
     {
         return score;
-
     }
 
     public void DisablePhysics()
@@ -175,4 +174,6 @@ public class DodgeballPlayerMovement : MonoBehaviour
             rb.useGravity = true;   // This enables gravity
         }
     }
+
+
 }

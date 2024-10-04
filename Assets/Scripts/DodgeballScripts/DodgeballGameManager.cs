@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Linq;
 
 public class DodgeballGameManager : MonoBehaviour
 {
@@ -363,10 +364,48 @@ public class DodgeballGameManager : MonoBehaviour
 
     public void EndGame()
     {
+        //foreach (DodgeballPlayerMovement player in players)
+        //{
+        //    int finalScore = CalculateFinalScore();
+        //    player.GetComponent<PlayerStats>().playerData.SetPlayerScore(finalScore);
+        //    player.GetComponent<PlayerStats>().playerData.SetTotalScore(finalScore);
+        //}
+
         Debug.Log("Game Over!");
         sceneLoader.SetPreviousScene();
         SceneManager.LoadScene("Scores");
         Destroy(DodgeballPlayerManager.instance);
         Destroy(gameObject);
     }
+
+    public int CalculateFinalScore()
+    {
+        DodgeballPlayerMovement playerFirst = players.OrderByDescending(p => p.score).FirstOrDefault();
+        DodgeballPlayerMovement playerSecond = players.OrderByDescending(p => p.score).Skip(1).FirstOrDefault();
+        DodgeballPlayerMovement playerThird = players.OrderByDescending(p => p.score).Skip(2).FirstOrDefault();
+        DodgeballPlayerMovement playerFourth = players.OrderByDescending(p => p.score).Skip(3).FirstOrDefault();
+
+        int finalScore = 0;
+
+        if (playerFirst)
+        {
+            finalScore = playerCount - 1;
+        }
+        else if (playerSecond)
+        {
+            finalScore = playerCount - 2;
+        }
+        else if (playerThird)
+        {
+            finalScore = playerCount - 3;
+        }
+        else if (playerFourth)
+        {
+            finalScore = playerCount - 4;
+        }
+
+        return finalScore;
+    }
+
+
 }
