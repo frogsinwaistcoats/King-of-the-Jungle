@@ -17,14 +17,16 @@ public class RaceFinishManager : MonoBehaviour
 
     GameManager gameManager;
     SceneLoader sceneLoader;
-    RaceTimer raceTimer;
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         gameManager = GameManager.instance;
         sceneLoader = SceneLoader.instance;
-        raceTimer = FindObjectOfType<RaceTimer>();
 
         for (int i = 0; i < playerFinishText.Length; i++)
         {
@@ -57,7 +59,7 @@ public class RaceFinishManager : MonoBehaviour
 
     public void RaceGameFinish()
     {
-        raceTimer.CancelTimer();
+        RaceTimerText.instance.CancelTimer();
         panel.enabled = false;
         gameFinishText.enabled = true;
         StartCoroutine(NextScene());
