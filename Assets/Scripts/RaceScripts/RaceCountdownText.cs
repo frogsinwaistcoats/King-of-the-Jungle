@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class CountDownText : MonoBehaviour
+public class RaceCountdownText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private float remainingTime = 10f;

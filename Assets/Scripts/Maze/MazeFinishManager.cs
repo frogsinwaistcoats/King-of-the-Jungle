@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MazeFinishManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class MazeFinishManager : MonoBehaviour
 
     public TextMeshProUGUI[] playerFinishText;
     public TextMeshProUGUI gameFinishText;
+    public Image panel;
 
     private static int finishedPlayers = 0;
     private static int totalPlayers;
@@ -44,7 +46,6 @@ public class MazeFinishManager : MonoBehaviour
     {
         finishedPlayers++;
         playerFinishText[id].enabled = true;
-        playerFinishText[id].text = finishedPlayers + " !";
         Debug.Log("Finished players: " + finishedPlayers);
 
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
@@ -58,6 +59,7 @@ public class MazeFinishManager : MonoBehaviour
     public void GameFinish()
     {
         mazeTimer.CancelTimer();
+        panel.enabled = false;
         gameFinishText.enabled = true;
         StartCoroutine(NextScene());
     }

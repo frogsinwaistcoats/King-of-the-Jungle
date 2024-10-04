@@ -10,7 +10,6 @@ public class MazeCountdown : MonoBehaviour
     public float countdownTime = 3f;
     public TextMeshProUGUI countdownText;
     public bool isRunning;
-    //public List<MonoBehaviour> scriptsToDisable = new List<MonoBehaviour>();
 
     private void Awake()
     {

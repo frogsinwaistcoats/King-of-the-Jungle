@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class TimerText : MonoBehaviour
+public class RaceTimerText : MonoBehaviour
 {
+    public static RaceTimerText instance;
 
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float remainingTime;
@@ -11,15 +12,17 @@ public class TimerText : MonoBehaviour
 
     private bool isTiming = false;
 
-    FinishRace finishRace;
+    RaceFinishManager finishRace;
 
     private void Awake()
     {
-        finishRace = FinishRace.instance;
+        instance = this;
+
+        finishRace = RaceFinishManager.instance;
 
         if (finishRace == null )
         {
-            finishRace = FindObjectOfType<FinishRace>();
+            finishRace = FindObjectOfType<RaceFinishManager>();
         }
     }
 
@@ -54,6 +57,11 @@ public class TimerText : MonoBehaviour
             int seconds = Mathf.FloorToInt(remainingTime % 60);
             timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
-        
+    }
+
+    public void CancelTimer()
+    {
+        remainingTime = 0;
+        timerText.enabled = false;
     }
 }

@@ -2,12 +2,15 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class FinishRace : MonoBehaviour
+public class RaceFinishManager : MonoBehaviour
 {
-    public static FinishRace instance;
+    public static RaceFinishManager instance;
 
-    public TextMeshProUGUI finishText;
+    public TextMeshProUGUI[] playerFinishText;
+    public TextMeshProUGUI gameFinishText;
+    public Image panel;
 
     private static int finishedPlayers = 0;
     private static int totalPlayers;
@@ -21,21 +24,30 @@ public class FinishRace : MonoBehaviour
         {
             instance = this;
         }
+
+        gameManager = GameManager.instance;
+        sceneLoader = SceneLoader.instance;
+
+        for (int i = 0; i < playerFinishText.Length; i++)
+        {
+            if (playerFinishText[i] != null)
+            {
+                playerFinishText[i].enabled = false;
+            }
+        }
+
+        gameFinishText.enabled = false;
     }
 
     private void Start()
     {
-        gameManager = GameManager.instance;
-        sceneLoader = SceneLoader.instance;
-
-        finishText.enabled = false;
         totalPlayers = gameManager.players.Count;
-
     }
 
-    public int PlayerFinish()
+    public int PlayerFinish(int id)
     {
         finishedPlayers++;
+        playerFinishText[id].enabled = true;
 
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
@@ -47,7 +59,9 @@ public class FinishRace : MonoBehaviour
 
     public void RaceGameFinish()
     {
-        finishText.enabled = true;
+        RaceTimerText.instance.CancelTimer();
+        panel.enabled = false;
+        gameFinishText.enabled = true;
         StartCoroutine(NextScene());
     }
 

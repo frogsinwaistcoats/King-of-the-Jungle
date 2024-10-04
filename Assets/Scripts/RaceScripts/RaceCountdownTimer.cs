@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class CountdownTimer : MonoBehaviour
+public class RaceCountdownTimer : MonoBehaviour
 {
-    public static CountdownTimer instance;
+    public static RaceCountdownTimer instance;
    
     public float countdownDuration = 3f;
     public bool canMove;
@@ -12,6 +12,7 @@ public class CountdownTimer : MonoBehaviour
     {
         instance = this;
     }
+
     void Start()
     {
         StartCoroutine(StartCountdown());

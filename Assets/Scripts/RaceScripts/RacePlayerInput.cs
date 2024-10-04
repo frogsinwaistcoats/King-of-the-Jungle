@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class PlayerInputRace : MonoBehaviour
+public class RacePlayerInput : MonoBehaviour
 {
     public int playerID;
 
@@ -15,10 +15,10 @@ public class PlayerInputRace : MonoBehaviour
     public LayerMask groundLayer;
 
     private Rigidbody rb;
-    private CountdownTimer countdownTimer;
+    private RaceCountdownTimer countdownTimer;
     MultiplayerInputManager inputManager;
     InputControls inputControls;
-    FinishRace finishRace;
+    RaceFinishManager finishRace;
 
     [SerializeField] private bool isGrounded;
     private bool hasFinished = false;
@@ -27,8 +27,8 @@ public class PlayerInputRace : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        countdownTimer = CountdownTimer.instance;
-        finishRace = FindObjectOfType<FinishRace>();
+        countdownTimer = RaceCountdownTimer.instance;
+        finishRace = FindObjectOfType<RaceFinishManager>();
     }
 
     void Start()
@@ -125,7 +125,7 @@ public class PlayerInputRace : MonoBehaviour
         if (other.gameObject.CompareTag("RaceFinish"))
         {
             hasFinished = true;
-            int placing = finishRace.PlayerFinish();
+            int placing = finishRace.PlayerFinish(playerID);
             float score = finishRace.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
             GetComponent<PlayerStats>().playerData.SetTotalScore(score);
