@@ -24,6 +24,7 @@ public class RaceTimerText : MonoBehaviour
         {
             finishRace = FindObjectOfType<RaceFinishManager>();
         }
+        timerText.enabled = false;
     }
 
     void Start()
@@ -41,6 +42,8 @@ public class RaceTimerText : MonoBehaviour
     void Update()
     {
         if (isTiming)
+
+            timerText.enabled = true;
         {
             if (remainingTime > 0)
             {

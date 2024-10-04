@@ -7299,7 +7299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1816461812}
-  remainingTime: 60
+  remainingTime: 65
   startDelay: 4
 --- !u!114 &1639036298
 MonoBehaviour:

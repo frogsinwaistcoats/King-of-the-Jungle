@@ -48,7 +48,7 @@ public class RaceCountdownText : MonoBehaviour
     {
         countdownText.text = "GO!!!";
         countdownText.color = Color.green;
-        yield return new WaitForSeconds(1f); // Wait for 1 second
+        yield return //new WaitForSeconds(1f); // Wait for 1 second
         countdownText.text = ""; // Clear the text
     }
 
