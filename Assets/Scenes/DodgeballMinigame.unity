@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 631bb86a0fad490429457c9587de530c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18060657, g: 0.2261008, b: 0.30709973, a: 1}
+  m_IndirectSpecularColor: {r: 0.15421815, g: 0.51889265, b: 0.6994822, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1338,7 +1338,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
+  m_ColorTemperature: 6585
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -1353,13 +1353,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.509077, y: -0.2854904, z: -0.11591009, w: 0.8036795}
+  m_LocalRotation: {x: 0.35202634, y: 0.06819042, z: 0.050076704, w: 0.9321587}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 48.771, y: -61.084, z: -46.363}
+  m_LocalEulerAnglesHint: {x: 40.501, y: 12.331, z: 10.714}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4420,7 +4420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1307100106
 Transform:
   m_ObjectHideFlags: 0
@@ -6156,52 +6156,52 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.291825
+      value: 12.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7874923
+      value: 1.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2415047
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.29505754
+      value: 0.37381697
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.110557914
+      value: 0.100197025
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9417541
+      value: 0.91335684
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.11754697
+      value: -0.12649463
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 16.657
+      value: 17.817
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 146.43
+      value: 136.32
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 8.335
+      value: 5.331
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f4f15349924ffb648a10a1581b6a5647,
         type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Linq;
 
 public class DodgeballGameManager : MonoBehaviour
 {
@@ -363,10 +364,60 @@ public class DodgeballGameManager : MonoBehaviour
 
     public void EndGame()
     {
+        DodgeballPlayerMovement playerFirst = players.OrderByDescending(p => p.score).FirstOrDefault();
+        DodgeballPlayerMovement playerSecond = players.OrderByDescending(p => p.score).Skip(1).FirstOrDefault();
+        DodgeballPlayerMovement playerThird = players.OrderByDescending(p => p.score).Skip(2).FirstOrDefault();
+        DodgeballPlayerMovement playerFourth = players.OrderByDescending(p => p.score).Skip(3).FirstOrDefault();
+        
+        if (playerFirst != null)
+        {
+            playerFirst.GetComponent<PlayerStats>().playerData.SetPlayerScore(CalculateScore(1));
+            playerFirst.GetComponent<PlayerStats>().playerData.SetTotalScore(CalculateScore(1));
+        }
+        if (playerSecond != null)
+        {
+            playerSecond.GetComponent<PlayerStats>().playerData.SetPlayerScore(CalculateScore(2));
+            playerSecond.GetComponent<PlayerStats>().playerData.SetTotalScore(CalculateScore(2));
+        }
+        if (playerThird != null)
+        {
+            playerThird.GetComponent<PlayerStats>().playerData.SetPlayerScore(CalculateScore(3));
+            playerThird.GetComponent<PlayerStats>().playerData.SetTotalScore(CalculateScore(3));
+        }
+        if (playerFourth != null)
+        {
+            playerFourth.GetComponent<PlayerStats>().playerData.SetPlayerScore(CalculateScore(4));
+            playerFourth.GetComponent<PlayerStats>().playerData.SetTotalScore(CalculateScore(4));
+        }
+
         Debug.Log("Game Over!");
         sceneLoader.SetPreviousScene();
         SceneManager.LoadScene("Scores");
         Destroy(DodgeballPlayerManager.instance);
         Destroy(gameObject);
+    }
+
+    public int CalculateScore(int placing)
+    {
+        int score = 0;
+
+        if (placing == 1)
+        {
+            score = playerCount - 1;
+        }
+        else if (placing == 2)
+        {
+            score = playerCount - 2;
+        }
+        else if (placing == 3)
+        {
+            score = playerCount - 3;
+        }
+        else if (placing == 4)
+        {
+            score = playerCount - 4;
+        }
+
+        return score;
     }
 }
