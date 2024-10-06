@@ -10,7 +10,7 @@ public class RacePlayerInput : MonoBehaviour
     public Vector2 moveInput;
     public Vector2 jumpInput;
     public float moveSpeed = 15f;
-    public float jumpForce = 5f;
+    public float jumpForce = 10f;
 
     public LayerMask groundLayer;
 
