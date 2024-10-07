@@ -151,34 +151,37 @@ public class TOWPlayerInput : MonoBehaviour
 
     public void OnPull(InputAction.CallbackContext obj)
     {
-        if (obj.performed)
+        if (TOWTimer.instance.timerIsRunning)
         {
-            Debug.Log(obj.control.ToString());
-
-            if (chosenKey == GetTextAfterLastSlash(obj.control.ToString()))
+            if (obj.performed)
             {
-                if (playerID == 0)
-                {
-                    Debug.Log("Player 1 pull");
-                    player1Pulls++;
-                }
-                if (playerID == 1)
-                {
-                    Debug.Log("Player 2 pull");
-                    player2Pulls++;
-                }
-                if (playerID == 2)
-                {
-                    Debug.Log("Player 3 pull");
-                    player1Pulls++;
-                }
-                if (playerID == 3)
-                {
-                    Debug.Log("Player 4 pull");
-                    player2Pulls++;
-                }
+                Debug.Log(obj.control.ToString());
 
-                chosenKey = TOW_UI.instance.OpenReloadUI(newbutton, playerID, controllerType);
+                if (chosenKey == GetTextAfterLastSlash(obj.control.ToString()))
+                {
+                    if (playerID == 0)
+                    {
+                        Debug.Log("Player 1 pull");
+                        player1Pulls++;
+                    }
+                    if (playerID == 1)
+                    {
+                        Debug.Log("Player 2 pull");
+                        player2Pulls++;
+                    }
+                    if (playerID == 2)
+                    {
+                        Debug.Log("Player 3 pull");
+                        player1Pulls++;
+                    }
+                    if (playerID == 3)
+                    {
+                        Debug.Log("Player 4 pull");
+                        player2Pulls++;
+                    }
+
+                    chosenKey = TOW_UI.instance.OpenReloadUI(newbutton, playerID, controllerType);
+                }
             }
         }
     }
@@ -219,24 +222,22 @@ public class TOWPlayerInput : MonoBehaviour
             Debug.Log("Player 1/3 wins");
             if (playerID == 0 || playerID == 2)
             {
-                GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
-                GetComponent<PlayerStats>().playerData.SetTotalScore(1);
+                //GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
+                //GetComponent<PlayerStats>().playerData.SetTotalScore(1);
             }
 
-            sceneLoader.SetPreviousScene();
-            SceneManager.LoadScene("Scores");
+            TOWFinish.instance.GameOver();
         }
         else if (rope.position.x >= -maxDistance)
         {
             Debug.Log("Player 2/4 wins");
             if (playerID == 1 || playerID == 3)
             {
-                GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
-                GetComponent<PlayerStats>().playerData.SetTotalScore(1);
+                //GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
+                //GetComponent<PlayerStats>().playerData.SetTotalScore(1);
             }
 
-            sceneLoader.SetPreviousScene();
-            SceneManager.LoadScene("Scores");
+            TOWFinish.instance.GameOver();
         }
     }
 }

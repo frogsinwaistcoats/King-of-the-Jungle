@@ -17,7 +17,7 @@ public class GameManagerBumper : MonoBehaviour
 
     GameManager gameManager;
     SceneLoader sceneLoader;
-    TimerBumper _timeBump;
+    BumperTimer timer;
     
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +40,7 @@ public class GameManagerBumper : MonoBehaviour
             sceneLoader = FindAnyObjectByType<SceneLoader>();
         }
 
-       _timeBump = FindObjectOfType<TimerBumper>();
+       timer = FindObjectOfType<BumperTimer>();
 
         for (int i = 0; i < playerFinishText.Length; i++)
         {
@@ -76,7 +76,7 @@ public class GameManagerBumper : MonoBehaviour
     public void GameFinish()
     {
         sceneLoader.SetPreviousScene();
-        _timeBump.CancelTimer();
+        timer.CancelTimer();
         gameFinishText.enabled = true;
 
         StartCoroutine(NextScene());

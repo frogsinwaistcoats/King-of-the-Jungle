@@ -45,27 +45,27 @@ public class TOW_UI : MonoBehaviour
         switch (playerID)
         {
             case 0:
-                randomX = Random.Range(300, 500);
-                randomY = Random.Range(300, 700);
+                randomX = Random.Range(300, 700);
+                randomY = Random.Range(300, 500);
                 break;
 
             case 1:
                 randomX = Random.Range(900, 1100);
-                randomY = Random.Range(300, 700);
-                button.GetComponent<Image>().color = Color.red;
+                randomY = Random.Range(300, 500);
+                button.GetComponent<Image>().color = new Color(167, 241, 144, 255);
                 break;
 
             case 2:
                 randomX = Random.Range(500, 700);
                 randomY = Random.Range(300, 700);
-                button.GetComponent<Image>().color = Color.blue;
+                button.GetComponent<Image>().color = new Color(248, 190, 132, 255);
 
                 break;
 
             case 3:
                 randomX = Random.Range(1100, 1300);
                 randomY = Random.Range(300, 700);
-                button.GetComponent<Image>().color = Color.green;
+                button.GetComponent<Image>().color = new Color(91, 231, 255, 255);
                 break;
         }
 

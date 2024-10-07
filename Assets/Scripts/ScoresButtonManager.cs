@@ -38,7 +38,7 @@ public class ScoresButtonManager : MonoBehaviour
     private void Start()
     {
         SetButtonsInteractable(false);
-        StartCoroutine(EnableButtons(3f));
+        StartCoroutine(EnableButtons(1.5f));
     }
 
     IEnumerator EnableButtons(float delay)

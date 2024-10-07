@@ -107,14 +107,14 @@ public class PlayerSelect : MonoBehaviour
 
                 if (text != null)
                 {
-                    if (inputManager.players[playerID].controllerType == ControllerType.Xbox)
-                    {
-                        text.text = "A to Confirm";
-                    }
-                    else if (inputManager.players[playerID].controllerType == ControllerType.Keyboard)
-                    {
-                        text.text = "Enter to Confirm";
-                    }
+                    //if (inputManager.players[playerID].controllerType == ControllerType.Xbox)
+                    //{
+                    //    text.text = "A to Confirm";
+                    //}
+                    //else if (inputManager.players[playerID].controllerType == ControllerType.Keyboard)
+                    //{
+                    //    text.text = "Enter to Confirm";
+                    //}
                 }
             }
             else
