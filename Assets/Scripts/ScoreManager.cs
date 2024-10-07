@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI[] scoreTexts;
+    public Image[] characterImages;
+    public GameObject[] playerUI;
 
     GameManager gameManager;
     SceneLoader sceneLoader;
@@ -21,13 +21,17 @@ public class ScoreManager : MonoBehaviour
 
         if (gameManager.players.Count <= 3)
         {
+            playerUI[playerUI.Length - 1].SetActive(false);
             scoreTexts[scoreTexts.Length - 1].text = "";
             scoreTexts[scoreTexts.Length - 1] = null;
+            characterImages[characterImages.Length - 1].enabled = false;
         }
         if (gameManager.players.Count == 2)
         {
+            playerUI[playerUI.Length - 2].SetActive(false);
             scoreTexts[scoreTexts.Length - 2].text = "";
             scoreTexts[scoreTexts.Length - 2] = null;
+            characterImages[characterImages.Length - 2].enabled = false;
         }
 
         if (SceneManager.GetActiveScene().name == "Scores")
@@ -50,27 +54,27 @@ public class ScoreManager : MonoBehaviour
 
         if (scoreTexts[0] != null)
         {
-            string displayName = playerFirst.characterName;
-            scoreTexts[0].text = "1st - " + displayName + "   +" + playerFirst.playerScore;
+            scoreTexts[0].text = "+ " + playerFirst.playerScore;
+            characterImages[0].sprite = playerFirst.characterSprite;
         }
 
         if (scoreTexts[1] != null)
         {
-            string displayName = playerSecond.characterName;
-            scoreTexts[1].text = "2nd - " + displayName + "   +" + playerSecond.playerScore;
+            scoreTexts[1].text = "+ " + playerSecond.playerScore;
+            characterImages[1].sprite = playerSecond.characterSprite;
         }
 
         if (scoreTexts[2] != null)
         {
-            string displayName = playerThird.characterName;
-            scoreTexts[2].text = "3rd - " + displayName + "   +" + playerThird.playerScore;
+            scoreTexts[2].text = "+ " + playerThird.playerScore;
+            characterImages[2].sprite = playerThird.characterSprite;
         }
 
 
         if (scoreTexts[3] != null)
         {
-            string displayName = playerFourth.characterName;
-            scoreTexts[3].text = "4th - " + displayName + "   +" + playerFourth.playerScore;
+            scoreTexts[3].text = "+ " + playerFourth.playerScore;
+            characterImages[3].sprite = playerFourth.characterSprite;
         }
 
     }
@@ -84,27 +88,27 @@ public class ScoreManager : MonoBehaviour
 
         if (scoreTexts[0] != null)
         {
-            string displayName = playerFirst.characterName;
-            scoreTexts[0].text = "1st - " + displayName + "    " + playerFirst.totalScore;
+            scoreTexts[0].text = playerFirst.totalScore.ToString();
+            characterImages[0].sprite = playerFirst.characterSprite;
         }
 
         if (scoreTexts[1] != null)
         {
-            string displayName = playerSecond.characterName;
-            scoreTexts[1].text = "2nd - " + displayName + "    " + playerSecond.totalScore;
+            scoreTexts[1].text = playerSecond.totalScore.ToString();
+            characterImages[1].sprite = playerSecond.characterSprite;
         }
 
         if (scoreTexts[2] != null)
         {
-            string displayName = playerThird.characterName;
-            scoreTexts[2].text = "3rd - " + displayName + "    " + playerThird.totalScore;
+            scoreTexts[2].text = playerThird.totalScore.ToString();
+            characterImages[2].sprite = playerThird.characterSprite;
         }
 
 
         if (scoreTexts[3] != null)
         {
-            string displayName = playerFourth.characterName;
-            scoreTexts[3].text = "4th - " + displayName + "    " + playerFourth.totalScore;
+            scoreTexts[3].text = playerFourth.totalScore.ToString();
+            characterImages[3].sprite = playerFourth.characterSprite;
         }
 
     }

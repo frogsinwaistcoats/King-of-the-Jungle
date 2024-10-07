@@ -7,6 +7,7 @@ public class PlayerData
 {
     public int playerID;
     public int characterIndex;
+    public Sprite characterSprite;
     public string characterName;
     public ControllerType controllerType;
     public float playerScore;
@@ -20,6 +21,11 @@ public class PlayerData
     public void SetCharacter(int index)
     {
         characterIndex = index;
+    }
+
+    public void SetCharacterSprite(Sprite sprite)
+    {
+        characterSprite = sprite;
     }
 
     public void SetName(string name)
