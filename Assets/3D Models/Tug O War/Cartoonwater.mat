@@ -66,7 +66,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Basw_color: {r: 0.32280168, g: 0.5849056, b: 0.51261324, a: 0}
+    - _Basw_color: {r: 0.12815951, g: 0.6037736, b: 0.4732128, a: 0}
     - _ripple_color: {r: 0.25925514, g: 0.9315609, b: 0.39755526, a: 0}
     - _ripple_density: {r: 10, g: 10, b: 0, a: 0}
     - _ripple_slimness: {r: 0, g: 3, b: 0, a: 0}
