@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MazePlayerInput : MonoBehaviour
@@ -91,9 +92,17 @@ public class MazePlayerInput : MonoBehaviour
     {
         if (!hasFinished && MazeTimer.instance.timerIsRunning)
         {
+            if (spinHandler.isSpinning)
+            {
+                rb.velocity = Vector2.zero;
+                rb.angularVelocity = Vector2.zero;
+                moveInput = Vector3.zero;
+            }
+
             Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
-        }      
+
+        }   
     }
 
     private void OnTriggerEnter(Collider other)
@@ -132,13 +141,7 @@ public class MazePlayerInput : MonoBehaviour
         {
             respawnPosition = transform.position;
         }
-    }
-
-    
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("MazeBoulder"))
+        else if (other.gameObject.CompareTag("MazeBoulder"))
         {
             ReturnToStart();
             if (disabledSpinCollider != null)
@@ -147,7 +150,7 @@ public class MazePlayerInput : MonoBehaviour
                 disabledSpinCollider = null;
             }
         }
-        if (collision.gameObject.CompareTag("MazeBoulder2"))
+        else if (other.gameObject.CompareTag("MazeBoulder2"))
         {
             ReturnToCheckpoint2();
             if (disabledSpinCollider != null)
@@ -156,6 +159,13 @@ public class MazePlayerInput : MonoBehaviour
                 disabledSpinCollider = null;
             }
         }
+    }
+
+    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     public void ReturnToStart()

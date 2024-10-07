@@ -6,6 +6,7 @@ public class SpinHandler : MonoBehaviour
 {
     public float spinDuration = 1f;
     MazePlayerInput mazePlayerInput;
+    public bool isSpinning;
 
     private void Awake()
     {
@@ -20,7 +21,8 @@ public class SpinHandler : MonoBehaviour
 
     private IEnumerator SpinPlayer(int spinNum, Vector3 spinPos)
     {
-        mazePlayerInput.OnDisable();
+        //mazePlayerInput.OnDisable();
+        isSpinning = true;
 
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
@@ -36,7 +38,7 @@ public class SpinHandler : MonoBehaviour
 
         while (timeElapsed < spinDuration)
         {
-            transform.position = spinPos;
+            //transform.position = spinPos;
 
             transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
             timeElapsed += Time.deltaTime;
@@ -61,6 +63,8 @@ public class SpinHandler : MonoBehaviour
         {
             SpinControls3(mazePlayerInput.playerID);
         }
+
+        isSpinning = false;
     }
 
     public void SpinControls1(int ID)

@@ -5732,7 +5732,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 681471302}
   - {fileID: 1143720146}
-  speed: 4
+  speed: 3
   rotateSpeed: 150
 --- !u!135 &277395574
 SphereCollider:
@@ -16766,7 +16766,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 563547264}
   - {fileID: 294265450}
-  speed: 4
+  speed: 3
   rotateSpeed: -150
 --- !u!135 &725686824
 SphereCollider:
@@ -18141,7 +18141,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 1612307767}
   - {fileID: 906584813}
-  speed: 4
+  speed: 3
   rotateSpeed: -150
 --- !u!135 &789626160
 SphereCollider:
@@ -29695,7 +29695,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 835060991}
   - {fileID: 1303719232}
-  speed: 4
+  speed: 3
   rotateSpeed: 150
 --- !u!135 &1259978347
 SphereCollider:
@@ -29712,7 +29712,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -29743,7 +29743,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!1001 &1269780707
 PrefabInstance:
@@ -40416,7 +40416,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 1739509492}
   - {fileID: 136127678}
-  speed: 4
+  speed: 3
   rotateSpeed: 150
 --- !u!135 &1664004263
 SphereCollider:
@@ -46219,7 +46219,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 2113365065}
   - {fileID: 656118497}
-  speed: 4
+  speed: 3
   rotateSpeed: 150
 --- !u!135 &1933630992
 SphereCollider:
@@ -47392,7 +47392,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 366279935}
   - {fileID: 1887676635}
-  speed: 4
+  speed: 3
   rotateSpeed: -150
 --- !u!135 &1987993403
 SphereCollider:
@@ -50962,7 +50962,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!65 &400108500577050878
 BoxCollider:
@@ -55978,7 +55978,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -57372,7 +57372,7 @@ MonoBehaviour:
   pathPoints:
   - {fileID: 3725612021079219941}
   - {fileID: 1963952503238612747}
-  speed: 4
+  speed: 3
   rotateSpeed: -150
 --- !u!4 &5401524855939825854 stripped
 Transform:
@@ -59762,7 +59762,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!23 &7087470375670329117
 MeshRenderer:
@@ -59920,7 +59920,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
