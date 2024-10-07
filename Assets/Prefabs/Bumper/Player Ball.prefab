@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: b9bc697d126b27b4fb4d5cd2316795d8, type: 3}
+  - {fileID: 2100000, guid: 203b9d8e9074dff43a58c0f6acbcdf71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -219,6 +219,8 @@ MonoBehaviour:
   playerData:
     playerID: 0
     characterIndex: 0
+    characterSprite: {fileID: 0}
+    characterName: 
     controllerType: 0
     playerScore: 0
     totalScore: 0
