@@ -13,6 +13,13 @@ TagManager:
   - MazeBoulder
   - attack
   - RaceFinish
+  - MazeBoulder2
+  - MazeCheckpoint1
+  - MazeCheckpoint2
+  - MazeSpin1
+  - MazeSpin2
+  - MazeSpin3
+  - MazeCheckpoint3
   layers:
   - Default
   - TransparentFX

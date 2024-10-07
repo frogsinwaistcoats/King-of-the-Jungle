@@ -64,12 +64,12 @@ PrefabInstance:
     - target: {fileID: 288626045116343334, guid: 42951460eab136e49822bb32b1d285ad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7
+      value: 4.2
       objectReference: {fileID: 0}
     - target: {fileID: 288626045116343334, guid: 42951460eab136e49822bb32b1d285ad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3
+      value: -1.6
       objectReference: {fileID: 0}
     - target: {fileID: 288626045116343334, guid: 42951460eab136e49822bb32b1d285ad,
         type: 3}
@@ -240,6 +240,10 @@ MonoBehaviour:
   playerData:
     playerID: 0
     characterIndex: 0
+    characterName: 
+    controllerType: 0
+    playerScore: 0
+    totalScore: 0
   rend: {fileID: 7263005884030419897}
 --- !u!4 &4308274136626834125 stripped
 Transform:

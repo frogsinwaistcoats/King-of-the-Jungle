@@ -11,6 +11,7 @@ public class MazePlayerInput : MonoBehaviour
     public int playerID;
     private Rigidbody rb;
     private Vector3 startPosition;
+    private Vector3 respawnPosition;
     private bool hasFinished = false;
 
     public Vector2 moveInput;
@@ -97,9 +98,24 @@ public class MazePlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("MazeSpin"))
+        if (other.gameObject.CompareTag("MazeSpin1"))
         {
-            spinHandler.StartSpin();
+            ClearInputControls();
+            spinHandler.StartSpin(1, other.transform.position);
+            other.enabled = false;
+            disabledSpinCollider = other;
+        }
+        else if (other.gameObject.CompareTag("MazeSpin2"))
+        {
+            ClearInputControls();
+            spinHandler.StartSpin(2, other.transform.position);
+            other.enabled = false;
+            disabledSpinCollider = other;
+        }
+        else if (other.gameObject.CompareTag("MazeSpin3"))
+        {
+            ClearInputControls();
+            spinHandler.StartSpin(3, other.transform.position);
             other.enabled = false;
             disabledSpinCollider = other;
         }
@@ -111,6 +127,10 @@ public class MazePlayerInput : MonoBehaviour
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
             GetComponent<PlayerStats>().playerData.SetTotalScore(score);
             Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
+        }
+        else if (other.gameObject.CompareTag("MazeCheckpoint1") || other.gameObject.CompareTag("MazeCheckpoint2") || other.gameObject.CompareTag("MazeCheckpoint3"))
+        {
+            respawnPosition = transform.position;
         }
     }
 
@@ -127,17 +147,33 @@ public class MazePlayerInput : MonoBehaviour
                 disabledSpinCollider = null;
             }
         }
+        if (collision.gameObject.CompareTag("MazeBoulder2"))
+        {
+            ReturnToCheckpoint2();
+            if (disabledSpinCollider != null)
+            {
+                disabledSpinCollider.enabled = true;
+                disabledSpinCollider = null;
+            }
+        }
     }
 
     public void ReturnToStart()
     {
         gameObject.transform.position = startPosition;
-        ResetToMasterControls();
+        ClearInputControls();
+        spinHandler.MasterControls(playerID);
     }
 
-    private void ResetToMasterControls()
+    public void ReturnToCheckpoint2()
     {
-        //detatch current input controls
+        gameObject.transform.position = respawnPosition;
+        ClearInputControls();
+        spinHandler.SpinControls1(playerID);
+    }
+
+    public void ClearInputControls()
+    {
         inputControls.MasterControls.Movement.performed -= OnMove;
         inputControls.MasterControls.Movement.canceled -= OnMove;
         inputControls.SpinControl1.Movement.performed -= OnMove;
@@ -146,9 +182,5 @@ public class MazePlayerInput : MonoBehaviour
         inputControls.SpinControl2.Movement.canceled -= OnMove;
         inputControls.SpinControl3.Movement.performed -= OnMove;
         inputControls.SpinControl3.Movement.canceled -= OnMove;
-
-        //reassign master controls
-        inputControls.MasterControls.Movement.performed += OnMove;
-        inputControls.MasterControls.Movement.canceled += OnMove;
     }
 }
