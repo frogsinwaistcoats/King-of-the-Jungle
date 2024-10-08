@@ -65,6 +65,7 @@ public class SceneLoader : MonoBehaviour
         inputManager.ResetInstance();
         SceneManager.LoadScene("MainMenu");
 
+        AudioManager.instance.Stop("InterludeTheme");
         // Play main theme when loading the main menu
         AudioManager.instance.Play("MainTheme");
     }
@@ -146,40 +147,50 @@ public class SceneLoader : MonoBehaviour
     {
         SetPreviousScene();
         SceneManager.LoadScene("MazeInstructionScreen");
+
+        AudioManager.instance.Stop("MainTheme");
         // Play instruction music when loading instructions
-        AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InterludeTheme");
     }
 
     public void LoadRaceInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("RaceInstructionScreen");
+
+        AudioManager.instance.Stop("MainTheme");
         // Play instruction music when loading instructions
-        AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InterludeTheme");
     }
 
     public void LoadDodgeballInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("DodgeballInstructionScreen");
+
+        AudioManager.instance.Stop("MainTheme");
         // Play instruction music when loading instructions
-        AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InterludeTheme");
     }
 
     public void LoadBumperInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("BumperInstructionScreen");
+
+        AudioManager.instance.Stop("MainTheme");
         // Play instruction music when loading instructions
-        AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InterludeTheme");
     }
 
     public void LoadTugOWarInstructions()
     {
         SetPreviousScene();
         SceneManager.LoadScene("TugOWarInstructionScreen");
+
+        AudioManager.instance.Stop("MainTheme");
         // Play instruction music when loading instructions
-        AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InterludeTheme");
     }
     #endregion
 
