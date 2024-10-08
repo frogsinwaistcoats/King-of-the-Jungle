@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class AudioManager : MonoBehaviour
 {
@@ -6,6 +7,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource mainTheme;
     public AudioSource instructionMusic;
+    public AudioSource gameMusic;
+    public AudioSource raceMusic;
+    public AudioSource dashSFX;
 
     private void Awake()
     {
@@ -31,11 +35,29 @@ public class AudioManager : MonoBehaviour
                 else
                     Debug.LogError("MainTheme AudioSource is missing!");
                 break;
+            case "RaceTheme":
+                if (raceMusic != null)
+                    raceMusic.Play();
+                else
+                    Debug.LogError("Race Music AudioSource is missing!");
+                break;
+            case "GameTheme":
+                if (gameMusic != null)
+                    gameMusic.Play();
+                else
+                    Debug.LogError("Game Music AudioSource is missing!");
+                break;
             case "InstructionMusic":
                 if (instructionMusic != null)
                     instructionMusic.Play();
                 else
                     Debug.LogError("InstructionMusic AudioSource is missing!");
+                break;
+            case "Dash":
+                if (dashSFX != null)
+                    dashSFX.Play();
+                else
+                    Debug.LogError("DashSFX AudioSource is missing");
                 break;
             default:
                 Debug.LogError("Unknown audio name: " + name);

@@ -147,7 +147,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("MazeInstructionScreen");
         // Play instruction music when loading instructions
-        //AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadRaceInstructions()
@@ -155,7 +155,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("RaceInstructionScreen");
         // Play instruction music when loading instructions
-        //AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadDodgeballInstructions()
@@ -163,7 +163,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("DodgeballInstructionScreen");
         // Play instruction music when loading instructions
-        //AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadBumperInstructions()
@@ -171,7 +171,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("BumperInstructionScreen");
         // Play instruction music when loading instructions
-        //AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InstructionMusic");
     }
 
     public void LoadTugOWarInstructions()
@@ -179,7 +179,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("TugOWarInstructionScreen");
         // Play instruction music when loading instructions
-        //AudioManager.instance.Play("InstructionMusic");
+        AudioManager.instance.Play("InstructionMusic");
     }
     #endregion
 
