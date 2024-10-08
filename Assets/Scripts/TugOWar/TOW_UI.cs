@@ -8,10 +8,7 @@ public class TOW_UI : MonoBehaviour
     public static TOW_UI instance;
 
     public List<char> playerButtonList = new List<char>();
-
     public int playerCount;
-
-
 
     private void Awake()
     {
@@ -47,25 +44,26 @@ public class TOW_UI : MonoBehaviour
             case 0:
                 randomX = Random.Range(200, 760);
                 randomY = Random.Range(740, 880);
+                button.GetComponent<Image>().color = new Color(0f, 76f / 255f, 1f, 1f);
                 break;
 
             case 1:
                 randomX = Random.Range(1160, 1720);
                 randomY = Random.Range(740, 880);
-                button.GetComponent<Image>().color = new Color(167f / 255f, 241f / 255f, 144f / 255f, 1f);
+                button.GetComponent<Image>().color = new Color(215f / 255f, 94f / 255f, 244f / 255f, 1f);
                 break;
 
             case 2:
                 randomX = Random.Range(200, 760);
                 randomY = Random.Range(200, 340);
-                button.GetComponent<Image>().color = new Color(248f / 255f, 190f / 255f, 132f / 255f, 1f);
+                button.GetComponent<Image>().color = new Color(1f, 231f / 255f, 38f / 255f, 1f);
 
                 break;
 
             case 3:
                 randomX = Random.Range(1160, 1720);
                 randomY = Random.Range(200, 340);
-                button.GetComponent<Image>().color = new Color(91f / 255f, 231f / 255f, 255f / 255f, 1f);
+                button.GetComponent<Image>().color = new Color(144f / 255f, 1f, 92f / 255f, 1f);
                 break;
         }
 

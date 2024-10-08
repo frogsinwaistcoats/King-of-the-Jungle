@@ -58,7 +58,7 @@ public class TOWPlayerInput : MonoBehaviour
         
         //ChangeBindingToKey(randomKey);
 
-        //gameObject.transform.SetParent(rope); //players move with rope
+        gameObject.transform.SetParent(rope); //players move with rope
     }
 
 
