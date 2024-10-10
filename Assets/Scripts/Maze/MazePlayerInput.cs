@@ -8,6 +8,7 @@ public class MazePlayerInput : MonoBehaviour
     private SpinHandler spinHandler;
     MazeCountdown mazeCountdown;
     MazeFinishManager finishManager;
+    public Animator animator;
 
     public int playerID;
     private Rigidbody rb;
@@ -80,6 +81,8 @@ public class MazePlayerInput : MonoBehaviour
         if (!hasFinished && !mazeCountdown.isRunning)
         {
             moveInput = obj.ReadValue<Vector2>();
+            float movementValue = moveInput.sqrMagnitude > 0 ? 1f : 0f;
+            animator.SetFloat("isMoving", movementValue);
         }  
     }
 

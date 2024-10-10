@@ -210,6 +210,11 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 116
       objectReference: {fileID: 0}
+    - target: {fileID: 6079193666107678076, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 6090449978834709383}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -250,6 +255,7 @@ MonoBehaviour:
     playerScore: 0
     totalScore: 0
   rend: {fileID: 7263005884030419897}
+  animator: {fileID: 6090449978834709383}
 --- !u!95 &6090449978834709383
 Animator:
   serializedVersion: 5
