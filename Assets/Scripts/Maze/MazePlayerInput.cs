@@ -82,7 +82,6 @@ public class MazePlayerInput : MonoBehaviour
         {
             moveInput = obj.ReadValue<Vector2>();
             float movementValue = moveInput.sqrMagnitude > 0 ? 1f : 0f;
-            animator.SetFloat("isMoving", movementValue);
         }  
     }
 
@@ -162,13 +161,6 @@ public class MazePlayerInput : MonoBehaviour
                 disabledSpinCollider = null;
             }
         }
-    }
-
-    
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
     }
 
     public void ReturnToStart()

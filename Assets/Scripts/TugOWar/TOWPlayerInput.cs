@@ -10,7 +10,9 @@ public class TOWPlayerInput : MonoBehaviour
     public float moveSpeed = -1f;
     public float maxDistance = 10f;
     public UI_ReloadButton buttonPrefab;
-    string chosenKey;
+    (string, string) chosenKeys;
+    public bool isButton1Pressed = false;
+    public bool isButton2Pressed = false;
 
     public InputActionAsset actionAsset;
 
@@ -19,7 +21,8 @@ public class TOWPlayerInput : MonoBehaviour
 
     MultiplayerInputManager inputManager; 
     InputControls inputControls;
-    private UI_ReloadButton newbutton;
+    private UI_ReloadButton newButton1;
+    private UI_ReloadButton newButton2;
     SceneLoader sceneLoader;
 
     private void Awake()
@@ -52,37 +55,16 @@ public class TOWPlayerInput : MonoBehaviour
             inputManager.onPlayerJoined += AssignInputs;
         }
 
-        newbutton = Instantiate(buttonPrefab);
-        newbutton.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        chosenKey = TOW_UI.instance.OpenReloadUI(newbutton, playerID, controllerType);
+        newButton1 = Instantiate(buttonPrefab);
+        newButton2 = Instantiate(buttonPrefab);
+        newButton1.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        newButton2.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
         
         //ChangeBindingToKey(randomKey);
 
         gameObject.transform.SetParent(rope); //players move with rope
     }
-
-
-    /*
-    public void ChangeBindingToKey(string randomKey)
-    {
-        InputActionMap tugOWarControls = actionAsset.FindActionMap("TugOWarControls");
-
-        InputAction pullxAction = tugOWarControls.FindAction("Pull" + playerID);
-
-        if(pullxAction != null)
-        {
-            Debug.Log("change binding");
-            pullxAction.RemoveAllBindingOverrides();
-            pullxAction.ApplyBindingOverride(randomKey);
-            pullxAction.Disable();
-            pullxAction.Enable();
-        }
-        else
-        {
-            Debug.Log("not found");
-        }
-    }
-    */
 
     private void OnDisable()
     {
@@ -131,6 +113,13 @@ public class TOWPlayerInput : MonoBehaviour
 
     private void Update()
     {   
+        if (isButton1Pressed && isButton2Pressed)
+        {
+            HandlePullAction();
+            isButton1Pressed = false;
+            isButton2Pressed = false;
+        }
+
         //calculate the difference in pulls
         float pullDifference = (player1Pulls - player2Pulls) * moveSpeed * Time.deltaTime;
 
@@ -153,37 +142,116 @@ public class TOWPlayerInput : MonoBehaviour
     {
         if (TOWTimer.instance.timerIsRunning)
         {
+            Debug.Log(obj.control.ToString());
+            string controlPressed = GetTextAfterLastSlash(obj.control.ToString());
+
+            if (controlPressed == chosenKeys.Item1)
+            {
+                if (obj.performed)
+                {
+                    isButton1Pressed = true;
+                }
+                else if (obj.canceled)
+                {
+                    isButton1Pressed = false;
+                }
+            }
+
+            if (controlPressed == chosenKeys.Item2)
+            {
+                if (obj.performed)
+                {
+                    isButton2Pressed = true;
+                }
+                else if (obj.canceled)
+                {
+                    isButton2Pressed = false;
+                }
+            }
+
+            /*
+            if (controlPressed == chosenKeys.Item2)
+            {
+                isButton2Pressed = true;
+            }
+
             if (obj.performed)
             {
-                Debug.Log(obj.control.ToString());
+                
 
-                if (chosenKey == GetTextAfterLastSlash(obj.control.ToString()))
+                if (isButton1Pressed && isButton2Pressed)
                 {
                     if (playerID == 0)
                     {
                         Debug.Log("Player 1 pull");
                         player1Pulls++;
                     }
-                    if (playerID == 1)
+                    else if (playerID == 1)
                     {
                         Debug.Log("Player 2 pull");
                         player2Pulls++;
                     }
-                    if (playerID == 2)
+                    else if (playerID == 2)
                     {
                         Debug.Log("Player 3 pull");
                         player1Pulls++;
                     }
-                    if (playerID == 3)
+                    else if (playerID == 3)
                     {
                         Debug.Log("Player 4 pull");
                         player2Pulls++;
                     }
 
-                    chosenKey = TOW_UI.instance.OpenReloadUI(newbutton, playerID, controllerType);
+                    isButton1Pressed = false;
+                    isButton2Pressed = false;
+
+                    chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
                 }
             }
+
+            //reset if button is released
+
+            if (obj.canceled)
+            {
+                if (controlPressed == chosenKeys.Item1)
+                {
+                    isButton1Pressed = false;
+                }
+                if (controlPressed == chosenKeys.Item2)
+                {
+                    isButton2Pressed = false;
+                }
+            
+            }
+            */
+
         }
+    }
+
+    private void HandlePullAction()
+    {
+        if (playerID == 0)
+        {
+            Debug.Log("Player 1 pull");
+            player1Pulls++;
+        }
+        else if (playerID == 1)
+        {
+            Debug.Log("Player 2 pull");
+            player2Pulls++;
+        }
+        else if (playerID == 2)
+        {
+            Debug.Log("Player 3 pull");
+            player1Pulls++;
+        }
+        else if (playerID == 3)
+        {
+            Debug.Log("Player 4 pull");
+            player2Pulls++;
+        }
+
+        chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
     }
 
     public static string GetTextAfterLastSlash(string input)
