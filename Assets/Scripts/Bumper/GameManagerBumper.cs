@@ -11,7 +11,7 @@ public class GameManagerBumper : MonoBehaviour
 
     public TextMeshProUGUI[] playerFinishText;
     public TextMeshProUGUI gameFinishText;
-
+    private static int finishedPlayers = 0;
     private static int totalPlayers;
 
     GameManager gameManager;
@@ -27,6 +27,41 @@ public class GameManagerBumper : MonoBehaviour
             Destroy(other.gameObject);
         }
 
+    }
+    private void Awake()
+    {
+        instance = this;
+        gameManager = GameManager.instance;
+        sceneLoader = SceneLoader.instance;
+        timer = FindObjectOfType<BumperTimer>();
+
+        for (int i = 0; i < playerFinishText.Length; i++)
+        {
+            if (playerFinishText[i] != null)
+            {
+                playerFinishText[i].enabled = false;
+            }
+        }
+
+        gameFinishText.enabled = false;
+    }
+
+    private void Start()
+    {
+        totalPlayers = gameManager.players.Count;
+    }
+    public int PlayerFinish(int id)
+    {
+        finishedPlayers++;
+        playerFinishText[id].enabled = true;
+        Debug.Log("Finished players: " + finishedPlayers);
+
+        if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
+        {
+            GameFinish();
+        }
+
+        return finishedPlayers;
     }
 
     public void GameFinish()
