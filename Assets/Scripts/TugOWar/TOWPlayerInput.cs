@@ -1,6 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class TOWPlayerInput : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TOWPlayerInput : MonoBehaviour
     (string, string) chosenKeys;
     public bool isButton1Pressed = false;
     public bool isButton2Pressed = false;
+    public bool winConditionMet = false;
 
     public InputActionAsset actionAsset;
 
@@ -55,15 +57,20 @@ public class TOWPlayerInput : MonoBehaviour
             inputManager.onPlayerJoined += AssignInputs;
         }
 
+
+        StartCoroutine(SpawnButtons());
+
+        gameObject.transform.SetParent(rope); //players move with rope
+    }
+
+    public IEnumerator SpawnButtons()
+    {
+        yield return new WaitForSeconds(3f);
         newButton1 = Instantiate(buttonPrefab);
         newButton2 = Instantiate(buttonPrefab);
         newButton1.transform.SetParent(GameObject.Find("Canvas").transform, false);
         newButton2.transform.SetParent(GameObject.Find("Canvas").transform, false);
         chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
-        
-        //ChangeBindingToKey(randomKey);
-
-        gameObject.transform.SetParent(rope); //players move with rope
     }
 
     private void OnDisable()
@@ -113,13 +120,6 @@ public class TOWPlayerInput : MonoBehaviour
 
     private void Update()
     {   
-        if (isButton1Pressed && isButton2Pressed)
-        {
-            HandlePullAction();
-            isButton1Pressed = false;
-            isButton2Pressed = false;
-        }
-
         //calculate the difference in pulls
         float pullDifference = (player1Pulls - player2Pulls) * moveSpeed * Time.deltaTime;
 
@@ -132,126 +132,80 @@ public class TOWPlayerInput : MonoBehaviour
         //update rope position along x axis
         rope.position = new Vector3(newXPosition, rope.position.y, rope.position.z);
         
-        if (newXPosition == maxDistance || newXPosition == -maxDistance)
+        if (!winConditionMet && (newXPosition == maxDistance || newXPosition == -maxDistance))
         {
             CheckWinCondition();
+            winConditionMet = true;
         }
     }
 
     public void OnPull(InputAction.CallbackContext obj)
     {
-        if (TOWTimer.instance.timerIsRunning)
+        if (TOWTimer.instance.timerIsRunning && obj.performed)
         {
             Debug.Log(obj.control.ToString());
             string controlPressed = GetTextAfterLastSlash(obj.control.ToString());
 
             if (controlPressed == chosenKeys.Item1)
             {
-                if (obj.performed)
-                {
-                    isButton1Pressed = true;
-                }
-                else if (obj.canceled)
-                {
-                    isButton1Pressed = false;
-                }
+                isButton1Pressed = true;
             }
-
-            if (controlPressed == chosenKeys.Item2)
-            {
-                if (obj.performed)
-                {
-                    isButton2Pressed = true;
-                }
-                else if (obj.canceled)
-                {
-                    isButton2Pressed = false;
-                }
-            }
-
-            /*
             if (controlPressed == chosenKeys.Item2)
             {
                 isButton2Pressed = true;
             }
-
-            if (obj.performed)
+            if (controlPressed != chosenKeys.Item1 && controlPressed != chosenKeys.Item2)
             {
-                
-
-                if (isButton1Pressed && isButton2Pressed)
-                {
-                    if (playerID == 0)
-                    {
-                        Debug.Log("Player 1 pull");
-                        player1Pulls++;
-                    }
-                    else if (playerID == 1)
-                    {
-                        Debug.Log("Player 2 pull");
-                        player2Pulls++;
-                    }
-                    else if (playerID == 2)
-                    {
-                        Debug.Log("Player 3 pull");
-                        player1Pulls++;
-                    }
-                    else if (playerID == 3)
-                    {
-                        Debug.Log("Player 4 pull");
-                        player2Pulls++;
-                    }
-
-                    isButton1Pressed = false;
-                    isButton2Pressed = false;
-
-                    chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
-                }
+                StartCoroutine(Penalty());
             }
 
-            //reset if button is released
-
-            if (obj.canceled)
+            if (isButton1Pressed && isButton2Pressed)
             {
-                if (controlPressed == chosenKeys.Item1)
+                if (playerID == 0)
                 {
-                    isButton1Pressed = false;
+                    Debug.Log("Player 1 pull");
+                    player1Pulls++;
                 }
-                if (controlPressed == chosenKeys.Item2)
+                else if (playerID == 1)
                 {
-                    isButton2Pressed = false;
+                    Debug.Log("Player 2 pull");
+                    if (inputManager.PlayerCount == 3)
+                    {
+                        player2Pulls += 2;
+                    }
+                    else
+                    {
+                        player2Pulls++;
+                    }
                 }
-            
-            }
-            */
+                else if (playerID == 2)
+                {
+                    Debug.Log("Player 3 pull");
+                    player1Pulls++;
+                }
+                else if (playerID == 3)
+                {
+                    Debug.Log("Player 4 pull");
+                    player2Pulls++;
+                }
 
+                isButton1Pressed = false;
+                isButton2Pressed = false;
+
+                chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
+            }
         }
     }
 
-    private void HandlePullAction()
+    private IEnumerator Penalty()
     {
-        if (playerID == 0)
-        {
-            Debug.Log("Player 1 pull");
-            player1Pulls++;
-        }
-        else if (playerID == 1)
-        {
-            Debug.Log("Player 2 pull");
-            player2Pulls++;
-        }
-        else if (playerID == 2)
-        {
-            Debug.Log("Player 3 pull");
-            player1Pulls++;
-        }
-        else if (playerID == 3)
-        {
-            Debug.Log("Player 4 pull");
-            player2Pulls++;
-        }
-
+        Debug.Log("PLAYER " + (playerID+1) + "  WRONG BUTTON");
+        TOW_UI.instance.PenaltyButton(newButton1, newButton2);
+        OnDisable();
+        yield return new WaitForSeconds(1.5f);
+        AssignInputs(playerID);
         chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
+
     }
 
     public static string GetTextAfterLastSlash(string input)
@@ -290,8 +244,8 @@ public class TOWPlayerInput : MonoBehaviour
             Debug.Log("Player 1/3 wins");
             if (playerID == 0 || playerID == 2)
             {
-                //GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
-                //GetComponent<PlayerStats>().playerData.SetTotalScore(1);
+                GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
+                GetComponent<PlayerStats>().playerData.SetTotalScore(1);
             }
 
             TOWFinish.instance.GameOver();
@@ -301,8 +255,8 @@ public class TOWPlayerInput : MonoBehaviour
             Debug.Log("Player 2/4 wins");
             if (playerID == 1 || playerID == 3)
             {
-                //GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
-                //GetComponent<PlayerStats>().playerData.SetTotalScore(1);
+                GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
+                GetComponent<PlayerStats>().playerData.SetTotalScore(1);
             }
 
             TOWFinish.instance.GameOver();
