@@ -66,6 +66,12 @@ public class TOW_UI : MonoBehaviour
         return randomKeys;
     }
 
+    public void PenaltyButton(UI_ReloadButton button1, UI_ReloadButton button2)
+    {
+        button1.GetComponent<Image>().color = Color.red;
+        button2.GetComponent<Image>().color = Color.red;
+    }
+
     public (string, string) RandomizeButton(ControllerType controllerType, UI_ReloadButton button1, UI_ReloadButton button2)
     {
         string randomKey1 = string.Empty;
