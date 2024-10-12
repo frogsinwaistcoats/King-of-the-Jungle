@@ -9,6 +9,9 @@ public class MazePlayerInput : MonoBehaviour
     MazeCountdown mazeCountdown;
     MazeFinishManager finishManager;
     public Animator animator;
+    public SpriteRenderer rend;
+    PlayerStats playerStats;
+    PlayerData playerData;
 
     public int playerID;
     private Rigidbody rb;
@@ -25,17 +28,22 @@ public class MazePlayerInput : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
-        startPosition = transform.position;
-
-        spinHandler = GetComponent<SpinHandler>();
         mazeCountdown = MazeCountdown.instance;
         finishManager = MazeFinishManager.instance;
+
+        rb = GetComponent<Rigidbody>();
+        
+        startPosition = transform.position;
+
+        playerStats = GetComponent<PlayerStats>();
+        spinHandler = GetComponent<SpinHandler>();
+        animator = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
+        playerData = GetComponent<PlayerStats>().playerData;
     }
 
     private void Start()
     {
-        PlayerStats playerStats = GetComponent<PlayerStats>();
         if (playerStats != null && playerStats.playerData != null)
         {
             playerID = playerStats.playerData.playerID;
@@ -50,6 +58,8 @@ public class MazePlayerInput : MonoBehaviour
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
+
+        animator.enabled = false;
     }
 
     public void OnDisable()
@@ -80,8 +90,15 @@ public class MazePlayerInput : MonoBehaviour
     {
         if (!hasFinished && !mazeCountdown.isRunning)
         {
+            animator.enabled = true;
+            animator.SetBool(playerStats.playerData.characterName, true);
             moveInput = obj.ReadValue<Vector2>();
-            float movementValue = moveInput.sqrMagnitude > 0 ? 1f : 0f;
+            
+            if (obj.canceled)
+            {
+                animator.enabled = false;
+                rend.sprite = playerStats.playerData.characterSprite;
+            }
         }  
     }
 
@@ -103,7 +120,6 @@ public class MazePlayerInput : MonoBehaviour
 
             Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
-
         }   
     }
 

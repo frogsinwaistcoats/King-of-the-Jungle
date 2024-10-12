@@ -6,14 +6,11 @@ public class PlayerStats : MonoBehaviour
 {
     public PlayerData playerData;
 
-    [SerializeField] SpriteRenderer rend;
-
-    //public Animator animator;
+    public SpriteRenderer rend;
 
     public void UpdatePlayer(PlayerData data)
     {
         playerData = data;
         rend.sprite = CharacterSelect.instance.characters[playerData.characterIndex].characterSprite;
-        //animator.SetBool(rend.sprite.name, true);
     }
 }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f5a123f85733440a171459d7f8bc6a, type: 3}
   m_Name: Sloth
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 21300000, guid: 3aea60e7ddab9a44b94630fdead525ef, type: 3}
+  characterSprite: {fileID: 21300000, guid: 5b3804e2f3341604587e6e3e8617751d, type: 3}
   characterName: Sloth
+  isChosen: 0
