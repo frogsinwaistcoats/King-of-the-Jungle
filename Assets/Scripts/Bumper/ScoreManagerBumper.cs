@@ -11,47 +11,67 @@ public class ScoreManagerBumper : MonoBehaviour
     private int timer;
     public Text scoreText;// Use this for initialization
 
+    private float startTime; // Time when the player starts
+    private float elapsedTime; // Time that has passed since start
+    private bool isTimerActive = true; // Flag to check if the timer is active
+
+
+    void Start()
+    {
+        startTime = Time.time; // Record the start time
+        score = 0; 
+        {
+            currentScore = 0;
+
+        }
+    }
+
+    void Update()
+    {
+        // If the timer is active, calculate the elapsed time
+        if (isTimerActive)
+        {
+            elapsedTime = Time.time - startTime;
+            score = Mathf.FloorToInt(elapsedTime); // Convert elapsed time to a whole number score
+        }
+
+        // Update the UI to show the score
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+
+
+        score = (int)Time.time;
+
+    }
+
+
+    public void StopTimer()
+    {
+        // Stop the timer when the player enters the collider
+        isTimerActive = false;
+    }
     private void Awake()
     {
         instance = this;
     }
-    void Start()
-    {
-        currentScore = 0;
+  
 
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            currentScore = -10;
+            HandleScore();
+            StopTimer();
+        }
     }
     private void HandleScore()
     {
         scoreText.text = "Score: " + currentScore;
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            currentScore++;
-            HandleScore();
-        }
-    }
-
-
-    void Update()
-    {
-
-        score = (int)Time.time; 
-
-        if (timer > 5f)
-        {
-
-            score += 2;
-
-            //We only need to update the text if the score changed.
-            scoreText.text = score.ToString();
-
-            //Reset the timer to 0.
-            timer = 0;
-        }
-    }
 }
 
 

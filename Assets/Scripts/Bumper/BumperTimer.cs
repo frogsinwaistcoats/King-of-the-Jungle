@@ -41,7 +41,7 @@ public class BumperTimer : MonoBehaviour
                 timeRemaining = 0;
                 timerIsRunning = false;
                 timerText.enabled = false;
-                GameManagerBumper.instance.GameFinish();
+                SceneManager.LoadScene("Scores");
             }
         }
     }

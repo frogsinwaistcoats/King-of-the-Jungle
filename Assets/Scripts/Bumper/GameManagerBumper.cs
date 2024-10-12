@@ -14,10 +14,11 @@ public class GameManagerBumper : MonoBehaviour
     private static int finishedPlayers = 0;
     private static int totalPlayers;
 
+    
     GameManager gameManager;
     SceneLoader sceneLoader;
     BumperTimer timer;
-    
+    public string playerTag = "Player"; // Tag for the player GameObject
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,59 +27,18 @@ public class GameManagerBumper : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-
-    }
-    private void Awake()
-    {
-        instance = this;
-        gameManager = GameManager.instance;
-        sceneLoader = SceneLoader.instance;
-        timer = FindObjectOfType<BumperTimer>();
-
-        for (int i = 0; i < playerFinishText.Length; i++)
+        if (other.CompareTag(playerTag))  // Check if the object entering is the player
         {
-            if (playerFinishText[i] != null)
+            // Get the PlayerTimer component from the player and stop the timer
+            ScoreManagerBumper Scorebump = other.GetComponent<ScoreManagerBumper>();
+            if (Scorebump != null)
             {
-                playerFinishText[i].enabled = false;
+                Scorebump.StopTimer(); // Stop the player's timer
             }
+
         }
-
-        gameFinishText.enabled = false;
+  
     }
 
-    private void Start()
-    {
-        totalPlayers = gameManager.players.Count;
-    }
-    public int PlayerFinish(int id)
-    {
-        finishedPlayers++;
-        playerFinishText[id].enabled = true;
-        Debug.Log("Finished players: " + finishedPlayers);
-
-        if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
-        {
-            GameFinish();
-        }
-
-        return finishedPlayers;
-    }
-
-    public void GameFinish()
-    {
-        sceneLoader.SetPreviousScene();
-        timer.CancelTimer();
-        gameFinishText.enabled = true;
-        StartCoroutine(NextScene());
-    }
-
-   
-    IEnumerator NextScene()
-    {
-        //GameFinish(); 
-        yield return new WaitForSeconds(3);
-        SceneManager.LoadScene("Scores");
-    }
-
-
+  
 }
