@@ -25,7 +25,7 @@ public class BumperSpawnPoints : MonoBehaviour
 
         SpawnPlayers();
     }
-    
+
     void SpawnPlayers()
     {
         sceneLoader.SetPreviousScene();
