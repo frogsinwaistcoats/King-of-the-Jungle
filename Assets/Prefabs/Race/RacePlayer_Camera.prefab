@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2920221390183316797}
   - component: {fileID: 8425191700067985514}
   - component: {fileID: 8836097264249873635}
+  - component: {fileID: 407373321548041522}
   m_Layer: 0
   m_Name: RacePlayer
   m_TagString: Untagged
@@ -172,11 +173,33 @@ MonoBehaviour:
   playerData:
     playerID: 0
     characterIndex: 0
+    characterSprite: {fileID: 0}
     characterName: 
     controllerType: 0
     playerScore: 0
     totalScore: 0
   rend: {fileID: 5980362001357510467}
+--- !u!95 &407373321548041522
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4826439791679876359}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa2b8de543275ee47a772cf137da7cea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4890932981749933370
 GameObject:
   m_ObjectHideFlags: 0

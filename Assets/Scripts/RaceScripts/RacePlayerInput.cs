@@ -19,6 +19,9 @@ public class RacePlayerInput : MonoBehaviour
     MultiplayerInputManager inputManager;
     InputControls inputControls;
     RaceFinishManager finishRace;
+    PlayerStats playerStats;
+    Animator animator;
+    SpriteRenderer rend;
 
     [SerializeField] private bool isGrounded;
     private bool hasFinished = false;
@@ -29,11 +32,14 @@ public class RacePlayerInput : MonoBehaviour
 
         countdownTimer = RaceCountdownTimer.instance;
         finishRace = FindObjectOfType<RaceFinishManager>();
+        animator = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     void Start()
     {
-        PlayerStats playerStats = GetComponent<PlayerStats>();
+        
         if (playerStats != null && playerStats.playerData != null)
         {
             playerID = playerStats.playerData.playerID;
@@ -50,6 +56,8 @@ public class RacePlayerInput : MonoBehaviour
         {
             inputManager.onPlayerJoined += AssignInputs;
         }
+
+        animator.enabled = false;
     }
 
     void AssignInputs(int ID)
@@ -69,7 +77,15 @@ public class RacePlayerInput : MonoBehaviour
     {
         if (!hasFinished && countdownTimer.canMove)
         {
+            animator.enabled = true;
+            animator.SetBool(playerStats.playerData.characterName, true);
             moveInput = obj.ReadValue<Vector2>();
+
+            if (obj.canceled)
+            {
+                animator.enabled = false;
+                rend.sprite = playerStats.playerData.characterSprite;
+            }
         }
     }
 
