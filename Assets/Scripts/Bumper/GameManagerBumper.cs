@@ -69,15 +69,13 @@ public class GameManagerBumper : MonoBehaviour
         sceneLoader.SetPreviousScene();
         timer.CancelTimer();
         gameFinishText.enabled = true;
-
         StartCoroutine(NextScene());
     }
 
    
     IEnumerator NextScene()
     {
-
-        GameFinish(); 
+        //GameFinish(); 
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene("Scores");
     }
