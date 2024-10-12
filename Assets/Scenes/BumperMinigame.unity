@@ -3824,7 +3824,6 @@ GameObject:
   - component: {fileID: 1814563177}
   - component: {fileID: 1814563178}
   - component: {fileID: 1814563180}
-  - component: {fileID: 1814563179}
   m_Layer: 0
   m_Name: boundary
   m_TagString: Untagged
@@ -3868,21 +3867,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 430.4523, y: 17.415125, z: 258.51675}
   m_Center: {x: -27.625296, y: 8.207555, z: -36.648815}
---- !u!114 &1814563179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814563176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9b851a3632a87d4fa19a9a5f23cfa5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Boundary: {fileID: 1814563176}
-  playerFinishText: []
-  gameFinishText: {fileID: 1377829087}
 --- !u!114 &1814563180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3896,6 +3880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 0}
+  playerTag: Player
 --- !u!1 &1847752109
 GameObject:
   m_ObjectHideFlags: 0
