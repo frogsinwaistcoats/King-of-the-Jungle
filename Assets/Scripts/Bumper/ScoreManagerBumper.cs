@@ -11,28 +11,24 @@ public class ScoreManagerBumper : MonoBehaviour
     {
         instance = this;
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("has entered");
-        if (other.tag == "Player")
+        // Check if the player enters the fall zone or leaves the arena
+        if (other.CompareTag("Player"))
         {
-            Destroy(other.gameObject);
-        }
-        if (other.CompareTag(playerTag))  // Check if the object entering is the player
-        {
-            // Get the PlayerTimer component from the player and stop the timer
+            // Get the PlayerSurvivalTimer component from the player
             PlayerTimer playerTimer = other.GetComponent<PlayerTimer>();
             if (playerTimer != null)
             {
-                playerTimer.StopTimer(); // Stop the player's timer
+                // Stop the player's survival timer
+                playerTimer.StopSurvival();
             }
-            HandleScore();// Handle the score (you can apply some score penalty or logic here)
+            Debug.Log("has entered");
+            if (other.tag == "Player")
+            {
+                Destroy(other.gameObject);
+            }
         }
-    }
 
-    private void HandleScore()
-    {
-       Debug.Log ("Player has fallen!");
     }
 }

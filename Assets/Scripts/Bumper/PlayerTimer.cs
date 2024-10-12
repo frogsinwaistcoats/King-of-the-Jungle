@@ -4,36 +4,39 @@ using UnityEngine.UI;
 public class PlayerTimer : MonoBehaviour
 {
     public Text scoreText;   
-    private float startTime; 
-    private float elapsedTime; 
-    private bool isTimerActive = true;  
-    private int score;      
+    public float survivalTime = 0f; 
+    private bool isSurviving = true; 
+    private int score; 
 
     void Start()
     {
-        startTime = Time.time; 
+        
         score = 0;
     }
 
     void Update()
     {
         
-        if (isTimerActive)
+        if (isSurviving)
         {
-            elapsedTime = Time.time - startTime;
-            score = Mathf.FloorToInt(elapsedTime); // Convert elapsed time to a whole number score
-        }
+           
+            survivalTime += Time.deltaTime;
 
-        
-        if (scoreText != null)
-        {
-            scoreText.text = "Score: " + score.ToString();
+            
+            score = Mathf.FloorToInt(survivalTime); 
+
+            // Update the UI score text
+            if (scoreText != null)
+            {
+                scoreText.text = "Score: " + score.ToString();
+            }
         }
     }
 
-
-    public void StopTimer()
+   
+    public void StopSurvival()
     {
-        isTimerActive = false;
+        isSurviving = false;
+        Debug.Log("Player stopped surviving. Final Score: " + score);
     }
 }
