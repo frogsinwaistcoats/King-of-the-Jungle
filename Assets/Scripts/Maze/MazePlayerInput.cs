@@ -149,6 +149,8 @@ public class MazePlayerInput : MonoBehaviour
         else if (other.gameObject.CompareTag("MazeFinish"))
         {
             hasFinished = true;
+            animator.enabled = false;
+            rend.sprite = playerStats.playerData.characterSprite;
             int placing = finishManager.PlayerFinish(playerID);
             float score = finishManager.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
@@ -161,6 +163,7 @@ public class MazePlayerInput : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("MazeBoulder"))
         {
+            MazeAudioManager.instance.PlayThudSFX();
             ReturnToStart();
             if (disabledSpinCollider != null)
             {
@@ -170,6 +173,7 @@ public class MazePlayerInput : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("MazeBoulder2"))
         {
+            MazeAudioManager.instance.PlayThudSFX();
             ReturnToCheckpoint2();
             if (disabledSpinCollider != null)
             {

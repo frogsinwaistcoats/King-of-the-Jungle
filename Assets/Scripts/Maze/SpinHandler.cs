@@ -21,6 +21,7 @@ public class SpinHandler : MonoBehaviour
 
     private IEnumerator SpinPlayer(int spinNum, Vector3 spinPos)
     {
+        MazeAudioManager.instance.PlaySpinSFX();
         //mazePlayerInput.OnDisable();
         isSpinning = true;
 
