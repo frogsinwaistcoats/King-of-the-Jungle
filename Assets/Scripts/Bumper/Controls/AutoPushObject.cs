@@ -5,12 +5,13 @@ public class AutoPushObjects : MonoBehaviour
     public float pushForce = 10f; // Add push force
     public float pushDistance = 1f;
     public LayerMask pushableLayer;
-
+   
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+       
     }
 
     void Update()
@@ -28,6 +29,7 @@ public class AutoPushObjects : MonoBehaviour
         {
             if (collider.gameObject != gameObject)
             {
+                
                 Rigidbody objectRb = collider.GetComponent<Rigidbody>();
                 Debug.Log(Vector3.Distance(transform.position, collider.transform.position));
                 if (objectRb != null)

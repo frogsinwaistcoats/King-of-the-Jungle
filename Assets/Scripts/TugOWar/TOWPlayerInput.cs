@@ -5,6 +5,7 @@ using System.Collections;
 
 public class TOWPlayerInput : MonoBehaviour
 {
+    public AudioSource tickSource;
     public int playerID;
     public ControllerType controllerType;
     public Transform rope;
@@ -34,6 +35,7 @@ public class TOWPlayerInput : MonoBehaviour
 
     private void Start()
     {
+        tickSource = GetComponent<AudioSource>();
         PlayerStats playerStats = GetComponent<PlayerStats>();
         if (playerStats != null && playerStats.playerData != null)
         {
@@ -143,6 +145,7 @@ public class TOWPlayerInput : MonoBehaviour
     {
         if (TOWTimer.instance.timerIsRunning && obj.performed)
         {
+            tickSource.Play();
             Debug.Log(obj.control.ToString());
             string controlPressed = GetTextAfterLastSlash(obj.control.ToString());
 

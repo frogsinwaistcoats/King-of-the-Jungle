@@ -14,6 +14,7 @@ public class PlayerInputBumper : MonoBehaviour
     public float hitTimer;
     public float pushForce;
     private Rigidbody rb;
+    
    
     public float FallingThreshold = -10f;  
     [HideInInspector]
@@ -52,6 +53,8 @@ public class PlayerInputBumper : MonoBehaviour
         GetComponent<PlayerStats>().playerData.SetPlayerScore(startingScore); //added this for now, so they start with a point and whoever falls off loses that point
         GetComponent<PlayerStats>().playerData.SetTotalScore(startingScore);
         Debug.Log("Player " + playerID + " score: " + GetComponent<PlayerStats>().playerData.playerScore);
+
+        
     }
 
     private void OnDisable()
