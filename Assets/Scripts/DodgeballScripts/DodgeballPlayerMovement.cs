@@ -16,13 +16,22 @@ public class DodgeballPlayerMovement : MonoBehaviour
     private Vector2 movementInput;
 
     public InputControls playerControls;
+    PlayerStats playerStats;
+    Animator animator;
+    SpriteRenderer rend;
     public float score;
 
     MultiplayerInputManager multiplayerInputManager;
 
+    private void Awake()
+    {
+        playerStats = GetComponent<PlayerStats>();
+        animator = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
-        PlayerStats playerStats = GetComponent<PlayerStats>();
         if (playerStats != null && playerStats.playerData != null)
         {
             playerID = playerStats.playerData.playerID;
@@ -31,11 +40,20 @@ public class DodgeballPlayerMovement : MonoBehaviour
         multiplayerInputManager = MultiplayerInputManager.instance;
         multiplayerInputManager.onPlayerJoined += AssignInputs;
         rb = GetComponent<Rigidbody>();
+        animator.enabled = false;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        animator.enabled = true;
+        animator.SetBool(playerStats.playerData.characterName, true);
         movementInput = context.ReadValue<Vector2>();
+
+        if (context.canceled)
+        {
+            animator.enabled = false;
+            rend.sprite = playerStats.playerData.characterSprite;
+        }
     }
 
     public void AssignInputs(int ID)
@@ -57,8 +75,8 @@ public class DodgeballPlayerMovement : MonoBehaviour
 
             if (playerControls != null)
             {
-                playerControls.Player.Move.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
-                playerControls.Player.Move.canceled += ctx => movementInput = Vector2.zero;
+                playerControls.Player.Move.performed += OnMove;
+                playerControls.Player.Move.canceled += OnMove; //ctx => movementInput = Vector2.zero;
 
                 playerControls.Player.Dash.performed += ctx => StartCoroutine(Dash());
             }

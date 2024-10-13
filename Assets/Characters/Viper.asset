@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f5a123f85733440a171459d7f8bc6a, type: 3}
   m_Name: Viper
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 21300000, guid: f7f726f55f40a0a4b9e7d1fff7a7221e, type: 3}
+  characterSprite: {fileID: 21300000, guid: f6e14fa327677ec4ca78c22168ea3f78, type: 3}
   characterName: Viper
+  isChosen: 0

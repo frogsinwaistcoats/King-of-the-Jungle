@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f5a123f85733440a171459d7f8bc6a, type: 3}
   m_Name: Macaw
   m_EditorClassIdentifier: 
-  characterSprite: {fileID: 21300000, guid: 7c53e2cd0a55e694e89718dcf462fa5a, type: 3}
+  characterSprite: {fileID: 21300000, guid: 5a985af1024f0184f9f4b3f552e49714, type: 3}
   characterName: Macaw
+  isChosen: 1

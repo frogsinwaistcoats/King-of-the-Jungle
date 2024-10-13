@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 6481096094152325052}
   - component: {fileID: 545980711219950097}
   - component: {fileID: 6628330183039673776}
+  - component: {fileID: 6110619851141515207}
   m_Layer: 0
   m_Name: PlayerTwo
   m_TagString: Untagged
@@ -291,6 +292,7 @@ MonoBehaviour:
   isTarget: 0
   dashSpeed: 20
   dashDuration: 0.2
+  score: 0
 --- !u!114 &545980711219950097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,11 +332,33 @@ MonoBehaviour:
   playerData:
     playerID: 0
     characterIndex: 0
+    characterSprite: {fileID: 0}
     characterName: 
     controllerType: 0
     playerScore: 0
     totalScore: 0
   rend: {fileID: -3648759878741535265}
+--- !u!95 &6110619851141515207
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823711751368333508}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa2b8de543275ee47a772cf137da7cea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4039122845336759161
 GameObject:
   m_ObjectHideFlags: 0
