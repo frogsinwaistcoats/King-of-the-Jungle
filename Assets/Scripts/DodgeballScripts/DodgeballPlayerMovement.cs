@@ -45,15 +45,19 @@ public class DodgeballPlayerMovement : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        animator.enabled = true;
-        animator.SetBool(playerStats.playerData.characterName, true);
-        movementInput = context.ReadValue<Vector2>();
-
-        if (context.canceled)
+        if (isTarget)
         {
-            animator.enabled = false;
-            rend.sprite = playerStats.playerData.characterSprite;
+            animator.enabled = true;
+            animator.SetBool(playerStats.playerData.characterName, true);
+            movementInput = context.ReadValue<Vector2>();
+
+            if (context.canceled)
+            {
+                animator.enabled = false;
+                rend.sprite = playerStats.playerData.characterSprite;
+            }
         }
+        
     }
 
     public void AssignInputs(int ID)
