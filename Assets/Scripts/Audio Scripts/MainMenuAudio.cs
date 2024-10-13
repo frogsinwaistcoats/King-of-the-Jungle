@@ -5,7 +5,7 @@ public class MainMenuAudio : MonoBehaviour
     private void Start()
     {
         // Stop any instruction music if it's playing
-        AudioManager.instance.Stop("InterludeTheme");
+        AudioManager.instance.StopAllSounds();
 
         // Play main theme when entering the main menu
         AudioManager.instance.Play("MainTheme");

@@ -29,6 +29,8 @@ public class AudioManager : MonoBehaviour
     private void InitializeSoundEffects()
     {
         // Add each sound effect to the dictionary and load from Resources folder
+
+        //Dodgeball
         soundEffects.Add("Shoot1", gameObject.AddComponent<AudioSource>());
         soundEffects["Shoot1"].clip = Resources.Load<AudioClip>("Audio/SFX/Dodgeball/Whoosh_high");
 
@@ -61,7 +63,31 @@ public class AudioManager : MonoBehaviour
         soundEffects["Fireworks"].clip = Resources.Load<AudioClip>("Audio/SFX/Dodgeball/Fireworks_short");
         soundEffects["Fireworks"].loop = true;  // Set looping if needed
 
+        //Maze
+
+        soundEffects.Add("SpinSFX", gameObject.AddComponent<AudioSource>());
+        soundEffects["SpinSFX"].clip = Resources.Load<AudioClip>("Audio/SFX/Maze/maze_spin");
+
+        soundEffects.Add("ThudSFX", gameObject.AddComponent<AudioSource>());
+        soundEffects["ThudSFX"].clip = Resources.Load<AudioClip>("Audio/SFX/Maze/maze_thud");
+
+        //Race
+
+        soundEffects.Add("Bounce", gameObject.AddComponent<AudioSource>());
+        soundEffects["Bounce"].clip = Resources.Load<AudioClip>("Audio/SFX/Race/Cute_Bounce");
+
+        //Bumper
+
+        soundEffects.Add("Bump", gameObject.AddComponent<AudioSource>());
+        soundEffects["Bump"].clip = Resources.Load<AudioClip>("Audio/SFX/Bumper/Bump");
+
+        //TugOfWar
+
+        soundEffects.Add("RopeCreak", gameObject.AddComponent<AudioSource>());
+        soundEffects["RopeCreak"].clip = Resources.Load<AudioClip>("Audio/SFX/TugOfWar/RopeCreak");
+
         // Music
+
         //soundEffects.Add("CelebrationMusic", gameObject.AddComponent<AudioSource>());
         //soundEffects["CelebrationMusic"].clip = Resources.Load<AudioClip>("Audio/Music/CelebrationMusic");
         //soundEffects["CelebrationMusic"].loop = true;  // Set looping if needed
@@ -74,8 +100,26 @@ public class AudioManager : MonoBehaviour
         soundEffects["InterludeTheme"].clip = Resources.Load<AudioClip>("Audio/Music/Interlude Theme");
         soundEffects["InterludeTheme"].loop = true;
 
+        soundEffects.Add("RaceTheme", gameObject.AddComponent<AudioSource>());
+        soundEffects["RaceTheme"].clip = Resources.Load<AudioClip>("Audio/Music/Race Theme");
+        soundEffects["RaceTheme"].loop = true;
+
     }
 
+    public void PlayRandomShoot()
+    {
+        // Randomly pick between 0 and 1 (inclusive)
+        int randomIndex = Random.Range(0, 2);
+
+        if (randomIndex == 0)
+        {
+            Play("Shoot1");
+        }
+        else
+        {
+            Play("Shoot2");
+        }
+    }
 
     public void Play(string soundName)
     {

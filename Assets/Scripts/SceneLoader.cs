@@ -112,30 +112,40 @@ public class SceneLoader : MonoBehaviour
     {
         SetPreviousScene();
         SceneManager.LoadScene("MazeMinigame");
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("RaceTheme");
     }
 
     public void LoadRaceMinigame()
     {
         SetPreviousScene();
         SceneManager.LoadScene("RaceMinigame");
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("RaceTheme");
     }
 
     public void LoadDodgeballMinigame()
     {
         SetPreviousScene();
         SceneManager.LoadScene("DodgeballMinigame");
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("RaceTheme");
     }
 
     public void LoadBumperMinigame()
     {
         SetPreviousScene();
         SceneManager.LoadScene("BumperMinigame");
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("RaceTheme");
     }
 
     public void LoadTugOWarMinigame()
     {
         SetPreviousScene();
         SceneManager.LoadScene("TugOWarMinigame 1");
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("RaceTheme");
     }
     #endregion
 
@@ -148,7 +158,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("MazeInstructionScreen");
 
-        AudioManager.instance.Stop("MainTheme");
+        AudioManager.instance.StopAllSounds();
         // Play instruction music when loading instructions
         AudioManager.instance.Play("InterludeTheme");
     }
@@ -158,7 +168,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("RaceInstructionScreen");
 
-        AudioManager.instance.Stop("MainTheme");
+        AudioManager.instance.StopAllSounds();
         // Play instruction music when loading instructions
         AudioManager.instance.Play("InterludeTheme");
     }
@@ -168,7 +178,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("DodgeballInstructionScreen");
 
-        AudioManager.instance.Stop("MainTheme");
+        AudioManager.instance.StopAllSounds();
         // Play instruction music when loading instructions
         AudioManager.instance.Play("InterludeTheme");
     }
@@ -178,7 +188,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("BumperInstructionScreen");
 
-        AudioManager.instance.Stop("MainTheme");
+        AudioManager.instance.StopAllSounds();
         // Play instruction music when loading instructions
         AudioManager.instance.Play("InterludeTheme");
     }
@@ -188,7 +198,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("TugOWarInstructionScreen");
 
-        AudioManager.instance.Stop("MainTheme");
+        AudioManager.instance.StopAllSounds();
         // Play instruction music when loading instructions
         AudioManager.instance.Play("InterludeTheme");
     }
@@ -197,6 +207,8 @@ public class SceneLoader : MonoBehaviour
     public void LoadTotalScores()
     {
         SceneManager.LoadScene("TotalScores");
+        AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("InterludeTheme");
     }
 
     //switch cases

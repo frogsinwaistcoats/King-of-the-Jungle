@@ -208,7 +208,7 @@ public class PlayerAiming : MonoBehaviour
 
             // Instantiate the projectile
             GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.LookRotation(shootDirection));
-
+            AudioManager.instance.PlayRandomShoot();
             if (projectile != null)
             {
 

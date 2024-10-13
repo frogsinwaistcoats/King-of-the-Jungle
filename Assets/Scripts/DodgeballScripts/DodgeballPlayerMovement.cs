@@ -156,6 +156,7 @@ public class DodgeballPlayerMovement : MonoBehaviour
 
         Vector3 dashDirection = new Vector3(movementInput.x, 0, 0).normalized;
         rb.velocity = dashDirection * dashSpeed;
+        AudioManager.instance.Play("Dash");
 
         yield return new WaitForSeconds(dashDuration);
 

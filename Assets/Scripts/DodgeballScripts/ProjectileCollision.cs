@@ -27,12 +27,14 @@ public class ProjectileCollision : MonoBehaviour
         if (other.gameObject.CompareTag("Floor"))
         {
             Destroy(gameObject);
+            AudioManager.instance.Play("Splat");
         }
 
         // Check if the ball touches the target player
         if (other.gameObject.CompareTag("TargetPlayer"))
         {
             Destroy(gameObject);
+            AudioManager.instance.Play("Hit");
         }
     }
 }

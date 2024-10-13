@@ -124,6 +124,7 @@ public class RacePlayerInput : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jumpInput = Vector2.zero;
             isGrounded = false;
+            AudioManager.instance.Play("Bounce");
         }
     }
    
