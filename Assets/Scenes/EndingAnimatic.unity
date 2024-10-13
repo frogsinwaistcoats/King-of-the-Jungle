@@ -5378,6 +5378,7 @@ GameObject:
   m_Component:
   - component: {fileID: 137413820}
   - component: {fileID: 137413819}
+  - component: {fileID: 137413821}
   m_Layer: 0
   m_Name: PodiumPlayerManager
   m_TagString: Untagged
@@ -5398,11 +5399,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  selectedPrefabsIndex: 
+  - {fileID: 8009297037645961009, guid: 09acfef276417ab4a847fa77a92bcc8f, type: 3}
+  - {fileID: 1706625389620012522, guid: 11f860af292c9f5458ea31dbea5ca0e2, type: 3}
+  - {fileID: 3632143323998582188, guid: 7ef045e22ac998e48b40d08e82c88259, type: 3}
+  - {fileID: 4729845100448747307, guid: 1ad536427e082c1469f2ab2f15c2b3e1, type: 3}
+  selectedPrefabsIndex: 00000000010000000200000003000000
 --- !u!4 &137413820
 Transform:
   m_ObjectHideFlags: 0
@@ -5418,6 +5419,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &137413821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137413818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230f718d06abf654bb77e6179b0bfa79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  podiumPositions:
+  - {fileID: 1959138688}
+  - {fileID: 505611941}
+  - {fileID: 147430064}
+  - {fileID: 1810322536}
 --- !u!1 &147430063
 GameObject:
   m_ObjectHideFlags: 0
@@ -12309,7 +12327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &563738385
 MonoBehaviour:
   m_ObjectHideFlags: 0
