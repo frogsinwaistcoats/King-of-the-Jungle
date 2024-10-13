@@ -1,22 +1,22 @@
-using System.Collections;
-using UnityEngine;
+//using System.Collections;
+//using UnityEngine;
 
-public class EndingAnimaticManager : MonoBehaviour
-{
-    SceneLoader sceneLoader;
+//public class EndingAnimaticManager : MonoBehaviour
+//{
+//    SceneLoader sceneLoader;
 
-    private void Awake()
-    {
-        sceneLoader = SceneLoader.instance;
-    }
-    void Start()
-    {
-        StartCoroutine(LoadNextScene());
-    }
+//    private void Awake()
+//    {
+//        sceneLoader = SceneLoader.instance;
+//    }
+//    void Start()
+//    {
+//        StartCoroutine(LoadNextScene());
+//    }
 
-    IEnumerator LoadNextScene()
-    {
-        yield return new WaitForSeconds(3f);
-        sceneLoader.LoadMainMenu();
-    }
-}
+//    IEnumerator LoadNextScene()
+//    {
+//        yield return new WaitForSeconds(3f);
+//        sceneLoader.LoadMainMenu();
+//    }
+//}
