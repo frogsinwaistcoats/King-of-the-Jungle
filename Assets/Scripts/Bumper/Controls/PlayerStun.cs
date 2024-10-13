@@ -18,12 +18,14 @@ public class PlayerStun : MonoBehaviour
         if (isStunned)
         {
             // Disable player movement during stun
-            playerMovement.enabled = false;
+            playerMovement.moveInput = Vector3.zero;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
         else
         {
             // Enable player movement when not stunned
-            playerMovement.enabled = true;
+            //playerMovement.enabled = true;
         }
     }
 
