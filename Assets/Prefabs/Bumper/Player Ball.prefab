@@ -229,7 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8debb74720178f246b6a83271b549979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pushDistance: 10
+  pushForce: 120
+  pushDistance: 2
   pushableLayer:
     serializedVersion: 2
     m_Bits: 64

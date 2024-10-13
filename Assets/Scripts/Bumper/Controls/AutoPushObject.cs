@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AutoPushObjects : MonoBehaviour
 {
-    //public float pushForce = 10f;
+    public float pushForce = 10f; // Add push force
     public float pushDistance = 1f;
     public LayerMask pushableLayer;
 
@@ -22,7 +22,7 @@ public class AutoPushObjects : MonoBehaviour
     void PushObjects()
     {
         // Check for objects within a certain distance in front of the character
-        Collider[] colliders = Physics.OverlapSphere(transform.position, pushDistance / 2, pushableLayer);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, pushDistance, pushableLayer);
 
         foreach (Collider collider in colliders)
         {
@@ -34,7 +34,9 @@ public class AutoPushObjects : MonoBehaviour
                 {
                     // Calculate direction to push
                     Vector3 pushDirection = (collider.transform.position - transform.position).normalized;
-                    //collider.GetComponent<PlayerInputBumper>().PlayerHit(pushDirection);
+
+                    // Apply force to the detected object
+                    objectRb.AddForce(pushDirection * pushForce, ForceMode.Impulse);
                 }
             }
         }

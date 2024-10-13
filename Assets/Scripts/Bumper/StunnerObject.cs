@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StunnerObject : MonoBehaviour
 {
-    public float stunForce = 10f; 
+  
     private void OnCollisionEnter(Collision collision)
     {
         
