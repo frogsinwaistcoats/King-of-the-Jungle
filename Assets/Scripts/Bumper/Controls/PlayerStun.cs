@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class PlayerStun : MonoBehaviour
 {
-    public float stunDuration = 2f; // Duration for which the player is stunned
-    private bool isStunned = false; // Flag to check if the player is stunned
+    public float stunDuration = 2f; 
+    private bool isStunned = false; 
 
-    private PlayerInputBumper playerMovement; // Reference to the player's movement script (you should have one)
+    private PlayerInputBumper playerMovement; 
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerInputBumper>(); // Assuming the player has a movement script
+        playerMovement = GetComponent<PlayerInputBumper>(); 
     }
 
     private void Update()
