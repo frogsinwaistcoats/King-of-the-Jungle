@@ -1,22 +1,19 @@
-//using System.Collections;
-//using UnityEngine;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-//public class EndingAnimaticManager : MonoBehaviour
-//{
-//    SceneLoader sceneLoader;
+public class EndingAnimaticManager : MonoBehaviour
+{
+    private void Update()
+    {
+        Gamepad gamepad = Gamepad.current;
 
-//    private void Awake()
-//    {
-//        sceneLoader = SceneLoader.instance;
-//    }
-//    void Start()
-//    {
-//        StartCoroutine(LoadNextScene());
-//    }
-
-//    IEnumerator LoadNextScene()
-//    {
-//        yield return new WaitForSeconds(3f);
-//        sceneLoader.LoadMainMenu();
-//    }
-//}
+        if (SceneManager.GetActiveScene().name == "EndingAnimatic")
+        {
+            if (Input.GetKey(KeyCode.Space) || (gamepad != null && gamepad.buttonSouth.isPressed))
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
+    }
+}
