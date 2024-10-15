@@ -32,11 +32,11 @@ public class InstructionsManager : MonoBehaviour
 
         if (gameManager.player1ControllerType == ControllerType.Xbox)
         {
-            text.text = "Player 1 press Y to Continue";
+            text.text = "Press Y to Continue";
         }
         else if (gameManager.player1ControllerType == ControllerType.Keyboard)
         {
-            text.text = "Player 1 press Space to Continue";
+            text.text = "Press Space to Continue";
         }
     }
 
