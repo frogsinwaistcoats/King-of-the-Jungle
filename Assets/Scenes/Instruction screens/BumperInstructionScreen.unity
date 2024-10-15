@@ -648,12 +648,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: '
 
-    -Push other players off the arena
-
-    -Avoid the falling rocks
-
-    -Last
-    person standing wins'
+    Push other players off the arena, be careful of the falling objects
+    as they can stun you! Once stunned it will take a few seconds to move again.
+    Use this chance to win against your enemy.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31dd26f5de35a5e4eba379904fb3fda9, type: 2}
   m_sharedMaterial: {fileID: -1709349579252097646, guid: 31dd26f5de35a5e4eba379904fb3fda9,

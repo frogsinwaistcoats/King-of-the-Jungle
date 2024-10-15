@@ -16,15 +16,14 @@ public class PlayerInputBumper : MonoBehaviour
     private Rigidbody rb;
     
    
-    public float FallingThreshold = -10f;  
+    public float FallingThreshold = -10f;
     [HideInInspector]
     public bool Falling = false;
-
     float startingScore = 1;
 
     InputControls inputControls;
     bool isHit;
-    SpriteRenderer rend;
+   
 
     private void Awake()
     {
@@ -71,13 +70,16 @@ public class PlayerInputBumper : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("attack"))
+        
+        if (other.gameObject.CompareTag("Player"))
         {
-            rend.material.color = Color.white;//turns white when hit
+            
             FindAnyObjectByType<Spawner>().Stop(0.5f);
             StartCoroutine(WaitForSpawn());
         }
+        
     }
+
     
     IEnumerator WaitForSpawn()
     {
