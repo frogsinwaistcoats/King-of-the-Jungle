@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using System;
 
 public class MazePlayerInput : MonoBehaviour
 {
@@ -131,6 +134,7 @@ public class MazePlayerInput : MonoBehaviour
             spinHandler.StartSpin(1, other.transform.position);
             other.enabled = false;
             disabledSpinCollider = other;
+            StartCoroutine(StopSpin());
         }
         else if (other.gameObject.CompareTag("MazeSpin2"))
         {
@@ -145,6 +149,7 @@ public class MazePlayerInput : MonoBehaviour
             spinHandler.StartSpin(3, other.transform.position);
             other.enabled = false;
             disabledSpinCollider = other;
+            StartCoroutine(StopSpin());
         }
         else if (other.gameObject.CompareTag("MazeFinish"))
         {
@@ -164,6 +169,7 @@ public class MazePlayerInput : MonoBehaviour
         else if (other.gameObject.CompareTag("MazeBoulder"))
         {
             MazeAudioManager.instance.PlayThudSFX();
+            StopAllCoroutines();
             ReturnToStart();
             if (disabledSpinCollider != null)
             {
@@ -174,6 +180,7 @@ public class MazePlayerInput : MonoBehaviour
         else if (other.gameObject.CompareTag("MazeBoulder2"))
         {
             MazeAudioManager.instance.PlayThudSFX();
+            StopAllCoroutines();
             ReturnToCheckpoint2();
             if (disabledSpinCollider != null)
             {
@@ -194,7 +201,7 @@ public class MazePlayerInput : MonoBehaviour
     {
         gameObject.transform.position = respawnPosition;
         ClearInputControls();
-        spinHandler.SpinControls1(playerID);
+        spinHandler.SpinControls2(playerID);
     }
 
     public void ClearInputControls()
@@ -207,5 +214,12 @@ public class MazePlayerInput : MonoBehaviour
         inputControls.SpinControl2.Movement.canceled -= OnMove;
         inputControls.SpinControl3.Movement.performed -= OnMove;
         inputControls.SpinControl3.Movement.canceled -= OnMove;
+    }
+
+    IEnumerator StopSpin()
+    {
+        yield return new WaitForSeconds(10f);
+        ClearInputControls();
+        spinHandler.MasterControls(playerID);
     }
 }

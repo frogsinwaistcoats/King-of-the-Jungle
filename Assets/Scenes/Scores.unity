@@ -1921,9 +1921,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneLoader: {fileID: 0}
   buttons:
-  - {fileID: 1001997043}
+  - {fileID: 260769870}
   - {fileID: 746950893}
-  minigameButton: {fileID: 260769870}
+  minigameButton: {fileID: 1001997043}
 --- !u!114 &989688862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2114,7 +2114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 260769868}
+  m_FirstSelected: {fileID: 1001997041}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1003042230

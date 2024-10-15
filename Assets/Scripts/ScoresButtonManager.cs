@@ -31,7 +31,7 @@ public class ScoresButtonManager : MonoBehaviour
                 button.gameObject.SetActive(true);
             }
 
-            minigameButton.GetComponentInChildren<TextMeshProUGUI>().text = "Play Again";
+            minigameButton.GetComponentInChildren<TextMeshProUGUI>().text = "Minigame Selection";
         }
     }
 

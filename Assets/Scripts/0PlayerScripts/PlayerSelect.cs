@@ -107,23 +107,20 @@ public class PlayerSelect : MonoBehaviour
 
                 if (text != null)
                 {
-                    //if (inputManager.players[playerID].controllerType == ControllerType.Xbox)
-                    //{
-                    //    text.text = "A to Confirm";
-                    //}
-                    //else if (inputManager.players[playerID].controllerType == ControllerType.Keyboard)
-                    //{
-                    //    text.text = "Enter to Confirm";
-                    //}
+                    if (inputManager.players[playerID].controllerType == ControllerType.Xbox)
+                    {
+                        text.text = "A to Confirm";
+                    }
+                    else if (inputManager.players[playerID].controllerType == ControllerType.Keyboard)
+                    {
+                        text.text = "Enter to Confirm";
+                    }
                 }
             }
             else
             {
                 Debug.LogError("Right button not found");
             }
-
-            
-            
         }
     }
 
@@ -225,13 +222,15 @@ public class PlayerSelect : MonoBehaviour
         gameManager.AddPlayer(gameManager.players[playerID], playerID, currentCharacter, characterSelect.characters[currentCharacter].characterName, controllerType, characterSelect.characters[currentCharacter].characterSprite);
         buttons.SetActive(false);
 
+        characterSelect.haveJoined++;
+
         characterSelect.characters[currentCharacter].isChosen = true;
 
         ForceOtherPlayersToSwitch();
 
         SetCharacter(currentCharacter);
 
-        if (inputManager.players.Count == gameManager.players.Count && gameManager.players.Count >= 2)
+        if ((inputManager.players.Count == characterSelect.haveJoined) && gameManager.players.Count >= 2)
         {
             startButton.SetActive(true);
             

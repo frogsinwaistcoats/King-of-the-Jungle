@@ -923,7 +923,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START
+  m_text: Press Y to START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e07e02529dd7cce4dad4c5bc250012df, type: 2}
   m_sharedMaterial: {fileID: 4412921400276838783, guid: e07e02529dd7cce4dad4c5bc250012df,
@@ -1254,7 +1254,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -960, y: -543.21, z: 0}
-  m_LocalScale: {x: 0.30609998, y: 0.30609998, z: 0.30609998}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2065751015}

@@ -10,6 +10,7 @@ public class CharacterSelect : MonoBehaviour
     public List<GameObject> UIPrompts;
     public List<GameObject> characterSelections;
     public GameObject startButton;
+    public int haveJoined;
 
 
     public void Awake()
@@ -19,6 +20,7 @@ public class CharacterSelect : MonoBehaviour
             instance = this;
         }
 
+        haveJoined = 0;
         ResetCharacterChoices();
     }
 
