@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class PlayerStun : MonoBehaviour
 {
-    public float stunDuration = 2f; 
-    private bool isStunned = false; 
+    public float stunDuration = 2f;
+    public float stunCooldown = 20f; // Cooldown duration after being stunned
+    private bool isStunned = false;
+    private bool canBeStunned = true; // To track if player can be stunned
 
-    private PlayerInputBumper playerMovement; 
+    private PlayerInputBumper playerMovement;
+
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerInputBumper>(); 
+        playerMovement = GetComponent<PlayerInputBumper>();
     }
 
     private void Update()
@@ -31,17 +34,24 @@ public class PlayerStun : MonoBehaviour
 
     public void StunPlayer()
     {
-        if (!isStunned)
+        if (!isStunned && canBeStunned)
         {
-            isStunned = true;
             StartCoroutine(RecoverFromStun());
+            isStunned = true;
+            canBeStunned = false; // Disable further stuns
+            
         }
     }
 
     private IEnumerator RecoverFromStun()
     {
-        // Wait for the stun duration before allowing the player to move again
+        // Wait for the stun duration
         yield return new WaitForSeconds(stunDuration);
         isStunned = false;
+
+        // Wait for the cooldown duration before allowing further stuns
+        yield return new WaitForSeconds(stunCooldown);
+        canBeStunned = true; // Allow stuns again
     }
+
 }

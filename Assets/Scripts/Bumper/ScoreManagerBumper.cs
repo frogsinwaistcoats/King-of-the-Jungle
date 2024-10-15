@@ -6,7 +6,7 @@ public class ScoreManagerBumper : MonoBehaviour
     public static ScoreManagerBumper instance;
     public Text scoreText; // UI Text to display the score
     public string playerTag = "Player"; // Tag for the player GameObject
-
+    public string onectTag = "Rock";
     void Awake()
     {
         instance = this;
@@ -28,7 +28,14 @@ public class ScoreManagerBumper : MonoBehaviour
             {
                 Destroy(other.gameObject);
             }
+            if (other.tag == "Rock")
+            {
+                Destroy(other.gameObject);
+
+            }
         }
+
+ 
 
     }
 }

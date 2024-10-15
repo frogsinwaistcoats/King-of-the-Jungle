@@ -20,6 +20,7 @@ TagManager:
   - MazeSpin2
   - MazeSpin3
   - MazeCheckpoint3
+  - Rock
   layers:
   - Default
   - TransparentFX
