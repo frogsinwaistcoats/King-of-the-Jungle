@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class TOWFinish : MonoBehaviour
 {
     public static TOWFinish instance;
+    GameManager gameManager;
     SceneLoader sceneLoader;
     public TextMeshProUGUI gameOverText;
 
@@ -15,6 +16,7 @@ public class TOWFinish : MonoBehaviour
         instance = this;
 
         sceneLoader = SceneLoader.instance;
+        gameManager = GameManager.instance;
     }
 
     private void Start()
@@ -24,6 +26,11 @@ public class TOWFinish : MonoBehaviour
 
     public void GameOver()
     {
+        Animator[] animators = FindObjectsOfType<Animator>();
+        foreach (Animator animator in animators)
+        {
+            animator.enabled = false;
+        }
         TOWTimer.instance.CancelTimer();
         gameOverText.enabled = true;
         StartCoroutine(NextScene());

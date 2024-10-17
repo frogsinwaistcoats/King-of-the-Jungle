@@ -12,9 +12,9 @@ public class TOWPlayerInput : MonoBehaviour
     public float moveSpeed = -1f;
     public float maxDistance = 10f;
     public UI_ReloadButton buttonPrefab;
-    (string, string) chosenKeys;
+    string chosenKey;
     public bool isButton1Pressed = false;
-    public bool isButton2Pressed = false;
+    //public bool isButton2Pressed = false;
     public bool winConditionMet = false;
 
     public InputActionAsset actionAsset;
@@ -25,12 +25,15 @@ public class TOWPlayerInput : MonoBehaviour
     MultiplayerInputManager inputManager; 
     InputControls inputControls;
     private UI_ReloadButton newButton1;
-    private UI_ReloadButton newButton2;
     SceneLoader sceneLoader;
+    public Animator animator;
+    PlayerStats playerStats;
 
     private void Awake()
     {
         sceneLoader = SceneLoader.instance;
+        animator = GetComponent<Animator>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     private void Start()
@@ -63,16 +66,16 @@ public class TOWPlayerInput : MonoBehaviour
         StartCoroutine(SpawnButtons());
 
         gameObject.transform.SetParent(rope); //players move with rope
+
+        animator.enabled = false;
     }
 
     public IEnumerator SpawnButtons()
     {
         yield return new WaitForSeconds(3f);
         newButton1 = Instantiate(buttonPrefab);
-        newButton2 = Instantiate(buttonPrefab);
         newButton1.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        newButton2.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
+        chosenKey = TOW_UI.instance.OpenReloadUI(newButton1, playerID, controllerType);
     }
 
     private void OnDisable()
@@ -145,24 +148,14 @@ public class TOWPlayerInput : MonoBehaviour
     {
         if (TOWTimer.instance.timerIsRunning && obj.performed)
         {
+            animator.enabled = true;
+            animator.SetBool(playerStats.playerData.characterName, true);
+
             tickSource.Play();
             Debug.Log(obj.control.ToString());
             string controlPressed = GetTextAfterLastSlash(obj.control.ToString());
 
-            if (controlPressed == chosenKeys.Item1)
-            {
-                isButton1Pressed = true;
-            }
-            if (controlPressed == chosenKeys.Item2)
-            {
-                isButton2Pressed = true;
-            }
-            if (controlPressed != chosenKeys.Item1 && controlPressed != chosenKeys.Item2)
-            {
-                StartCoroutine(Penalty());
-            }
-
-            if (isButton1Pressed && isButton2Pressed)
+            if (controlPressed == chosenKey)
             {
                 if (playerID == 0)
                 {
@@ -192,10 +185,11 @@ public class TOWPlayerInput : MonoBehaviour
                     player2Pulls++;
                 }
 
-                isButton1Pressed = false;
-                isButton2Pressed = false;
-
-                chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
+                chosenKey = TOW_UI.instance.OpenReloadUI(newButton1, playerID, controllerType);
+            }
+            else
+            {
+                StartCoroutine(Penalty());
             }
         }
     }
@@ -203,11 +197,11 @@ public class TOWPlayerInput : MonoBehaviour
     private IEnumerator Penalty()
     {
         Debug.Log("PLAYER " + (playerID+1) + "  WRONG BUTTON");
-        TOW_UI.instance.PenaltyButton(newButton1, newButton2);
+        TOW_UI.instance.PenaltyButton(newButton1);
         OnDisable();
         yield return new WaitForSeconds(1.5f);
         AssignInputs(playerID);
-        chosenKeys = TOW_UI.instance.OpenReloadUI(newButton1, newButton2, playerID, controllerType);
+        chosenKey = TOW_UI.instance.OpenReloadUI(newButton1, playerID, controllerType);
 
     }
 

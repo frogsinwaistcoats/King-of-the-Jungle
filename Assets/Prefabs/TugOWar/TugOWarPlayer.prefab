@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8486225715911852401}
   - component: {fileID: 970902533659661701}
   - component: {fileID: -215676515131049506}
+  - component: {fileID: 2540851070924688915}
   m_Layer: 0
   m_Name: TugOWarPlayer
   m_TagString: Untagged
@@ -109,7 +110,6 @@ MonoBehaviour:
   buttonPrefab: {fileID: 4804138035407369803, guid: 296715453d6f3fb4281b01fb4788a62b,
     type: 3}
   isButton1Pressed: 0
-  isButton2Pressed: 0
   winConditionMet: 0
   actionAsset: {fileID: -944628639613478452, guid: 1b9d4e2a490d11b478ce487656760ae4,
     type: 3}
@@ -317,3 +317,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickSource: {fileID: 970902533659661701}
+--- !u!95 &2540851070924688915
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6998380466645238876}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa2b8de543275ee47a772cf137da7cea, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
