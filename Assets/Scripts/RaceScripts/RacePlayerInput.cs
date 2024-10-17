@@ -91,15 +91,17 @@ public class RacePlayerInput : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext obj)
     {
-        if (obj.performed)
+        if (!hasFinished && RaceTimerText.instance.isTiming)
         {
-            JumpPlayer();
+            if (obj.performed)
+            {
+                JumpPlayer();
+            }
+            else if (obj.canceled)
+            {
+                jumpInput = Vector2.zero;
+            }
         }
-        else if (obj.canceled)
-        {
-            jumpInput = Vector2.zero;
-        }
-        
     }
 
 
@@ -110,7 +112,7 @@ public class RacePlayerInput : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (!hasFinished)
+        if (!hasFinished && RaceTimerText.instance.isTiming)
         {
             Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
@@ -141,6 +143,7 @@ public class RacePlayerInput : MonoBehaviour
     {
         if (other.gameObject.CompareTag("RaceFinish"))
         {
+            animator.enabled = false;
             hasFinished = true;
             int placing = finishRace.PlayerFinish(playerID);
             float score = finishRace.CalculateScore(placing);

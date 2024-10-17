@@ -12044,8 +12044,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1816461812}
-  remainingTime: 65
+  remainingTime: 61
   startDelay: 4
+  isTiming: 0
 --- !u!114 &1639036298
 MonoBehaviour:
   m_ObjectHideFlags: 0

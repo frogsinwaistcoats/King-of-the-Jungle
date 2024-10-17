@@ -10,7 +10,7 @@ public class RaceTimerText : MonoBehaviour
     [SerializeField] float remainingTime;
     [SerializeField] float startDelay = 4f;
 
-    private bool isTiming = false;
+    public bool isTiming = false;
 
     RaceFinishManager finishRace;
 
@@ -24,6 +24,7 @@ public class RaceTimerText : MonoBehaviour
         {
             finishRace = FindObjectOfType<RaceFinishManager>();
         }
+        
         timerText.enabled = false;
     }
 
@@ -41,20 +42,21 @@ public class RaceTimerText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isTiming)
-
-            timerText.enabled = true;
+        if (isTiming) 
         {
+            timerText.enabled = true;
+
             if (remainingTime > 0)
             {
                 remainingTime -= Time.deltaTime;
             }
-            else if (remainingTime < 0)
+            else
             {
                 remainingTime = 0;
+                isTiming = false;
+                timerText.text = "";
                 finishRace.RaceGameFinish();
-                //GameOver();
-                timerText.color = Color.red;
+                
             }
             int minutes = Mathf.FloorToInt(remainingTime / 60);
             int seconds = Mathf.FloorToInt(remainingTime % 60);
@@ -64,7 +66,7 @@ public class RaceTimerText : MonoBehaviour
 
     public void CancelTimer()
     {
-        remainingTime = 0;
         timerText.enabled = false;
+        remainingTime = 0;
     }
 }
