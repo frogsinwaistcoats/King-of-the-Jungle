@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinHandler : MonoBehaviour
+public class MazeSpinHandler : MonoBehaviour
 {
     public float spinDuration = 1f;
     MazePlayerInput mazePlayerInput;
     public bool isSpinning;
+    public GameObject dizzyAnimator;
 
     private void Awake()
     {
         mazePlayerInput = GetComponent<MazePlayerInput>();
+        dizzyAnimator.SetActive(false);
     }
 
     public void StartSpin(int spinNum, Vector3 spinPos)
@@ -21,6 +23,7 @@ public class SpinHandler : MonoBehaviour
 
     private IEnumerator SpinPlayer(int spinNum, Vector3 spinPos)
     {
+        dizzyAnimator.SetActive(true);
         MazeAudioManager.instance.PlaySpinSFX();
         //mazePlayerInput.OnDisable();
         isSpinning = true;
@@ -109,6 +112,7 @@ public class SpinHandler : MonoBehaviour
             inputControls = mazePlayerInput.inputManager.players[mazePlayerInput.playerID].playerControls;
             inputControls.MasterControls.Movement.performed += mazePlayerInput.OnMove;
             inputControls.MasterControls.Movement.canceled += mazePlayerInput.OnMove;
+            dizzyAnimator.SetActive(false);
         }
     }
 }

@@ -8,16 +8,16 @@ public class MazePlayerInput : MonoBehaviour
 {
     public MultiplayerInputManager inputManager;
     public InputControls inputControls;
-    private SpinHandler spinHandler;
+    private MazeSpinHandler spinHandler;
     MazeCountdown mazeCountdown;
     MazeFinishManager finishManager;
-    public Animator animator;
-    public SpriteRenderer rend;
     PlayerStats playerStats;
     PlayerData playerData;
 
     public int playerID;
     private Rigidbody rb;
+    public Animator animator;
+    public SpriteRenderer rend;
     private Vector3 startPosition;
     private Vector3 respawnPosition;
     private bool hasFinished = false;
@@ -39,7 +39,7 @@ public class MazePlayerInput : MonoBehaviour
         startPosition = transform.position;
 
         playerStats = GetComponent<PlayerStats>();
-        spinHandler = GetComponent<SpinHandler>();
+        spinHandler = GetComponent<MazeSpinHandler>();
         animator = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
         playerData = GetComponent<PlayerStats>().playerData;
@@ -130,6 +130,7 @@ public class MazePlayerInput : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MazeSpin1"))
         {
+            StopAllCoroutines();
             ClearInputControls();
             spinHandler.StartSpin(1, other.transform.position);
             other.enabled = false;
@@ -138,6 +139,7 @@ public class MazePlayerInput : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("MazeSpin2"))
         {
+            StopAllCoroutines();
             ClearInputControls();
             spinHandler.StartSpin(2, other.transform.position);
             other.enabled = false;
@@ -145,6 +147,7 @@ public class MazePlayerInput : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("MazeSpin3"))
         {
+            StopAllCoroutines();
             ClearInputControls();
             spinHandler.StartSpin(3, other.transform.position);
             other.enabled = false;

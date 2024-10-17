@@ -62,6 +62,7 @@ public class ScoresButtonManager : MonoBehaviour
         if (sceneLoader != null)
         {
             scoreManager.ResetScore();
+            Destroy(scoreManager);
             sceneLoader.LoadMainMenu();
         }
         else
@@ -74,16 +75,8 @@ public class ScoresButtonManager : MonoBehaviour
     {
         if (sceneLoader != null)
         {
-            if (sceneLoader.storyMode)
-            {
-                sceneLoader.LoadTotalScores();
-            }
-            else if (!sceneLoader.storyMode)
-            {
-                sceneLoader.LoadPreviousScene();
-            }
-
             scoreManager.ResetScore();
+            sceneLoader.LoadPreviousScene();
         }
         else
         {
@@ -96,7 +89,14 @@ public class ScoresButtonManager : MonoBehaviour
         if (sceneLoader != null)
         {
             scoreManager.ResetScore();
-            sceneLoader.LoadMinigameSelection();
+            if (sceneLoader.storyMode)
+            {
+                sceneLoader.LoadTotalScores();
+            }
+            else if (!sceneLoader.storyMode)
+            {
+                sceneLoader.LoadMinigameSelection();
+            }
         }
         else
         {

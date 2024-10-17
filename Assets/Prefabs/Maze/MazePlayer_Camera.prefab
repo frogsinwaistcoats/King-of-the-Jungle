@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 19bd73c0989195d4cac21a7f653703e0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -306,6 +306,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MazePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 4789225356485424417, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+        type: 3}
+      propertyPath: dizzyAnimator
+      value: 
+      objectReference: {fileID: 4100328147904090880}
     - target: {fileID: 5635165692950955854, guid: bfb7775a61d408a49bfbc978d3ae91e1,
         type: 3}
       propertyPath: m_UseGravity
@@ -326,6 +331,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 6090449978834709383}
+    - target: {fileID: 6079193666107678076, guid: bfb7775a61d408a49bfbc978d3ae91e1,
+        type: 3}
+      propertyPath: dizzyAnimator
+      value: 
+      objectReference: {fileID: 1395245469644301935}
     - target: {fileID: 6100879080466452727, guid: bfb7775a61d408a49bfbc978d3ae91e1,
         type: 3}
       propertyPath: m_Sprite
