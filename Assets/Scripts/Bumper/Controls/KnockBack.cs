@@ -1,44 +1,55 @@
 using UnityEngine;
-
+using System.Collections;
 public class Knockback : MonoBehaviour
 {
-    public float knockbackForce = 10000f;  
-    public float knockbackDuration = 1f; 
+    public float knockbackTime = 0.2f;
+    public float hitDirectionForce = 10f;
+    public float constForce = 5f;
+    public float inputForce = 7.5f;
 
-    private Rigidbody rb; 
-    private bool isKnockedBack = false; 
+    private Rigidbody rb;
+    private Coroutine KnockbackCoroutine;
+    public bool IsBeingKnockedBack{ get; private set; }
 
-    void Start()
+    private void Start()
     {
-        
         rb = GetComponent<Rigidbody>();
     }
-
-    void OnCollisionEnter(Collision collision)
+    public IEnumerator KnockbackAction(Vector3 hitDirection, Vector3 constantForceDirection, float inputDirection)
     {
-        
-        if (!isKnockedBack && collision.gameObject.CompareTag("Player"))
+        IsBeingKnockedBack = true;
+        Vector3 _hitForce;
+        Vector3 _constantForce;
+        Vector3 _knockbackForce;
+        Vector3 _combinedForce;
+
+        _hitForce = hitDirection * hitDirectionForce;
+        _constantForce = constantForceDirection * constForce;
+
+        float _elapsedTme = 0f;
+        while (_elapsedTme < knockbackTime)
         {
-            Vector3 knockbackDirection = transform.position - collision.transform.position;
-            ApplyKnockback(knockbackDirection);
-            StartCoroutine(ResetKnockback());
+            _elapsedTme += Time.fixedDeltaTime;
+            _knockbackForce = _hitForce + _constantForce;
+
+            if (inputDirection != 0)
+            {
+                _combinedForce = _knockbackForce + new Vector3(inputDirection, 0f);
+            }
+            else
+            {
+                _combinedForce = _knockbackForce;
+            }
+            rb.velocity = _combinedForce;
+            yield return new WaitForFixedUpdate();
         }
+        IsBeingKnockedBack = false;
     }
-
-    void ApplyKnockback(Vector3 direction)
+    public void CallKnockBack(Vector3 hitDirection, Vector3 constantForceDirection, float inputDirection)
     {
-        
-        Vector3 knockbackDirection = direction.normalized;
+        KnockbackCoroutine = StartCoroutine(KnockbackAction(hitDirection, constantForceDirection, inputDirection));
 
-        
-        rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
     }
+   
 
-    
-    private System.Collections.IEnumerator ResetKnockback()
-    {
-        isKnockedBack = true;
-        yield return new WaitForSeconds(knockbackDuration);
-        isKnockedBack = false;
-    }
 }

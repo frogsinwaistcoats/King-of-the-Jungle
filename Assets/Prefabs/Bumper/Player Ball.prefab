@@ -380,7 +380,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12492ffa5fe07924e8ea29e42e225bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 200
+  knockbackForce: 20000
+  smoothFactor: 0.1
   knockbackDuration: 0.2
 --- !u!1 &9015000819614593388
 GameObject:

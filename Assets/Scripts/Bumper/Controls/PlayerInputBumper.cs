@@ -23,16 +23,19 @@ public class PlayerInputBumper : MonoBehaviour
 
     InputControls inputControls;
     bool isHit;
-   
+    private Knockback knockback;
+    private static readonly object instance;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        
+        knockback = GetComponent<Knockback>();
+
     }
 
     private void Start()
     {
+       
         PlayerStats playerStats = GetComponent<PlayerStats>();
         if (playerStats != null && playerStats.playerData != null)
         {
@@ -68,7 +71,9 @@ public class PlayerInputBumper : MonoBehaviour
             inputManager.onPlayerJoined -= AssignInputs;
         }
     }
-    private void OnCollisionEnter(Collision other)
+
+   
+    private void OnCollisionEnter(Collision other, Vector3 hitDirection)
     {
         
         if (other.gameObject.CompareTag("Player"))
@@ -77,7 +82,7 @@ public class PlayerInputBumper : MonoBehaviour
             FindAnyObjectByType<Spawner>().Stop(0.5f);
             StartCoroutine(WaitForSpawn());
         }
-        
+        knockback.CallKnockBack(hitDirection, Vector3.up, PlayerInputBumper.instance.moveInput.x);
     }
 
     
@@ -118,7 +123,13 @@ public class PlayerInputBumper : MonoBehaviour
             rb.velocity = movement;
         }
     }
-
+    private void Update()
+    {
+       if (!knockback.IsBeingKnockedBack)
+        {
+            MovePlayer();
+        }
+    }
     public void PlayerHit(Vector3 direction)
     {
         if (isHit == false)
