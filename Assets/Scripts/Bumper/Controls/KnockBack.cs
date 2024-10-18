@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
 public class Knockback : MonoBehaviour
 {
     public float knockbackTime = 0.2f;
@@ -45,6 +47,12 @@ public class Knockback : MonoBehaviour
         }
         IsBeingKnockedBack = false;
     }
+
+    internal void CallKnockBack(Vector3 hitDirection, Vector3 up, object x)
+    {
+        throw new NotImplementedException();
+    }
+
     public void CallKnockBack(Vector3 hitDirection, Vector3 constantForceDirection, float inputDirection)
     {
         KnockbackCoroutine = StartCoroutine(KnockbackAction(hitDirection, constantForceDirection, inputDirection));

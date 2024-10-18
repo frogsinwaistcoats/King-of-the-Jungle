@@ -23,14 +23,14 @@ public class PlayerInputBumper : MonoBehaviour
 
     InputControls inputControls;
     bool isHit;
-    private Knockback knockback;
-    private static readonly object instance;
+
+    public object Instance { get; internal set; }
 
     private void Awake()
     {
+        
         rb = GetComponent<Rigidbody>();
-        knockback = GetComponent<Knockback>();
-
+        
     }
 
     private void Start()
@@ -82,7 +82,7 @@ public class PlayerInputBumper : MonoBehaviour
             FindAnyObjectByType<Spawner>().Stop(0.5f);
             StartCoroutine(WaitForSpawn());
         }
-        knockback.CallKnockBack(hitDirection, Vector3.up, PlayerInputBumper.instance.moveInput.x);
+        
     }
 
     
@@ -103,7 +103,7 @@ public class PlayerInputBumper : MonoBehaviour
         }
     }
 
-    private void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    public void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         moveInput = obj.ReadValue<Vector2>();
     }
@@ -113,7 +113,7 @@ public class PlayerInputBumper : MonoBehaviour
         MovePlayer();
     }
 
-    private void MovePlayer()
+    public void MovePlayer()
     {
         if (isHit == false)
         {
@@ -123,13 +123,7 @@ public class PlayerInputBumper : MonoBehaviour
             rb.velocity = movement;
         }
     }
-    private void Update()
-    {
-       if (!knockback.IsBeingKnockedBack)
-        {
-            MovePlayer();
-        }
-    }
+    
     public void PlayerHit(Vector3 direction)
     {
         if (isHit == false)
