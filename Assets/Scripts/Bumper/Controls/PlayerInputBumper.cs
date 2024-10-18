@@ -81,6 +81,8 @@ public class PlayerInputBumper : MonoBehaviour
             
             FindAnyObjectByType<Spawner>().Stop(0.5f);
             StartCoroutine(WaitForSpawn());
+
+            
         }
         
     }
