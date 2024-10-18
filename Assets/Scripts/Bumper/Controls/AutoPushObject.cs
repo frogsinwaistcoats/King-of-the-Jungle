@@ -25,17 +25,10 @@ public class AutoPushObjects : MonoBehaviour
         
         PushObjects();
 
-        if (!knockback.IsBeingKnockedBack)
-        {
-            playerInput.MovePlayer();
-        }
+        
     }
 
-    private void OnCollisionEnter(Collision other, Vector3 hitDirection)
-    {
-   
-        knockback.CallKnockBack(hitDirection, Vector3.up, playerInput.Instance.moveInput.x);
-    }
+  
     void PushObjects()
     {
         
