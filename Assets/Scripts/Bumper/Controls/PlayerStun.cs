@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerStun : MonoBehaviour
 {
     public float stunDuration = 2f;
-    public float stunCooldown = 20f; // Cooldown duration after being stunned
+    public float stunCooldown = 1f; 
     private bool isStunned = false;
-    private bool canBeStunned = true; // To track if player can be stunned
+    private bool canBeStunned = true; 
 
     private PlayerInputBumper playerMovement;
 
@@ -20,7 +20,7 @@ public class PlayerStun : MonoBehaviour
     {
         if (isStunned)
         {
-            // Disable player movement during stun
+            
             playerMovement.moveInput = Vector3.zero;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
@@ -38,20 +38,20 @@ public class PlayerStun : MonoBehaviour
         {
             StartCoroutine(RecoverFromStun());
             isStunned = true;
-            canBeStunned = false; // Disable further stuns
+            canBeStunned = false; 
             
         }
     }
 
     private IEnumerator RecoverFromStun()
     {
-        // Wait for the stun duration
+        
         yield return new WaitForSeconds(stunDuration);
         isStunned = false;
 
-        // Wait for the cooldown duration before allowing further stuns
+       
         yield return new WaitForSeconds(stunCooldown);
-        canBeStunned = true; // Allow stuns again
+        canBeStunned = true; 
     }
 
 }

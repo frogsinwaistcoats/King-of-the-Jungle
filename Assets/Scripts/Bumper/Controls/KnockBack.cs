@@ -3,7 +3,7 @@ using UnityEngine;
 public class Knockback : MonoBehaviour
 {
     public float knockbackForce = 10000f;  
-    public float knockbackDuration = 0.1f; 
+    public float knockbackDuration = 1f; 
 
     private Rigidbody rb; 
     private bool isKnockedBack = false; 
