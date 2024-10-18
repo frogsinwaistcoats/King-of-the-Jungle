@@ -3,31 +3,42 @@ using UnityEngine;
 
 public class PodiumManager : MonoBehaviour
 {
-    public Transform[] podiumPositions; // Assign the podium spawn points (1st, 2nd, 3rd, 4th) in the inspector
-    private DodgeballPlayerManager playerManager;
-    private GameManager gameManager;
+    public Transform[] podiumPositions; // Assign these in the inspector for 1st, 2nd, 3rd, 4th
+    public GameObject podiumPlayerPrefab; // Prefab to display the player (empty game object with a SpriteRenderer)
 
     private void Start()
     {
-        playerManager = DodgeballPlayerManager.instance;
-        gameManager = GameManager.instance;
+        //debug
+        foreach (PlayerData player in GameManager.instance.players)
+        {
+            Debug.Log($"Player {player.playerID}: Character Sprite = {player.characterSprite.name}");
+        }
 
         PlacePlayersOnPodium();
     }
 
     private void PlacePlayersOnPodium()
     {
-        // Get the players ordered by score
-        var orderedPlayers = gameManager.players.OrderByDescending(p => p.playerScore).ToList();
+        // Get players ordered by score
+        var orderedPlayers = GameManager.instance.players.OrderByDescending(p => p.totalScore).ToList();
 
         for (int i = 0; i < orderedPlayers.Count && i < podiumPositions.Length; i++)
         {
-            // Get the corresponding player prefab index
-            int prefabIndex = playerManager.selectedPrefabsIndex[orderedPlayers[i].playerID];
+            PlayerData playerData = orderedPlayers[i];
 
-            // Instantiate the player prefab at the corresponding podium position
-            GameObject playerPrefab = playerManager.playerPrefabs[prefabIndex];
-            Instantiate(playerPrefab, podiumPositions[i].position, podiumPositions[i].rotation);
+            // Instantiate a prefab at the podium position
+            GameObject podiumPlayer = Instantiate(podiumPlayerPrefab, podiumPositions[i].position, podiumPositions[i].rotation);
+
+            // Assign the player's sprite to the prefab's SpriteRenderer
+            SpriteRenderer spriteRenderer = podiumPlayer.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.sprite = playerData.characterSprite;
+            }
+            else
+            {
+                Debug.LogError("Podium player prefab is missing a SpriteRenderer!");
+            }
         }
     }
 }

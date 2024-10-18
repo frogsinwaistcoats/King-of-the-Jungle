@@ -12,5 +12,6 @@ public class PlayerStats : MonoBehaviour
     {
         playerData = data;
         rend.sprite = CharacterSelect.instance.characters[playerData.characterIndex].characterSprite;
+        //rend.sprite = playerData.characterSprite; //Put this to test if it would fix the ending scene sprites
     }
 }
