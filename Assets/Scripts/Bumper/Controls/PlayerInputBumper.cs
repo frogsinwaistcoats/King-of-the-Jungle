@@ -73,7 +73,7 @@ public class PlayerInputBumper : MonoBehaviour
     }
 
    
-    private void OnCollisionEnter(Collision other, Vector3 hitDirection)
+    private void OnCollisionEnter(Collision other)
     {
         
         if (other.gameObject.CompareTag("Player"))
