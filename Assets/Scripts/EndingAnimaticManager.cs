@@ -35,5 +35,6 @@ public class EndingAnimaticManager : MonoBehaviour
 
         // Load the main menu scene
         SceneManager.LoadScene("MainMenu");
+        AudioManager.instance.Play("MainTheme");
     }
 }
