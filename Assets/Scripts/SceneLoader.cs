@@ -57,11 +57,15 @@ public class SceneLoader : MonoBehaviour
         storyMode = true;
         SceneManager.LoadScene("IntroAnimatic");
         AudioManager.instance.StopAllSounds();
+        AudioManager.instance.Play("AnimaticMusic");
     }
 
     public void LoadMainMenu()
     {
         SetPreviousScene();
+
+        storyMode = false; //Added this in because it wasn't resetting after finishing story mode
+
         gameManager.ResetInstance();
         inputManager.ResetInstance();
         SceneManager.LoadScene("MainMenu");
@@ -114,7 +118,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("MazeMinigame");
         AudioManager.instance.StopAllSounds();
-        AudioManager.instance.Play("RaceTheme");
+        AudioManager.instance.Play("MazeTheme");
     }
 
     public void LoadRaceMinigame()
@@ -146,7 +150,7 @@ public class SceneLoader : MonoBehaviour
         SetPreviousScene();
         SceneManager.LoadScene("TugOWarMinigame 1");
         AudioManager.instance.StopAllSounds();
-        AudioManager.instance.Play("RaceTheme");
+        AudioManager.instance.Play("MazeTheme");
     }
     #endregion
 
@@ -208,8 +212,8 @@ public class SceneLoader : MonoBehaviour
     public void LoadTotalScores()
     {
         SceneManager.LoadScene("TotalScores");
-        AudioManager.instance.StopAllSounds();
-        AudioManager.instance.Play("InterludeTheme");
+        //AudioManager.instance.StopAllSounds();
+        //AudioManager.instance.Play("InterludeTheme");
     }
 
     //switch cases

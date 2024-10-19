@@ -11,5 +11,6 @@ public class EndingSceneAudio : MonoBehaviour
 
         // Play main theme when entering the main menu
         AudioManager.instance.Play("Fireworks");
+        AudioManager.instance.Play("CelebrationMusic");
     }
 }

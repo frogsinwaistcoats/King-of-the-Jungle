@@ -88,9 +88,12 @@ public class AudioManager : MonoBehaviour
 
         // Music
 
-        //soundEffects.Add("CelebrationMusic", gameObject.AddComponent<AudioSource>());
-        //soundEffects["CelebrationMusic"].clip = Resources.Load<AudioClip>("Audio/Music/CelebrationMusic");
-        //soundEffects["CelebrationMusic"].loop = true;  // Set looping if needed
+        soundEffects.Add("CelebrationMusic", gameObject.AddComponent<AudioSource>());
+        soundEffects["CelebrationMusic"].clip = Resources.Load<AudioClip>("Audio/Music/Celebration Music");
+        soundEffects["CelebrationMusic"].loop = true;  // Set looping if needed
+
+        soundEffects.Add("AnimaticMusic", gameObject.AddComponent<AudioSource>());
+        soundEffects["AnimaticMusic"].clip = Resources.Load<AudioClip>("Audio/Music/Animatic Song");
 
         soundEffects.Add("MainTheme", gameObject.AddComponent<AudioSource>());
         soundEffects["MainTheme"].clip = Resources.Load<AudioClip>("Audio/Music/Jungle King Main Theme");
@@ -103,6 +106,10 @@ public class AudioManager : MonoBehaviour
         soundEffects.Add("RaceTheme", gameObject.AddComponent<AudioSource>());
         soundEffects["RaceTheme"].clip = Resources.Load<AudioClip>("Audio/Music/Race Theme");
         soundEffects["RaceTheme"].loop = true;
+
+        soundEffects.Add("MazeTheme", gameObject.AddComponent<AudioSource>());
+        soundEffects["MazeTheme"].clip = Resources.Load<AudioClip>("Audio/Music/Maze Theme");
+        soundEffects["MazeTheme"].loop = true;
 
     }
 
