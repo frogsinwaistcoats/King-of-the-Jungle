@@ -56,6 +56,7 @@ public class SceneLoader : MonoBehaviour
     {
         storyMode = true;
         SceneManager.LoadScene("IntroAnimatic");
+        AudioManager.instance.StopAllSounds();
     }
 
     public void LoadMainMenu()

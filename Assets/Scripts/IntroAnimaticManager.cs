@@ -13,5 +13,8 @@ public class IntroAnimaticManager : MonoBehaviour
     {
         yield return new WaitForSeconds(15f);
         SceneManager.LoadScene("MazeInstructionScreen");
+        AudioManager.instance.StopAllSounds();
+        // Play instruction music when loading instructions
+        AudioManager.instance.Play("InterludeTheme");
     }
 }
