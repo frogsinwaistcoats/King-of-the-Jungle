@@ -54,7 +54,7 @@ public class PlayerInputBumper : MonoBehaviour
 
         GetComponent<PlayerStats>().playerData.SetPlayerScore(startingScore); //added this for now, so they start with a point and whoever falls off loses that point
         GetComponent<PlayerStats>().playerData.SetTotalScore(startingScore);
-        Debug.Log("Player " + playerID + " score: " + GetComponent<PlayerStats>().playerData.playerScore);
+        //Debug.Log("Player " + playerID + " score: " + GetComponent<PlayerStats>().playerData.playerScore);
 
         
     }
@@ -136,17 +136,19 @@ public class PlayerInputBumper : MonoBehaviour
         }
     }
 
+    
     public void HitCooldown()
     {
         isHit = false;
         rb.velocity = Vector3.zero;
         rb.angularDrag = 0;
     }
-   
+    
+
 
     private void Fell()
     {
-        Debug.Log("Player " + playerID + " lose");
+        //Debug.Log("Player " + playerID + " lose");
         GetComponent<PlayerStats>().playerData.SetPlayerScore(-1);
         GetComponent<PlayerStats>().playerData.SetTotalScore(-1);
         SceneLoader.instance.SetPreviousScene();

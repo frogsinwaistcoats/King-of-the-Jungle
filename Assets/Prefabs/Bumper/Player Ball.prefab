@@ -218,7 +218,7 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   moveSpeed: 20
   hitTimer: 1
-  pushForce: 800
+  pushForce: 0
   FallingThreshold: -10
   Falling: 0
 --- !u!114 &9042390056430742254
