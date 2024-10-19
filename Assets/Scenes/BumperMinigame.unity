@@ -1441,8 +1441,8 @@ MonoBehaviour:
   - {fileID: 205177938482607655, guid: 843a8c33ba5819b42be5fd7352dc7a9d, type: 3}
   - {fileID: 205177938482607655, guid: acc4e83492092324d86a7ead1428d1e3, type: 3}
   - {fileID: 205177938482607655, guid: d9d0855606c39c140aff85f28ec655d8, type: 3}
-  spawnAreaMin: {x: 0, y: 20, z: 0}
-  spawnAreaMax: {x: -5, y: 50, z: -5}
+  spawnAreaMin: {x: 35, y: 20, z: 25}
+  spawnAreaMax: {x: -35, y: 50, z: -25}
   frequency: 2
   initialSpeed: 10
 --- !u!1 &370474969
@@ -5922,7 +5922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &2146128811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6003,7 +6003,7 @@ Transform:
   m_GameObject: {fileID: 2146128810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9, y: 33.2, z: -34.7}
+  m_LocalPosition: {x: 17, y: 24.48, z: -23}
   m_LocalScale: {x: 20.279139, y: 10.13107, z: 19.025148}
   m_ConstrainProportionsScale: 0
   m_Children: []
