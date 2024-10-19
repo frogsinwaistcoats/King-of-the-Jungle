@@ -5,21 +5,27 @@ public class AutoPushObjects : MonoBehaviour
     public float pushForce = 10f; 
     public float pushDistance = 1f;
     public LayerMask pushableLayer;
-   
+  
+
     private Rigidbody rb;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-       
+
     }
+  
 
     void Update()
     {
         
         PushObjects();
+
+        
     }
 
+  
     void PushObjects()
     {
         

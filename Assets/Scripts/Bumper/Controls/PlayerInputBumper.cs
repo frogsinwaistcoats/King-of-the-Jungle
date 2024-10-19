@@ -23,16 +23,19 @@ public class PlayerInputBumper : MonoBehaviour
 
     InputControls inputControls;
     bool isHit;
-   
+
+    public object Instance { get; internal set; }
 
     private void Awake()
     {
+        
         rb = GetComponent<Rigidbody>();
         
     }
 
     private void Start()
     {
+       
         PlayerStats playerStats = GetComponent<PlayerStats>();
         if (playerStats != null && playerStats.playerData != null)
         {
@@ -68,6 +71,8 @@ public class PlayerInputBumper : MonoBehaviour
             inputManager.onPlayerJoined -= AssignInputs;
         }
     }
+
+   
     private void OnCollisionEnter(Collision other)
     {
         
@@ -76,6 +81,8 @@ public class PlayerInputBumper : MonoBehaviour
             
             FindAnyObjectByType<Spawner>().Stop(0.5f);
             StartCoroutine(WaitForSpawn());
+
+            
         }
         
     }
@@ -98,7 +105,7 @@ public class PlayerInputBumper : MonoBehaviour
         }
     }
 
-    private void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    public void OnMove(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         moveInput = obj.ReadValue<Vector2>();
     }
@@ -108,7 +115,7 @@ public class PlayerInputBumper : MonoBehaviour
         MovePlayer();
     }
 
-    private void MovePlayer()
+    public void MovePlayer()
     {
         if (isHit == false)
         {
@@ -118,7 +125,7 @@ public class PlayerInputBumper : MonoBehaviour
             rb.velocity = movement;
         }
     }
-
+    
     public void PlayerHit(Vector3 direction)
     {
         if (isHit == false)

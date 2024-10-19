@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6481096094152325052}
   - component: {fileID: 545980711219950097}
   - component: {fileID: 6628330183039673776}
-  - component: {fileID: 6110619851141515207}
+  - component: {fileID: 8732050835717466267}
   m_Layer: 0
   m_Name: PlayerTwo
   m_TagString: Untagged
@@ -257,7 +257,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -338,7 +338,7 @@ MonoBehaviour:
     playerScore: 0
     totalScore: 0
   rend: {fileID: -3648759878741535265}
---- !u!95 &6110619851141515207
+--- !u!95 &8732050835717466267
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

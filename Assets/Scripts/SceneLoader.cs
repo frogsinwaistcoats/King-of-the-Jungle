@@ -65,7 +65,7 @@ public class SceneLoader : MonoBehaviour
         inputManager.ResetInstance();
         SceneManager.LoadScene("MainMenu");
 
-        AudioManager.instance.Stop("InterludeTheme");
+        AudioManager.instance.StopAllSounds();
         // Play main theme when loading the main menu
         AudioManager.instance.Play("MainTheme");
     }

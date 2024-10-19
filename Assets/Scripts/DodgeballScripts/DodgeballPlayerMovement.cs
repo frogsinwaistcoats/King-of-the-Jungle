@@ -9,8 +9,8 @@ public class DodgeballPlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public bool isTarget;
 
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.2f;
+    public float dashSpeed = 30f;
+    public float dashDuration = 0.4f;
     private bool isDashing;
     private bool canDash = true;
     private Vector2 movementInput;
@@ -140,6 +140,11 @@ public class DodgeballPlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (DodgeballCountdown.instance != null && !DodgeballCountdown.instance.canStartGame)
+        {
+            return;  // Stop player movement until the countdown is over
+        }
+
         if (isTarget && !isDashing)
         {
             Vector3 movement = new Vector3(movementInput.x, 0, 0) * moveSpeed * Time.fixedDeltaTime; // Only allow movement along the x-axis

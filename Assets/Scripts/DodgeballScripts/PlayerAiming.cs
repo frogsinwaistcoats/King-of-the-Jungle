@@ -12,7 +12,9 @@ public class PlayerAiming : MonoBehaviour
     public GameObject projectilePrefab;
     public Transform shootPoint;
     public float projectileSpeed = 20f;
-    public float shootCooldown = 1f;
+
+    public float shootCooldown = 0.8f;
+    private float currentCooldown;
 
     private InputControls playerControls;
     private float keyboardAimInput;
@@ -28,6 +30,11 @@ public class PlayerAiming : MonoBehaviour
     {
         lineLength = 1f; // Example length, can be changed dynamically
         MultiplayerInputManager.instance.onPlayerJoined += AssignInputs;
+
+        // Adjust cooldown based on player count
+        int playerCount = DodgeballPlayerManager.instance.spawnedPlayers.Count;
+        currentCooldown = shootCooldown + (0.2f * (playerCount - 2));  // Increase cooldown by 0.2s per player
+        currentCooldown = Mathf.Max(0.5f, currentCooldown);  // Ensure it doesn't go below 0.5 seconds
 
         if (aimIndicator != null)
         {
@@ -152,6 +159,12 @@ public class PlayerAiming : MonoBehaviour
 
     private void Update()
     {
+        // Prevent aiming or shooting during countdown
+        if (DodgeballCountdown.instance != null && !DodgeballCountdown.instance.canStartGame)
+        {
+            return;  // Stop aiming and shooting until the countdown is over
+        }
+
         if (isShooter && playerControls != null)
         {
             float inputDirection = 0;

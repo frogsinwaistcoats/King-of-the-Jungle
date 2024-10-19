@@ -26,6 +26,8 @@ public class DodgeballGameManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI[] playerScoreTexts;  // Array to hold the references to the TextMeshPro UI components
 
+    private Coroutine roundTimerCoroutine;
+
 
     private void Awake()
     {
@@ -73,7 +75,7 @@ public class DodgeballGameManager : MonoBehaviour
             if (players.Count >= 2) // Minimum two players to start the game
             {
                 allPlayersReady = true;
-                StartRound();
+                StartNewRound();
             }
             else
             {
@@ -113,6 +115,32 @@ public class DodgeballGameManager : MonoBehaviour
         players.Add(playerMovement);
     }
 
+    public void StartNewRound()
+    {
+        // Stop any running round timer
+        if (roundTimerCoroutine != null)
+        {
+            StopCoroutine(roundTimerCoroutine);
+            roundTimerCoroutine = null; // Reset the reference
+        }
+
+        // Trigger countdown before the round starts
+        DodgeballCountdown.instance.StartCoroutine(DodgeballCountdown.instance.StartCountdown());
+        StartCoroutine(StartRoundAfterCountdown());
+        
+    }
+
+    IEnumerator StartRoundAfterCountdown()
+    {
+        DodgeballCountdown.instance.StartCoroutine(DodgeballCountdown.instance.StartCountdown());
+
+        // Wait until the countdown is done
+        yield return new WaitUntil(() => DodgeballCountdown.instance.canStartGame);
+
+        // Now start the round (e.g., spawn players, enable any other gameplay logic)
+        StartRound();
+    }
+
 
     private void StartRound()
     {
@@ -121,7 +149,8 @@ public class DodgeballGameManager : MonoBehaviour
             roundTimer = roundDuration;
             ReassignPlayerRolesAndSpawnPoints();
             RespawnPlayers(); // Make sure roles are set up before the round starts
-            StartCoroutine(RoundTimer());
+
+            roundTimerCoroutine = StartCoroutine(RoundTimer());
         }
         else
         {
@@ -281,6 +310,13 @@ public class DodgeballGameManager : MonoBehaviour
         players[currentTargetIndex].AddScore(roundDuration - roundTimer);
         DebugScores();
 
+        //This should stop 2x speed of timer caused by parallel coroutines
+        if (roundTimerCoroutine != null)
+        {
+            StopCoroutine(roundTimerCoroutine);
+        }
+
+
         // Calculate new target index and continue the game or end it
         currentTargetIndex = (currentTargetIndex + 1) % players.Count;
         roundsPlayed++;
@@ -293,7 +329,7 @@ public class DodgeballGameManager : MonoBehaviour
         {
             RotateSpawnPointsDown(); // Swap the spawn points before respawning players
             RespawnPlayers(); // Reassign roles and reset controls
-            StartRound();
+            StartNewRound();
         }
     }
 
@@ -364,11 +400,17 @@ public class DodgeballGameManager : MonoBehaviour
 
     public void EndGame()
     {
+        StartCoroutine(EndGameSequence());
+    }
+
+    private IEnumerator EndGameSequence()
+    {
+        // Calculate scores for all players
         DodgeballPlayerMovement playerFirst = players.OrderByDescending(p => p.score).FirstOrDefault();
         DodgeballPlayerMovement playerSecond = players.OrderByDescending(p => p.score).Skip(1).FirstOrDefault();
         DodgeballPlayerMovement playerThird = players.OrderByDescending(p => p.score).Skip(2).FirstOrDefault();
         DodgeballPlayerMovement playerFourth = players.OrderByDescending(p => p.score).Skip(3).FirstOrDefault();
-        
+
         if (playerFirst != null)
         {
             playerFirst.GetComponent<PlayerStats>().playerData.SetPlayerScore(CalculateScore(1));
@@ -390,9 +432,20 @@ public class DodgeballGameManager : MonoBehaviour
             playerFourth.GetComponent<PlayerStats>().playerData.SetTotalScore(CalculateScore(4));
         }
 
-        Debug.Log("Game Over!");
+        // Show "Game Over!" text
+        DodgeballCountdown.instance.countdownText.text = "Game Over!";
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Clear the "Game Over!" text
+        DodgeballCountdown.instance.countdownText.text = "";
+
+        // Transition to the Scores scene
         sceneLoader.SetPreviousScene();
         SceneManager.LoadScene("Scores");
+
+        // Clean up
         Destroy(DodgeballPlayerManager.instance);
         Destroy(gameObject);
     }
