@@ -16,7 +16,7 @@ public class PlayerInputBumper : MonoBehaviour
     private Rigidbody rb;
     
    
-    public float FallingThreshold = -10f;
+    //public float FallingThreshold = -10f;
     [HideInInspector]
     public bool Falling = false;
     float startingScore = 1;

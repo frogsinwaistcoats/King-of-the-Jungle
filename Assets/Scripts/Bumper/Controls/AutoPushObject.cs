@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class AutoPushObjects : MonoBehaviour
 {
-    public float pushForce = 50f; 
+    public float pushForce = 50f;
     public float pushDistance = 2f;
     public LayerMask pushableLayer;
-   
+
     private Rigidbody rb;
 
     void Start()
@@ -29,7 +29,7 @@ public class AutoPushObjects : MonoBehaviour
             if (collider.gameObject != gameObject)
             {
                 Rigidbody objectRb = collider.GetComponent<Rigidbody>();
-                
+
                 if (objectRb != null)
                 {
                     Vector3 pushDirection = (collider.transform.position - transform.position).normalized; // Calculate direction to push

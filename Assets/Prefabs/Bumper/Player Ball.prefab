@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 3283638725811692887}
   - component: {fileID: 9042390056430742254}
   - component: {fileID: 2379870167482840164}
+  - component: {fileID: -2892959965709232576}
   - component: {fileID: -1269438932598228590}
   - component: {fileID: -8712144668925148099}
-  - component: {fileID: -2892959965709232576}
   m_Layer: 6
   m_Name: Player Ball
   m_TagString: Player
@@ -219,7 +219,6 @@ MonoBehaviour:
   moveSpeed: 20
   hitTimer: 1
   pushForce: 0
-  FallingThreshold: -10
   Falling: 0
 --- !u!114 &9042390056430742254
 MonoBehaviour:
@@ -259,6 +258,20 @@ MonoBehaviour:
     playerScore: 0
     totalScore: 0
   rend: {fileID: 7597269286194593977}
+--- !u!114 &-2892959965709232576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240485996847482445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12492ffa5fe07924e8ea29e42e225bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 25
+  knockbackDuration: 0
 --- !u!114 &-1269438932598228590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,20 +381,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-2892959965709232576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240485996847482445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12492ffa5fe07924e8ea29e42e225bc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackForce: 30
-  knockbackDuration: 0
 --- !u!1 &9015000819614593388
 GameObject:
   m_ObjectHideFlags: 0
