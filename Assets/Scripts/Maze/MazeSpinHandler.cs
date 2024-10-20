@@ -9,6 +9,7 @@ public class MazeSpinHandler : MonoBehaviour
     public bool isSpinning;
     public GameObject dizzyAnimator;
 
+
     private void Awake()
     {
         mazePlayerInput = GetComponent<MazePlayerInput>();
@@ -69,6 +70,7 @@ public class MazeSpinHandler : MonoBehaviour
         }
 
         isSpinning = false;
+
     }
 
     public void SpinControls1(int ID)

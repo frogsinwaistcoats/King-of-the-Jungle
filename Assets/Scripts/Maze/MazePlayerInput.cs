@@ -18,7 +18,7 @@ public class MazePlayerInput : MonoBehaviour
     private Rigidbody rb;
     public Animator animator;
     public SpriteRenderer rend;
-    private Vector3 startPosition;
+    //private Vector3 startPosition;
     private Vector3 respawnPosition;
     private bool hasFinished = false;
 
@@ -26,7 +26,9 @@ public class MazePlayerInput : MonoBehaviour
     public float moveSpeed;
 
     public int finishPosition;
-    
+    public GameObject colliderVisual;
+
+
     private Collider disabledSpinCollider;
 
     private void Awake()
@@ -36,7 +38,7 @@ public class MazePlayerInput : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         
-        startPosition = transform.position;
+        respawnPosition = transform.position;
 
         playerStats = GetComponent<PlayerStats>();
         spinHandler = GetComponent<MazeSpinHandler>();
@@ -128,6 +130,7 @@ public class MazePlayerInput : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.CompareTag("MazeSpin1"))
         {
             StopAllCoroutines();
@@ -135,6 +138,7 @@ public class MazePlayerInput : MonoBehaviour
             spinHandler.StartSpin(1, other.transform.position);
             other.enabled = false;
             disabledSpinCollider = other;
+            StartCoroutine(DisableSpinVisuals(other));
             StartCoroutine(StopSpin());
         }
         else if (other.gameObject.CompareTag("MazeSpin2"))
@@ -144,6 +148,7 @@ public class MazePlayerInput : MonoBehaviour
             spinHandler.StartSpin(2, other.transform.position);
             other.enabled = false;
             disabledSpinCollider = other;
+            StartCoroutine(DisableSpinVisuals(other));
         }
         else if (other.gameObject.CompareTag("MazeSpin3"))
         {
@@ -152,6 +157,7 @@ public class MazePlayerInput : MonoBehaviour
             spinHandler.StartSpin(3, other.transform.position);
             other.enabled = false;
             disabledSpinCollider = other;
+            StartCoroutine(DisableSpinVisuals(other));
             StartCoroutine(StopSpin());
         }
         else if (other.gameObject.CompareTag("MazeFinish"))
@@ -173,38 +179,33 @@ public class MazePlayerInput : MonoBehaviour
         {
             MazeAudioManager.instance.PlayThudSFX();
             StopAllCoroutines();
-            ReturnToStart();
+            ReturnToCheckpoint();
             if (disabledSpinCollider != null)
             {
                 disabledSpinCollider.enabled = true;
                 disabledSpinCollider = null;
+                colliderVisual.SetActive(true);
             }
         }
         else if (other.gameObject.CompareTag("MazeBoulder2"))
         {
             MazeAudioManager.instance.PlayThudSFX();
             StopAllCoroutines();
-            ReturnToCheckpoint2();
+            ReturnToCheckpoint();
             if (disabledSpinCollider != null)
             {
                 disabledSpinCollider.enabled = true;
                 disabledSpinCollider = null;
+                colliderVisual.SetActive(true);
             }
         }
     }
 
-    public void ReturnToStart()
-    {
-        gameObject.transform.position = startPosition;
-        ClearInputControls();
-        spinHandler.MasterControls(playerID);
-    }
-
-    public void ReturnToCheckpoint2()
+    public void ReturnToCheckpoint()
     {
         gameObject.transform.position = respawnPosition;
         ClearInputControls();
-        spinHandler.SpinControls2(playerID);
+        spinHandler.MasterControls(playerID);
     }
 
     public void ClearInputControls()
@@ -224,5 +225,16 @@ public class MazePlayerInput : MonoBehaviour
         yield return new WaitForSeconds(10f);
         ClearInputControls();
         spinHandler.MasterControls(playerID);
+    }
+
+    IEnumerator DisableSpinVisuals(Collider other)
+    {
+        yield return new WaitForSeconds(1f);
+        Transform parentTransform = other.transform.parent;
+        if (parentTransform != null)
+        {
+            colliderVisual = parentTransform.Find("SpinVisual").gameObject;
+            colliderVisual.SetActive(false);
+        }
     }
 }
