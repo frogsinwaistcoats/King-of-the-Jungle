@@ -93,6 +93,30 @@ public class PlayerAiming : MonoBehaviour
         }
     }
 
+    public void EnableShootingControls()
+    {
+        if (playerControls != null)
+        {
+            playerControls.Player.Shoot.Enable(); // Enable shooting input
+        }
+        else
+        {
+            Debug.LogError("Cannot enable shooting controls - playerControls is null!");
+        }
+    }
+
+    public void DisableShootingControls()
+    {
+        if (playerControls != null)
+        {
+            playerControls.Player.Shoot.Disable(); // Disable shooting input
+        }
+        else
+        {
+            Debug.LogError("Cannot disable shooting controls - playerControls is null!");
+        }
+    }
+
     // Method to unsubscribe from all events
     private void UnsubscribeFromEvents()
     {

@@ -12,6 +12,7 @@ public class DodgeballGameManager : MonoBehaviour
     SceneLoader sceneLoader;
 
     public List<DodgeballPlayerMovement> players = new List<DodgeballPlayerMovement>();
+    //public List<PlayerAiming> player2 = new List<PlayerAiming>();
     public float roundDuration = 30f;
     private float roundTimer;
     private int currentTargetIndex = 0;
@@ -132,10 +133,14 @@ public class DodgeballGameManager : MonoBehaviour
 
     IEnumerator StartRoundAfterCountdown()
     {
+        DisableAllPlayerControls();
+
         DodgeballCountdown.instance.StartCoroutine(DodgeballCountdown.instance.StartCountdown());
 
         // Wait until the countdown is done
         yield return new WaitUntil(() => DodgeballCountdown.instance.canStartGame);
+
+        EnableAllPlayerControls();
 
         // Now start the round (e.g., spawn players, enable any other gameplay logic)
         StartRound();
@@ -238,15 +243,42 @@ public class DodgeballGameManager : MonoBehaviour
 
     private void AssignFourPlayerSpawns()
     {
-        Transform temp = spawnPoints[0];
-        spawnPoints[0] = spawnPoints[3];
-        spawnPoints[3] = spawnPoints[2];
-        spawnPoints[2] = spawnPoints[1];
-        spawnPoints[1] = temp;
+        // Rotate players to new positions each round
+        // currentTargetIndex will be used to decide who spawns at point A each round
 
-        for (int i = 0; i < players.Count; i++)
+        // Starting from the target at point A (index 0)
+        int[] rotationOrder = new int[4];
+
+        // Define rotation logic
+        for (int i = 0; i < 4; i++)
         {
-            players[i].transform.position = spawnPoints[i].position;
+            // (currentTargetIndex + i) % 4 ensures correct cyclic rotation
+            rotationOrder[i] = (currentTargetIndex + i) % 4;
+        }
+
+        // Assign positions based on the rotation order
+        for (int i = 0; i < 4; i++)
+        {
+            players[rotationOrder[i]].transform.position = spawnPoints[i].position;
+            players[rotationOrder[i]].transform.rotation = spawnPoints[i].rotation;
+        }
+    }
+
+    private void DisableAllPlayerControls()
+    {
+        foreach (var player in players)
+        {
+            player.DisableMovementControls(); // Disable movement and dash
+            player.GetComponent<PlayerAiming>().DisableShootingControls(); // Disable shooting
+        }
+    }
+
+    private void EnableAllPlayerControls()
+    {
+        foreach (var player in players)
+        {
+            player.EnableMovementControls(); // Enable movement and dash
+            player.GetComponent<PlayerAiming>().EnableShootingControls(); // Enable shooting
         }
     }
 

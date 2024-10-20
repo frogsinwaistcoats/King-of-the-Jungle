@@ -118,6 +118,9 @@ public class DodgeballPlayerMovement : MonoBehaviour
         {
             playerControls.Player.Move.Enable();
             playerControls.Player.Dash.Enable();
+
+            // Enable aiming and shooting as well
+            GetComponent<PlayerAiming>().EnableShootingControls(); // Enable shooting
         }
         else
         {
@@ -131,6 +134,9 @@ public class DodgeballPlayerMovement : MonoBehaviour
         {
             playerControls.Player.Move.Disable();
             playerControls.Player.Dash.Disable();
+
+            // Disable aiming and shooting as well
+            GetComponent<PlayerAiming>().DisableShootingControls(); // Disable shooting
         }
         else
         {

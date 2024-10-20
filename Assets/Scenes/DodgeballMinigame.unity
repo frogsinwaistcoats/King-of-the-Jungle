@@ -1416,7 +1416,7 @@ Transform:
   m_GameObject: {fileID: 389914183}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.87, z: 1.64}
+  m_LocalPosition: {x: 0, y: 6.5, z: 1.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12595,7 +12595,7 @@ Transform:
   m_GameObject: {fileID: 1595803619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 6.5, z: 1.64}
+  m_LocalPosition: {x: 5, y: 6, z: 1.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14526,7 +14526,7 @@ Transform:
   m_GameObject: {fileID: 1937814059}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 6.41, z: 1.64}
+  m_LocalPosition: {x: -5, y: 6, z: 1.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15912,6 +15912,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1426134869385400221, guid: dd04247a27823fb48aa248519c642bb8,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3413559512116385429, guid: dd04247a27823fb48aa248519c642bb8,
         type: 3}
       propertyPath: m_Name
@@ -15983,6 +15988,11 @@ PrefabInstance:
     - target: {fileID: 1524551645042874174, guid: 49959737d4eddc348b65bf45bde51bab,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3158858107403570801, guid: 49959737d4eddc348b65bf45bde51bab,
+        type: 3}
+      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3750126999823788786, guid: 49959737d4eddc348b65bf45bde51bab,
@@ -16068,6 +16078,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7541297018397083683, guid: 707f19ca93199cd41997dae4605b2cf2,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16081,6 +16096,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 296070648897374200, guid: e686d729e74d6a546ba6d2a0500cc8c7,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1411912507767918661, guid: e686d729e74d6a546ba6d2a0500cc8c7,
         type: 3}
       propertyPath: m_Name
