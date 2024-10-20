@@ -74,7 +74,7 @@ public class AudioManager : MonoBehaviour
         //Race
 
         soundEffects.Add("Bounce", gameObject.AddComponent<AudioSource>());
-        soundEffects["Bounce"].clip = Resources.Load<AudioClip>("Audio/SFX/Race/Cute_Bounce");
+        soundEffects["Bounce"].clip = Resources.Load<AudioClip>("Audio/SFX/Race/Bounce");
 
         //Bumper
 
