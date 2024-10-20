@@ -1,37 +1,18 @@
 using UnityEngine;
 public class Knockback : MonoBehaviour
 {
-    public float knockbackForce = 100f;
-    public float knockbackDuration = 0f;
-    private Rigidbody rb;
-    private bool isKnockedBack = false;
-    void Start()
+    [SerializeField] private float knockbackStrength;
+    private void OnCollisionEnter(Collision collision)
     {
+        Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
 
-        rb = GetComponent<Rigidbody>();
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-
-        if (!isKnockedBack && collision.gameObject.CompareTag("Player"))
+        if (rb !=null)
         {
-            Vector3 knockbackDirection = transform.position - collision.transform.position;
-            ApplyKnockback(knockbackDirection);
-            StartCoroutine(ResetKnockback());
+            Vector3 direction = collision.transform.position - transform.position;
+            direction.y = 0;
+            rb.AddForce(direction.normalized * knockbackStrength, ForceMode.Impulse);
         }
+       
     }
-    void ApplyKnockback(Vector3 direction)
-    {
-
-        Vector3 knockbackDirection = direction.normalized;
-
-        rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-    }
-
-    private System.Collections.IEnumerator ResetKnockback()
-    {
-        isKnockedBack = true;
-        yield return new WaitForSeconds(knockbackDuration);
-        isKnockedBack = false;
-    }
+    
 }
