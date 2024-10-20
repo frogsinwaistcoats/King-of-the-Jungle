@@ -6,6 +6,12 @@ using UnityEngine.UI;  // For button handling
 public class EndingAnimaticManager : MonoBehaviour
 {
     public Button mainMenuButton; // Assign this in the inspector
+    SceneLoader sceneLoader;
+
+    private void Awake()
+    {
+        sceneLoader = SceneLoader.instance;
+    }
 
     private void Start()
     {
@@ -34,7 +40,7 @@ public class EndingAnimaticManager : MonoBehaviour
         AudioManager.instance.StopAllSounds();
 
         // Load the main menu scene
-        SceneManager.LoadScene("MainMenu");
+        sceneLoader.LoadMainMenu();
         AudioManager.instance.Play("MainTheme");
     }
 }
