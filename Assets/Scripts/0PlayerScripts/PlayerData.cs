@@ -40,7 +40,7 @@ public class PlayerData
 
     public void SetPlayerScore(float score)
     {
-        playerScore += score;
+        playerScore = score;
     }
 
     public void SetTotalScore(float score)

@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class BumperCountdown : MonoBehaviour
 {
@@ -10,6 +9,7 @@ public class BumperCountdown : MonoBehaviour
     public float countdownTime = 3f;
     public TextMeshProUGUI countdownText;
     public bool isRunning;
+    public bool canMove = false; // Add this flag to control player movement
 
     private void Awake()
     {
@@ -24,6 +24,7 @@ public class BumperCountdown : MonoBehaviour
     IEnumerator StartCountdown()
     {
         isRunning = true;
+        canMove = false; // Disable player movement initially
 
         float currentTime = countdownTime;
 
@@ -41,7 +42,7 @@ public class BumperCountdown : MonoBehaviour
         {
             isRunning = false;
             countdownText.text = "Go!";
-            BumperTimer.instance.timerIsRunning = true;
+            canMove = true; // Enable player movement when countdown finishes
         }
 
         if (countdownText != null)

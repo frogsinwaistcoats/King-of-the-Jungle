@@ -21,6 +21,7 @@ TagManager:
   - MazeSpin3
   - MazeCheckpoint3
   - Rock
+  - BumperFinish
   layers:
   - Default
   - TransparentFX
