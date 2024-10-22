@@ -42,7 +42,7 @@ public class BumperFinishManager : MonoBehaviour
         // Get the player based on ID
         PlayerData playerData = gameManager.players[id];
 
-        //Debug.Log($"Player {playerData.playerID} fell! They are placed {finishedPlayers}");
+        Debug.Log($"Player {playerData.playerID} fell! They are placed {finishedPlayers}");
 
         // Set the score for the current player based on when they fell
         playerData.SetPlayerScore(finishedPlayers - 1);  // Assign the score based on when the player fell
@@ -69,7 +69,7 @@ public class BumperFinishManager : MonoBehaviour
             lastPlayer.SetPlayerScore(totalPlayers - 1);
             lastPlayer.SetTotalScore(totalPlayers - 1);
 
-            //Debug.Log("Last player standing: Player " + lastPlayer.playerID + " Score: " + lastPlayer.playerScore);
+            Debug.Log("Last player standing: Player " + lastPlayer.playerID + " Score: " + lastPlayer.playerScore);
         }
     }
     public void GameFinish()
@@ -77,7 +77,7 @@ public class BumperFinishManager : MonoBehaviour
         // Log scores for debugging
         foreach (var player in gameManager.players)
         {
-            //Debug.Log($"Player {player.playerID} final score: {player.playerScore}, Total Score: {player.totalScore}");
+            Debug.Log($"Player {player.playerID} final score: {player.playerScore}, Total Score: {player.totalScore}");
         }
 
         // Proceed to the score screen
