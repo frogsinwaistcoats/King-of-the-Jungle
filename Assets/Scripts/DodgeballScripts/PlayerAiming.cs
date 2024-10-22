@@ -78,7 +78,7 @@ public class PlayerAiming : MonoBehaviour
                 // Re-subscribe the input controls for shooters
                 SubscribeToShooterControls();
 
-                Debug.Log($"Player {playerID} set as shooter with controls assigned.");
+                //Debug.Log($"Player {playerID} set as shooter with controls assigned.");
             }
             else
             {
@@ -171,7 +171,7 @@ public class PlayerAiming : MonoBehaviour
 
             if (playerControls != null)
             {
-                Debug.Log($"Player {playerID}: Input controls found. Setting up controls...");
+                //Debug.Log($"Player {playerID}: Input controls found. Setting up controls...");
                 SetupControls();
             }
             else
@@ -265,7 +265,7 @@ public class PlayerAiming : MonoBehaviour
                 if (projectileRb != null)
                 {
                     projectileRb.velocity = shootDirection * projectileSpeed;
-                    Debug.Log($"Player {playerID}: Projectile velocity set to {projectileRb.velocity}");
+                    //Debug.Log($"Player {playerID}: Projectile velocity set to {projectileRb.velocity}");
                 }
                 else
                 {

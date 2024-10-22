@@ -149,7 +149,7 @@ public class RacePlayerInput : MonoBehaviour
             float score = finishRace.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
             GetComponent<PlayerStats>().playerData.SetTotalScore(score);
-            Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
+            //Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
     }
 }

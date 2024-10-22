@@ -169,7 +169,7 @@ public class MazePlayerInput : MonoBehaviour
             float score = finishManager.CalculateScore(placing);
             GetComponent<PlayerStats>().playerData.SetPlayerScore(score);
             GetComponent<PlayerStats>().playerData.SetTotalScore(score);
-            Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
+            //Debug.Log("Player " + playerID + " Placing: " + placing + " Score: " + score);
         }
         else if (other.gameObject.CompareTag("MazeCheckpoint1") || other.gameObject.CompareTag("MazeCheckpoint2") || other.gameObject.CompareTag("MazeCheckpoint3"))
         {

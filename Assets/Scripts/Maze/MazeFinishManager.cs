@@ -47,7 +47,7 @@ public class MazeFinishManager : MonoBehaviour
         MazeAudioManager.instance.PlayWinSFX();
         finishedPlayers++;
         playerFinishText[id].enabled = true;
-        Debug.Log("Finished players: " + finishedPlayers);
+        //Debug.Log("Finished players: " + finishedPlayers);
 
         if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == (totalPlayers))
         {
