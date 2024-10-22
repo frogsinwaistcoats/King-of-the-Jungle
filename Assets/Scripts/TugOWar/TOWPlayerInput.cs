@@ -152,19 +152,19 @@ public class TOWPlayerInput : MonoBehaviour
             animator.SetBool(playerStats.playerData.characterName, true);
 
             tickSource.Play();
-            Debug.Log(obj.control.ToString());
+            //Debug.Log(obj.control.ToString());
             string controlPressed = GetTextAfterLastSlash(obj.control.ToString());
 
             if (controlPressed == chosenKey)
             {
                 if (playerID == 0)
                 {
-                    Debug.Log("Player 1 pull");
+                    //Debug.Log("Player 1 pull");
                     player1Pulls++;
                 }
                 else if (playerID == 1)
                 {
-                    Debug.Log("Player 2 pull");
+                    //Debug.Log("Player 2 pull");
                     if (inputManager.PlayerCount == 3)
                     {
                         player2Pulls += 2;
@@ -176,12 +176,12 @@ public class TOWPlayerInput : MonoBehaviour
                 }
                 else if (playerID == 2)
                 {
-                    Debug.Log("Player 3 pull");
+                    //Debug.Log("Player 3 pull");
                     player1Pulls++;
                 }
                 else if (playerID == 3)
                 {
-                    Debug.Log("Player 4 pull");
+                    //Debug.Log("Player 4 pull");
                     player2Pulls++;
                 }
 
@@ -196,7 +196,7 @@ public class TOWPlayerInput : MonoBehaviour
 
     private IEnumerator Penalty()
     {
-        Debug.Log("PLAYER " + (playerID+1) + "  WRONG BUTTON");
+        //Debug.Log("PLAYER " + (playerID+1) + "  WRONG BUTTON");
         TOW_UI.instance.PenaltyButton(newButton1);
         OnDisable();
         yield return new WaitForSeconds(1.5f);
@@ -238,7 +238,7 @@ public class TOWPlayerInput : MonoBehaviour
     {
         if (rope.position.x <= maxDistance)
         {
-            Debug.Log("Player 1/3 wins");
+            //Debug.Log("Player 1/3 wins");
             if (playerID == 0 || playerID == 2)
             {
                 GetComponent<PlayerStats>().playerData.SetPlayerScore(1);
@@ -249,7 +249,7 @@ public class TOWPlayerInput : MonoBehaviour
         }
         else if (rope.position.x >= -maxDistance)
         {
-            Debug.Log("Player 2/4 wins");
+            //Debug.Log("Player 2/4 wins");
             if (playerID == 1 || playerID == 3)
             {
                 GetComponent<PlayerStats>().playerData.SetPlayerScore(1);

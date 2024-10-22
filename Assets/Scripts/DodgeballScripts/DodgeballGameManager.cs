@@ -80,7 +80,7 @@ public class DodgeballGameManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Not enough players, waiting 5 more seconds...");
+                //Debug.Log("Not enough players, waiting 5 more seconds...");
                 yield return new WaitForSeconds(5f);
             }
         }
@@ -325,7 +325,7 @@ public class DodgeballGameManager : MonoBehaviour
             // Calculate score
             float scoreToAdd = 5; // 5 base points 
             players[shooterID].AddScore(scoreToAdd);
-            Debug.Log($"Shooter {shooterID} hit the target and earned {scoreToAdd} points!");
+            //Debug.Log($"Shooter {shooterID} hit the target and earned {scoreToAdd} points!");
 
             // End the round and possibly reset positions
             EndRound();
