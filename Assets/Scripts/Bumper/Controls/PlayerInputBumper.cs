@@ -84,7 +84,7 @@ public class PlayerInputBumper : MonoBehaviour
             hasFallen = true; // Ensure this only triggers once
 
             // Log the fall and destroy the player
-            Debug.Log($"Player {playerID} fell!");
+            //Debug.Log($"Player {playerID} fell!");
 
             // Call PlayerFinish to calculate score and place
             int placing = finishManager.PlayerFinish(playerID);
@@ -95,7 +95,7 @@ public class PlayerInputBumper : MonoBehaviour
             // Destroy the player object after falling off
             Destroy(gameObject);
 
-            Debug.Log($"Player {playerID} Placing: {placing} with score {score}");
+            //Debug.Log($"Player {playerID} Placing: {placing} with score {score}");
         }
     }
 

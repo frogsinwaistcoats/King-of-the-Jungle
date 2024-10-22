@@ -31,7 +31,7 @@ public class BumperFinishManager : MonoBehaviour
     private void Start()
     {
         totalPlayers = gameManager.players.Count;
-        Debug.Log(totalPlayers);
+        //Debug.Log(totalPlayers);
     }
 
     public int PlayerFinish(int id)
@@ -41,7 +41,7 @@ public class BumperFinishManager : MonoBehaviour
         // Get the player based on ID
         PlayerData playerData = gameManager.players[id];
 
-        Debug.Log($"Finished players: {finishedPlayers}");
+        //Debug.Log($"Finished players: {finishedPlayers}");
 
         lastPlayerStanding = gameManager.players.Find(p => p != playerData && !p.Equals(playerData));
 
@@ -65,7 +65,7 @@ public class BumperFinishManager : MonoBehaviour
             lastPlayerStanding.SetPlayerScore(totalPlayers - 1);
             //lastPlayerStanding.SetTotalScore(totalPlayers - 1);
 
-            Debug.Log("Last player standing: Player " + lastPlayerStanding.playerID + " Score: " + lastPlayerStanding.playerScore);
+            //Debug.Log("Last player standing: Player " + lastPlayerStanding.playerID + " Score: " + lastPlayerStanding.playerScore);
         }
     }
     public void GameFinish()

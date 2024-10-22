@@ -49,7 +49,6 @@ public class SceneLoader : MonoBehaviour
     public void SetPreviousScene()
     {
         previousScene = SceneManager.GetActiveScene().name;
-        Debug.Log("Previous scene: " +  previousScene);
     }
 
     public void LoadStoryMode()

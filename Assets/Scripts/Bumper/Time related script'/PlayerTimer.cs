@@ -37,6 +37,6 @@ public class PlayerTimer : MonoBehaviour
     public void StopSurvival()
     {
         isSurviving = false;
-        Debug.Log("Player stopped surviving. Final Score: " + score);
+        //Debug.Log("Player stopped surviving. Final Score: " + score);
     }
 }

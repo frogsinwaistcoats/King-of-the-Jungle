@@ -41,20 +41,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-    /*
-    private void Move(InputAction.CallbackContext obj)
-    {
-        Vector2 moveInput = obj.ReadValue<Vector2>();
-
-        if (moveInput != Vector2.zero)
-        {
-            if (EventSystem.current != null)
-            {
-                EventSystem.current.SendMessage("Move", moveInput);
-            }
-        }
-    }
-    */
 
     private void OnSubmit(InputAction.CallbackContext obj)
     {

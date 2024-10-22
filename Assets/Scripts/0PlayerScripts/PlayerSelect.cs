@@ -166,7 +166,6 @@ public class PlayerSelect : MonoBehaviour
         if (playerID == 0 && inputManager.players.Count == gameManager.players.Count)
         {
             OnDisable();
-            Debug.Log("next scene");
             SceneLoader.instance.LoadMinigameSelection();
         }
     }

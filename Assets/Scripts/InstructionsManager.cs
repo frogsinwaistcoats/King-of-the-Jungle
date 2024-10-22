@@ -67,7 +67,6 @@ public class InstructionsManager : MonoBehaviour
         if (obj.control.device == inputManager.players[0].inputDevice)
         {
             OnDisable();
-            Debug.Log("Load Minigame");
             SceneLoader.instance.LoadMinigame();
         }
     }
