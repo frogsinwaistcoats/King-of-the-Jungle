@@ -43,6 +43,7 @@ public class BumperCountdown : MonoBehaviour
             isRunning = false;
             countdownText.text = "Go!";
             canMove = true; // Enable player movement when countdown finishes
+            BumperTimer.instance.timerIsRunning = true;
         }
 
         if (countdownText != null)

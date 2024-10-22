@@ -43,17 +43,14 @@ public class BumperFinishManager : MonoBehaviour
 
         Debug.Log($"Finished players: {finishedPlayers}");
 
-        // If only one player is left
-        if (finishedPlayers == totalPlayers - 1)
-        {
-            // Set the last player standing
-            lastPlayerStanding = gameManager.players.Find(p => p.playerScore == 0 && p != playerData);
-            AssignLastPlayerScore(); // Assign score to the last standing player
-        }
+        lastPlayerStanding = gameManager.players.Find(p => p != playerData && !p.Equals(playerData));
 
-        // Check if we have reached the end of the game (all players have fallen)
-        if (finishedPlayers == totalPlayers)
+        // Check if we have only one player remaining (or if all players have fallen)
+        if (finishedPlayers == (totalPlayers - 1) || finishedPlayers == totalPlayers)
         {
+            lastPlayerStanding = gameManager.players.Find(p => p.playerScore == 0 && p != playerData);
+            // The last player standing hasn't finished yet, assign their score
+            AssignLastPlayerScore();
             GameFinish(); // Call the end of the game
         }
 
@@ -66,18 +63,26 @@ public class BumperFinishManager : MonoBehaviour
         {
             // The last player gets the highest score, which is (totalPlayers - 1)
             lastPlayerStanding.SetPlayerScore(totalPlayers - 1);
-            lastPlayerStanding.SetTotalScore(totalPlayers - 1);
+            //lastPlayerStanding.SetTotalScore(totalPlayers - 1);
 
             Debug.Log("Last player standing: Player " + lastPlayerStanding.playerID + " Score: " + lastPlayerStanding.playerScore);
         }
-        else
-        {
-            Debug.LogError("No last player found to assign score!");
-        }
     }
-
     public void GameFinish()
     {
+        // Handle scoring for the last player standing
+        //if (finishedPlayers == (totalPlayers - 1)) // If there's one player left
+        //{
+            //PlayerData lastPlayer = gameManager.players.Find(p => p.playerScore == 0); // Find the player without a score
+
+            //if (lastPlayer != null)
+            //{
+            //    // Assign the first-place score to the last player standing
+            //    lastPlayer.SetPlayerScore(finishedPlayers);  // 1st place
+            //    Debug.Log($"Player {lastPlayer.playerID} is the last standing and gets 1st place (3 points).");
+            //}
+        //}
+
         // Make sure scores are logged for all players
         foreach (var player in gameManager.players)
         {
@@ -92,14 +97,14 @@ public class BumperFinishManager : MonoBehaviour
 
     public int CalculateScore(int placing)
     {
-        // Reverse the scoring so that the last player to fall gets the highest score
-        int score = placing - 1;
+        // Reverse the scoring so that last player to fall gets the highest score
+        int score = placing-1;
         return score;
     }
 
     IEnumerator NextScene()
     {
-        yield return new WaitForSeconds(3); // Delay before moving to the score screen
+        yield return new WaitForSeconds(3); // Delay before moving to score scene
         finishedPlayers = 0;  // Reset for the next game
         sceneLoader.SetPreviousScene();
         SceneManager.LoadScene("Scores");
